@@ -12,6 +12,7 @@ Static site. No build step, no dependencies. Two languages, English and Hindi.
 index.html            English site
 hi/index.html         Hindi site (हिंदी)
 img/                  Product photography used by both pages
+img/work/             Installed home-mandir photographs for the "Our work" section
 assets/flyers/        10 social ad creatives, 1080×1350
 assets/logo/          7 logo lockups (Devanagari + Latin), 2400×1600
 docs/                 Launch playbook — ad copy, SEO map, A/B test plan
@@ -59,6 +60,8 @@ These are placeholders. The site will function without fixing them, but it shoul
 **The "who touches the idol" block** in the Mandir Seva section is load-bearing. That objection stops this business faster than price does, and the stated default — *we prepare, you dress* — is what removes it. Don't let it get edited into something vaguer.
 
 **Known copy mismatch:** the Nitya card promises "soft cotton, machine-friendly, worn and washed often" but shows a pearl-worked poshak. Needs either a plain-cotton photograph or rewritten copy.
+
+**Customer photographs.** The eight images in `img/work/` are installations inside private homes, and the page states they are shared with permission. Get that permission in writing before the site goes public. Two frames from the source set were left out on purpose — one was unusable from flash glare, the other contained framed portraits of an identifiable person.
 
 **Prices** in the page and in the JSON-LD `OfferCatalog` must stay in sync. Schema that contradicts visible page text gets penalised.
 

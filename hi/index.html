@@ -220,6 +220,15 @@
   .heroart-in img{width:100%;height:100%;object-fit:cover;display:block;}
   .card .art{padding:0;overflow:hidden;position:relative;}
   .card .art img{width:100%;height:100%;object-fit:cover;display:block;}
+
+  /* ---------- our work ---------- */
+  .work-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:8px;}
+  @media(max-width:980px){.work-grid{grid-template-columns:repeat(2,1fr);}}
+  @media(max-width:520px){.work-grid{grid-template-columns:1fr;}}
+  .work-grid figure{margin:0;border:1px solid var(--line-d);background:var(--night-2);aspect-ratio:4/3;overflow:hidden;}
+  .work-grid img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s ease;}
+  .work-grid figure:hover img{transform:scale(1.045);}
+  @media (prefers-reduced-motion: reduce){.work-grid img{transition:none;}}
 </style>
 <style>
   body{font-family:Mukta,"Noto Sans Devanagari","Segoe UI",Arial,sans-serif;line-height:1.8;}
@@ -275,6 +284,7 @@
     </a>
     <a class="lnk" href="#collections">संग्रह</a>
     <a class="lnk" href="#seva">मंदिर सेवा</a>
+    <a class="lnk" href="#work">हमारा काम</a>
     <a class="lnk" href="#plans">योजनाएँ</a>
     <a class="lnk" href="#festivals">त्योहार</a>
     <a class="lnk" href="/" hreflang="en" lang="en" style="letter-spacing:.06em;">EN</a>
@@ -377,6 +387,27 @@
         <p class="lede">हमारे सेवा साथी पुलिस-सत्यापित हैं, सोसाइटी-मान्य पहचान-पत्र रखते हैं, शू-कवर पहनते हैं, मंदिर के पास नंगे पाँव काम करते हैं, और उन्हें सिखाया जाता है कि क्या छूना है और क्या नहीं। विज़िट की विंडो दो घंटे की होती है, और आप घर पर न हों तब भी तैयार मंदिर की फ़ोटो आपको मिलती है।</p>
       </div>
     </div>
+  </div>
+</section>
+
+
+<!-- ===== हमारा काम ===== -->
+<section class="section" id="work">
+  <div class="wrap stack">
+    <p class="eyebrow">हमारा काम</p>
+    <h2>जो मंदिर हम पहले सजा चुके हैं</h2>
+    <p class="lede">दिल्ली NCR के घरों के मंदिर &mdash; हर तल के नाप पर कटे रनर, मौसम के अनुसार नई सज्जा, और पूरे त्योहार की व्यवस्था। इनमें से हर मंदिर हमारी अपनी टीम ने नापा, बनाया और लगाया है।</p>
+    <div class="work-grid">
+        <figure><img src="../img/work/carved-marble-mandir.jpg" alt="नक़्क़ाशीदार सफ़ेद संगमरमर का घरेलू मंदिर, लाल ज़री के रनर और सजे विग्रहों के साथ" width="540" height="405" loading="lazy" decoding="async"></figure>
+        <figure><img src="../img/work/marble-shrine-deities.jpg" alt="संगमरमर का मंदिर, सजे विग्रह, मोरपंख और नाप के फूलदार रनर के साथ" width="540" height="405" loading="lazy" decoding="async"></figure>
+        <figure><img src="../img/work/dressed-deities-row.jpg" alt="एक ही रंग की गुलाबी पोशाक में सजे विग्रह, नीले-सुनहरे रनर पर" width="540" height="405" loading="lazy" decoding="async"></figure>
+        <figure><img src="../img/work/marigold-garland-temple.jpg" alt="त्योहार के लिए गेंदे और गुलाब की मालाओं से सजा सफ़ेद मंदिर" width="540" height="405" loading="lazy" decoding="async"></figure>
+        <figure><img src="../img/work/radha-krishna-dressed.jpg" alt="हाथ की कारीगरी वाली पोशाक में राधा-कृष्ण, ताज़े फूलों की मालाओं के साथ" width="540" height="405" loading="lazy" decoding="async"></figure>
+        <figure><img src="../img/work/diya-lit-mandir.jpg" alt="शाम का मंदिर, जलते दीपकों और पूरी थाली की व्यवस्था के साथ" width="540" height="405" loading="lazy" decoding="async"></figure>
+        <figure><img src="../img/work/fitted-step-runners.jpg" alt="सीढ़ीदार मंदिर, हर तल के नाप पर काटे और लगाए गए रनर के साथ" width="540" height="405" loading="lazy" decoding="async"></figure>
+        <figure><img src="../img/work/om-panel-shrine.jpg" alt="नीले-सफ़ेद मंदिर में ॐ की पट्टी और विग्रहों के फ़्रेम किए चित्र" width="540" height="405" loading="lazy" decoding="async"></figure>
+    </div>
+    <p class="areas" style="margin-top:16px;">मंदिर को इस स्तर तक लाना शृंगार योजना की साल में दो बार होने वाली पूरी सज्जा में शामिल है। परिवारों की अनुमति से साझा किया गया।</p>
   </div>
 </section>
 

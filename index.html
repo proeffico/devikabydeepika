@@ -225,6 +225,15 @@
   .heroart-in img{width:100%;height:100%;object-fit:cover;display:block;}
   .card .art{padding:0;overflow:hidden;position:relative;}
   .card .art img{width:100%;height:100%;object-fit:cover;display:block;}
+
+  /* ---------- our work ---------- */
+  .work-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:8px;}
+  @media(max-width:980px){.work-grid{grid-template-columns:repeat(2,1fr);}}
+  @media(max-width:520px){.work-grid{grid-template-columns:1fr;}}
+  .work-grid figure{margin:0;border:1px solid var(--line-d);background:var(--night-2);aspect-ratio:4/3;overflow:hidden;}
+  .work-grid img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s ease;}
+  .work-grid figure:hover img{transform:scale(1.045);}
+  @media (prefers-reduced-motion: reduce){.work-grid img{transition:none;}}
 </style>
 
 <script type="application/ld+json">
@@ -291,6 +300,7 @@
     </a>
     <a class="lnk" href="#collections">Collections</a>
     <a class="lnk" href="#seva">Mandir Seva</a>
+    <a class="lnk" href="#work">Our work</a>
     <a class="lnk" href="#plans">Plans</a>
     <a class="lnk" href="#festivals">Festivals</a>
     <a class="lnk" href="/hi/" hreflang="hi" lang="hi" style="letter-spacing:.02em;">हिंदी</a>
@@ -397,6 +407,27 @@
         <p class="lede">Our Seva Sathis are background-verified, carry society-approved ID, wear shoe covers, work barefoot at the shrine, and are trained in what may and may not be touched. Visit windows are two hours so you are not waiting all morning, and you get a photograph of the finished mandir even when you were not home.</p>
       </div>
     </div>
+  </div>
+</section>
+
+
+<!-- ===== OUR WORK ===== -->
+<section class="section" id="work">
+  <div class="wrap stack">
+    <p class="eyebrow">Our work</p>
+    <h2>Shrines we have already dressed</h2>
+    <p class="lede">Home mandirs across Delhi NCR &mdash; runners cut to each tier, seasonal restyling, and full festival setups. Every one of these was measured, made and installed by our own team.</p>
+    <div class="work-grid">
+        <figure><img src="img/work/carved-marble-mandir.jpg" alt="A carved white marble home mandir with a red zari runner and a full row of dressed deities" width="540" height="405" loading="lazy" decoding="async"></figure>
+        <figure><img src="img/work/marble-shrine-deities.jpg" alt="A marble shrine with dressed deities, peacock feathers and a fitted floral runner" width="540" height="405" loading="lazy" decoding="async"></figure>
+        <figure><img src="img/work/dressed-deities-row.jpg" alt="A row of deities in matching pink poshak on a blue and gold fitted runner" width="540" height="405" loading="lazy" decoding="async"></figure>
+        <figure><img src="img/work/marigold-garland-temple.jpg" alt="A white temple dressed with marigold and rose garlands for a festival" width="540" height="405" loading="lazy" decoding="async"></figure>
+        <figure><img src="img/work/radha-krishna-dressed.jpg" alt="Radha Krishna idols in hand-worked poshak with fresh flower garlands" width="540" height="405" loading="lazy" decoding="async"></figure>
+        <figure><img src="img/work/diya-lit-mandir.jpg" alt="An evening mandir setting with lit diyas and a full thali arrangement" width="540" height="405" loading="lazy" decoding="async"></figure>
+        <figure><img src="img/work/fitted-step-runners.jpg" alt="Stepped mandir platform with runners cut and fitted to each tier" width="540" height="405" loading="lazy" decoding="async"></figure>
+        <figure><img src="img/work/om-panel-shrine.jpg" alt="A blue and white shrine with an Om panel and framed deity portraits" width="540" height="405" loading="lazy" decoding="async"></figure>
+    </div>
+    <p class="areas" style="margin-top:16px;">Bringing a mandir up to this standard is what the twice-yearly full styling in the Shringar plan covers. Shared with the families&rsquo; permission.</p>
   </div>
 </section>
 
