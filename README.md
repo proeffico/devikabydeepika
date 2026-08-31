@@ -104,24 +104,28 @@ Both pages ship with meta description, canonical, Open Graph, Twitter card, reci
 
 Keyword map and content priorities are in [`docs/launch-playbook.md`](docs/launch-playbook.md).
 
-## Colour
+## Colour and themes
 
-Single bright theme, deliberately. There is no dark mode and no `prefers-color-scheme` block: every ground is light and every text colour is dark, so the page renders identically for every visitor.
+**Dark is the default. Light is one click away**, via the toggle in the nav. The choice is stored in `localStorage` under `devika-theme` and restored on the next visit; a small inline script at the top of the document applies it before first paint, so there is no flash of the wrong theme.
 
-Tokens live in one `:root` block at the top of each file:
+The site deliberately ignores `prefers-color-scheme`. Dark is the brand's look and every visitor sees it first, whatever their OS is set to.
 
-| Token | Use |
-|---|---|
-| `--night` `#FFFBF5` | main ground, warm ivory |
-| `--night-2` `#FCF2E4` | raised bands (trust bar, plans, footer) |
-| `--paper` `#FFFFFF` | alternating sections |
-| `--rose` `#FDEDEF` | collections tint |
-| `--mint` `#EDF6F0` | booking tint |
-| `--ink` / `--ivory` | plum text |
-| `--brass` `#8E5F17` | accent, eyebrows, primary button |
-| `--kumkum` `#C2402A` | WhatsApp button, error states |
+Both palettes live in one `:root` block per file — dark on bare `:root`, light on `:root[data-theme="light"]`. **Every colour in the stylesheet comes from a token**, including section tints, gradients, button foregrounds and the nav background. If you add a rule, take its colour from a token rather than hard-coding a hex, or it will break in one of the two themes.
 
-All 190 rendered text/background pairs pass WCAG AA on both language versions — checked programmatically, not by eye. If you darken a background or lighten `--brass`, re-check before shipping.
+| Token | Dark | Light |
+|---|---|---|
+| `--night` main ground | `#150E19` plum-black | `#FFFBF5` warm ivory |
+| `--night-2` raised band | `#1E1421` | `#FCF2E4` saffron tint |
+| `--paper` alternating section | `#F5F1EC` ivory | `#FFFFFF` |
+| `--sec-collections` | ivory | `#FDEDEF` blush |
+| `--sec-book` | ivory | `#EDF6F0` mint |
+| `--brass` accent | `#C89B4A` | `#8E5F17` |
+| `--brass-deep` small accent text | `#7E5310` | `#6F4610` |
+| `--on-brass` button text | `#1A1119` | `#FFFFFF` |
+
+Brass has to differ between themes: the gold that glows on near-black fails contrast on ivory, and the brown that reads on ivory disappears on black.
+
+All 191 rendered text/background pairs pass WCAG AA **in both themes, on both language versions** — checked programmatically. Re-run that check if you touch any colour.
 
 ## Browser support
 
