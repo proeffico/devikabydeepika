@@ -45,7 +45,6 @@ These are placeholders. The site will function without fixing them, but it shoul
 
 | What | Where | Why |
 |---|---|---|
-| WhatsApp number | `var WA = '910000000000';` at the top of the form script in both HTML files | Single source of truth &mdash; the form and the header button both read it. Nothing else to change |
 | `og-image.jpg` | referenced in `<head>` of both files | Not in the repo yet. Use `assets/flyers/devika_P1_seva_shrine.png` |
 | Analytics / Meta Pixel | `<head>` | Without it, ad spend teaches you nothing |
 | Canonical domain | `devikabydeepika.com` in canonical, `hreflang` and JSON-LD | Update if the domain changes |
@@ -67,6 +66,8 @@ These are placeholders. The site will function without fixing them, but it shoul
 ## The booking form
 
 **There is no backend and no form endpoint.** The form is a message composer: it validates what you typed, then opens WhatsApp with the whole enquiry written out, ready to send.
+
+The number lives in one place — `var WA = '919355110366';` at the top of the form script in each HTML file. The form and the header button both read it, so changing it is a single edit per language.
 
 ```
 Mandir Seva booking request
