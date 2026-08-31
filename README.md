@@ -104,6 +104,25 @@ Both pages ship with meta description, canonical, Open Graph, Twitter card, reci
 
 Keyword map and content priorities are in [`docs/launch-playbook.md`](docs/launch-playbook.md).
 
+## Colour
+
+Single bright theme, deliberately. There is no dark mode and no `prefers-color-scheme` block: every ground is light and every text colour is dark, so the page renders identically for every visitor.
+
+Tokens live in one `:root` block at the top of each file:
+
+| Token | Use |
+|---|---|
+| `--night` `#FFFBF5` | main ground, warm ivory |
+| `--night-2` `#FCF2E4` | raised bands (trust bar, plans, footer) |
+| `--paper` `#FFFFFF` | alternating sections |
+| `--rose` `#FDEDEF` | collections tint |
+| `--mint` `#EDF6F0` | booking tint |
+| `--ink` / `--ivory` | plum text |
+| `--brass` `#8E5F17` | accent, eyebrows, primary button |
+| `--kumkum` `#C2402A` | WhatsApp button, error states |
+
+All 190 rendered text/background pairs pass WCAG AA on both language versions — checked programmatically, not by eye. If you darken a background or lighten `--brass`, re-check before shipping.
+
 ## Browser support
 
 Modern evergreen browsers. Uses CSS custom properties, `aspect-ratio`, `object-fit` and `color-mix()`. Fonts load from Google Fonts (Marcellus + Karla for English; Noto Serif Devanagari + Mukta for Hindi), each with a real fallback stack.
