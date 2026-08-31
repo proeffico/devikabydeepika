@@ -45,8 +45,7 @@ These are placeholders. The site will function without fixing them, but it shoul
 
 | What | Where | Why |
 |---|---|---|
-| WhatsApp number | search `910000000000` in both HTML files | Currently a placeholder; every primary CTA points at it |
-| Booking form endpoint | `// TODO: POST to your endpoint` near the bottom of both HTML files | The form validates, runs its captcha and confirms, but **sends nothing**. Uncomment the `fetch` and point it at Formspree or your own API |
+| WhatsApp number | `var WA = '910000000000';` at the top of the form script in both HTML files | Single source of truth &mdash; the form and the header button both read it. Nothing else to change |
 | `og-image.jpg` | referenced in `<head>` of both files | Not in the repo yet. Use `assets/flyers/devika_P1_seva_shrine.png` |
 | Analytics / Meta Pixel | `<head>` | Without it, ad spend teaches you nothing |
 | Canonical domain | `devikabydeepika.com` in canonical, `hreflang` and JSON-LD | Update if the domain changes |
@@ -65,21 +64,30 @@ These are placeholders. The site will function without fixing them, but it shoul
 
 **Prices** in the page and in the JSON-LD `OfferCatalog` must stay in sync. Schema that contradicts visible page text gets penalised.
 
-## Form, captcha and spam handling
+## The booking form
 
-The booking form validates client-side and is protected three ways, none of which need an external service:
+**There is no backend and no form endpoint.** The form is a message composer: it validates what you typed, then opens WhatsApp with the whole enquiry written out, ready to send.
 
-- **Arithmetic captcha** — a random sum, rotated on every failed attempt, with an accessible label and `aria-live` announcement
-- **Honeypot** — an off-screen `company` field; any submission that fills it is rejected
-- **Time trap** — anything submitted within 2.5 seconds of page load is rejected
+```
+Mandir Seva booking request
 
-Validation covers a 10-digit mobile, a 6-digit pin code, and dates from today onward. Errors render in `#confirm` with `role="alert"` and mark the offending field `aria-invalid`.
+Name: ...
+Mobile: ...
+Pin code: ...
+Plan: ...
+Preferred date: Sunday 6 September, 2026
+Preferred window: 4–6 pm
+Who dresses the deity: ...
+Idol height: ...
+```
 
-**On your own domain, consider swapping the arithmetic check for [Cloudflare Turnstile](https://developers.cloudflare.com/turnstile/)** — free, no puzzle for most visitors, and much harder to script against. Add its widget script to `<head>` and replace the captcha comparison with `turnstile.getResponse()`. It ships with the built-in check instead because third-party scripts are blocked by CSP in the Claude artifact preview.
+Validation covers a 10-digit mobile, a 6-digit pin code, and dates from today onward. Errors render in `#confirm` with `role="alert"` and mark the offending field `aria-invalid`. A fallback link is shown in case the popup is blocked.
+
+**Why there is no captcha.** An earlier version had an arithmetic captcha, a honeypot and a timing trap. With WhatsApp as the only channel there is nothing to spam — no endpoint, no inbox reachable from the page, no database — so the captcha only cost conversions. If you ever add a real form endpoint, put those protections back (or use [Cloudflare Turnstile](https://developers.cloudflare.com/turnstile/)); until then it would be friction for nothing.
 
 ### Tests
 
-`test/test_form.py` drives both language versions in headless Chromium — 44 checks covering validation, captcha rotation, honeypot, time trap, slot selection, accessibility attributes, mobile layout and the success path.
+`test/test_form.py` drives both language versions in headless Chromium — 52 checks covering validation, the generated WhatsApp URL and every field inside it, the fallback link, single-source-of-truth for the number, mobile layout and the success path. It intercepts `window.open`, so no chat actually launches.
 
 ```bash
 pip install playwright && playwright install chromium

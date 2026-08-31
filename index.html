@@ -235,17 +235,9 @@
   .work-grid figure:hover img{transform:scale(1.045);}
   @media (prefers-reduced-motion: reduce){.work-grid img{transition:none;}}
 
-  /* ---------- captcha + anti-spam ---------- */
-  .hp{position:absolute!important;left:-10000px;top:auto;width:1px;height:1px;overflow:hidden;}
-  .cap-row{display:flex;gap:10px;align-items:stretch;}
-  .cap-row input{flex:0 0 130px;font-variant-numeric:tabular-nums;letter-spacing:.06em;}
-  .cap-q{font-family:Marcellus,Georgia,serif;font-size:1.05rem;letter-spacing:.06em;
-    background:#FFFDFA;border:1px solid var(--line-l);padding:11px 16px;display:inline-flex;align-items:center;
-    font-variant-numeric:tabular-nums;color:var(--ink);border-radius:2px;}
-  .cap-new{background:none;border:0;color:var(--brass-deep);font-family:inherit;font-size:.8rem;
-    text-decoration:underline;cursor:pointer;padding:0 4px;align-self:center;}
-  .cap-new:hover{color:var(--ink);}
+  /* ---------- form states ---------- */
   .confirm.err{border-color:var(--kumkum);background:#FDF1EE;}
+  .confirm a{color:var(--brass-deep);font-weight:700;}
   .field input[aria-invalid="true"],.field select[aria-invalid="true"]{border-color:var(--kumkum);}
 </style>
 
@@ -533,7 +525,7 @@
         <h2>Your first Seva, &#8377;299</h2>
         <p class="lede">One full visit &mdash; mandir cleaning, a cotton poshak, fresh flowers &mdash; so you can see how it feels before committing to a plan. No auto-renewal on the trial.</p>
         <p class="lede"><strong>Prefer to talk?</strong> Message us on WhatsApp and we will find a slot in a minute.</p>
-        <a class="btn btn-dark" href="https://wa.me/910000000000?text=Hi%20Devika%2C%20I%27d%20like%20to%20book%20a%20Mandir%20Seva%20visit" target="_blank" rel="noopener">WhatsApp us</a>
+        <a class="btn btn-dark" id="waDirect" href="https://wa.me/910000000000?text=Hi%20Devika%2C%20I%27d%20like%20to%20book%20a%20Mandir%20Seva%20visit" target="_blank" rel="noopener">WhatsApp us</a>
         <p class="form-note">Replace this number before going live.</p>
       </div>
       <div>
@@ -576,23 +568,8 @@
               <button class="slot pref" type="button" aria-pressed="false">Seva Sathi does it fully</button>
             </div>
           </div>
-          <!-- Anti-spam. On your own domain you can swap this arithmetic check for
-               Cloudflare Turnstile: add the widget script in <head> and replace the
-               isHuman() body with turnstile.getResponse(). Turnstile cannot load in the
-               Claude artifact preview, which is why the built-in check ships as default. -->
-          <div class="field">
-            <label for="cap">Quick check &mdash; please solve this</label>
-            <div class="cap-row">
-              <span class="cap-q" id="capq" aria-live="polite">3 + 4 =</span>
-              <input id="cap" name="captcha" type="text" inputmode="numeric" autocomplete="off"
-                     aria-describedby="caphelp" aria-label="Answer to the arithmetic question" required>
-              <button type="button" class="cap-new" id="capnew">New question</button>
-            </div>
-            <p class="form-note" id="caphelp">Keeps automated bookings out. Sorry for the extra step.</p>
-          </div>
-          <div class="hp"><label>Company (leave blank)<input type="text" name="company" tabindex="-1" autocomplete="off"></label></div>
-          <button class="btn btn-primary" type="submit">Request this slot</button>
-          <p class="form-note">We confirm on WhatsApp within two hours. No payment now.</p>
+          <button class="btn btn-primary" type="submit">Send on WhatsApp</button>
+          <p class="form-note">This opens WhatsApp with your details already written out. Nothing is stored on this website.</p>
           <div id="confirm" class="confirm" hidden></div>
         </form>
       </div>
@@ -648,51 +625,41 @@
 <script>
 var LOCALE = 'en-IN';
 var MSG = {
-  spam:   'Something went wrong with that submission. Please try again.',
-  fast:   'That was submitted a little too quickly. Please check the details and try once more.',
+  hello:  "Hi Devika, I'd like to book a Mandir Seva visit.",
   name:   'Please tell us your name so we know who to ask for.',
-  phone:  'Please enter a 10-digit mobile number we can confirm on.',
+  phone:  'Please enter a 10-digit mobile number we can reach you on.',
   pin:    'Please enter a valid 6-digit pin code so we can check whether we serve your area.',
   date:   'Please pick a date for the visit.',
   past:   'That date has already passed. Please choose a day from today onwards.',
-  captcha:'That answer was not right. Here is a new question.',
-  sent:   'Request sent',
-  ok: function(name, plan, date, win, pin, who){
-    return '<strong>Thank you, ' + name + '.</strong><br>We have your request for ' + plan +
-           ' on ' + date + ', ' + win + ', pin ' + pin + '. Preference: ' + who.toLowerCase() +
-           '. We will confirm on WhatsApp within two hours.';
-  }
+  sent:   'Opened in WhatsApp',
+  opening:'Opening WhatsApp with your details filled in &mdash; just press send. If nothing happened,',
+  openLink: 'tap here to open the chat.',
+  msgTitle: 'Mandir Seva booking request',
+  fName: 'Name', fPhone: 'Mobile', fPin: 'Pin code', fPlan: 'Plan',
+  fDate: 'Preferred date', fWindow: 'Preferred window', fDress: 'Who dresses the deity',
+  fIdol: 'Idol height'
 };
 </script>
 <script>
 (function(){
-  var openedAt = Date.now();
-  var MIN_MS = 2500;          // a human cannot complete this form faster
-  var a = 0, b = 0;
+  // ---- The one place to change the number. Used by the form and the header button. ----
+  var WA = '910000000000';           // TODO: replace with the real WhatsApp business number
 
-  var form  = document.getElementById('bookingForm');
-  var out   = document.getElementById('confirm');
-  var capQ  = document.getElementById('capq');
-  var capIn = document.getElementById('cap');
-  var capNew= document.getElementById('capnew');
+  var form   = document.getElementById('bookingForm');
+  var out    = document.getElementById('confirm');
+  var submit = form.querySelector('button[type=submit]');
 
-  function newChallenge(){
-    a = 2 + Math.floor(Math.random() * 8);
-    b = 1 + Math.floor(Math.random() * 8);
-    capQ.textContent = a + ' + ' + b + ' =';
-    capIn.value = '';
-    capIn.removeAttribute('aria-invalid');
-  }
-  newChallenge();
-  capNew.addEventListener('click', function(){ newChallenge(); capIn.focus(); });
+  // keep the standalone "WhatsApp us" button in sync with WA
+  var direct = document.getElementById('waDirect');
+  if (direct) direct.href = 'https://wa.me/' + WA + '?text=' + encodeURIComponent(MSG.hello);
 
   // slot / preference toggles
   document.querySelectorAll('.slots').forEach(function(group){
     group.addEventListener('click', function(e){
-      var b2 = e.target.closest('.slot');
-      if(!b2) return;
+      var b = e.target.closest('.slot');
+      if(!b) return;
       group.querySelectorAll('.slot').forEach(function(s){ s.setAttribute('aria-pressed','false'); });
-      b2.setAttribute('aria-pressed','true');
+      b.setAttribute('aria-pressed','true');
     });
   });
 
@@ -704,13 +671,16 @@ var MSG = {
     if(el){ el.setAttribute('aria-invalid','true'); el.focus(); }
     return false;
   }
+  function pressed(i){
+    var g = document.querySelectorAll('.slots')[i];
+    var b = g && g.querySelector('.slot[aria-pressed="true"]');
+    return b ? b.textContent.trim() : '';
+  }
 
   form.addEventListener('submit', function(e){
     e.preventDefault();
-
-    ['nm','ph','pin','dt','cap'].forEach(function(id){
-      var el = document.getElementById(id);
-      if(el) el.removeAttribute('aria-invalid');
+    ['nm','ph','pin','dt'].forEach(function(id){
+      var el = document.getElementById(id); if(el) el.removeAttribute('aria-invalid');
     });
 
     var name = (document.getElementById('nm').value || '').trim();
@@ -718,39 +688,45 @@ var MSG = {
     var pin  = (document.getElementById('pin').value || '').replace(/[^0-9]/g,'');
     var date = document.getElementById('dt').value;
     var plan = document.getElementById('pl').value;
-    var hp   = form.querySelector('input[name="company"]').value;
+    var idol = (document.getElementById('idl').value || '').trim();
 
-    if(hp){ return fail(MSG.spam); }                                   // honeypot
-    if(Date.now() - openedAt < MIN_MS){ return fail(MSG.fast); }        // time trap
     if(!name){ return fail(MSG.name, document.getElementById('nm')); }
     if(phone.length < 10){ return fail(MSG.phone, document.getElementById('ph')); }
     if(pin.length !== 6){ return fail(MSG.pin, document.getElementById('pin')); }
     if(!date){ return fail(MSG.date, document.getElementById('dt')); }
-    var chosen = new Date(date), today = new Date(); today.setHours(0,0,0,0);
+    var chosen = new Date(date + 'T00:00:00'), today = new Date(); today.setHours(0,0,0,0);
     if(chosen < today){ return fail(MSG.past, document.getElementById('dt')); }
-    if(parseInt(capIn.value, 10) !== a + b){ newChallenge(); return fail(MSG.captcha, capIn); }
 
     var dateTxt = date;
-    try { dateTxt = new Date(date + 'T00:00:00').toLocaleDateString(
-            LOCALE, {weekday:'long', day:'numeric', month:'long', year:'numeric'}); } catch(e){}
-    var win  = document.querySelector('.slots .slot[aria-pressed="true"]');
-    var who  = document.querySelectorAll('.slots')[1];
-    var whoTxt = who ? who.querySelector('.slot[aria-pressed="true"]').textContent : '';
+    try { dateTxt = chosen.toLocaleDateString(LOCALE,
+            {weekday:'long', day:'numeric', month:'long', year:'numeric'}); } catch(err){}
+
+    var lines = [
+      MSG.msgTitle, '',
+      MSG.fName   + ': ' + name,
+      MSG.fPhone  + ': ' + phone,
+      MSG.fPin    + ': ' + pin,
+      MSG.fPlan   + ': ' + plan,
+      MSG.fDate   + ': ' + dateTxt,
+      MSG.fWindow + ': ' + pressed(0),
+      MSG.fDress  + ': ' + pressed(1)
+    ];
+    if(idol) lines.push(MSG.fIdol + ': ' + idol);
+
+    var url = 'https://wa.me/' + WA + '?text=' + encodeURIComponent(lines.join(String.fromCharCode(10)));
 
     out.hidden = false;
     out.className = 'confirm';
     out.setAttribute('role','status');
-    out.innerHTML = MSG.ok(name.replace(/[<>&"]/g,''), plan, dateTxt, win ? win.textContent : '', pin, whoTxt);
-    form.querySelector('button[type=submit]').textContent = MSG.sent;
-    form.querySelector('button[type=submit]').disabled = true;
+    out.innerHTML = MSG.opening + ' <a href="' + url + '" target="_blank" rel="noopener" id="waFallback">'
+                  + MSG.openLink + '</a>';
+    submit.textContent = MSG.sent;
 
-    // TODO: POST to your endpoint here (Formspree, or your own API).
-    // fetch('https://formspree.io/f/XXXX', {method:'POST', headers:{'Content-Type':'application/json'},
-    //   body: JSON.stringify({name:name, phone:phone, pincode:pin, plan:plan, date:date,
-    //                         window: win && win.textContent, dressing: whoTxt})});
+    window.open(url, '_blank', 'noopener');
   });
 })();
 </script>
+
 
 
 </body>

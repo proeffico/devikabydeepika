@@ -230,17 +230,9 @@
   .work-grid figure:hover img{transform:scale(1.045);}
   @media (prefers-reduced-motion: reduce){.work-grid img{transition:none;}}
 
-  /* ---------- captcha + anti-spam ---------- */
-  .hp{position:absolute!important;left:-10000px;top:auto;width:1px;height:1px;overflow:hidden;}
-  .cap-row{display:flex;gap:10px;align-items:stretch;}
-  .cap-row input{flex:0 0 130px;font-variant-numeric:tabular-nums;letter-spacing:.06em;}
-  .cap-q{font-family:Marcellus,Georgia,serif;font-size:1.05rem;letter-spacing:.06em;
-    background:#FFFDFA;border:1px solid var(--line-l);padding:11px 16px;display:inline-flex;align-items:center;
-    font-variant-numeric:tabular-nums;color:var(--ink);border-radius:2px;}
-  .cap-new{background:none;border:0;color:var(--brass-deep);font-family:inherit;font-size:.8rem;
-    text-decoration:underline;cursor:pointer;padding:0 4px;align-self:center;}
-  .cap-new:hover{color:var(--ink);}
+  /* ---------- form states ---------- */
   .confirm.err{border-color:var(--kumkum);background:#FDF1EE;}
+  .confirm a{color:var(--brass-deep);font-weight:700;}
   .field input[aria-invalid="true"],.field select[aria-invalid="true"]{border-color:var(--kumkum);}
 </style>
 <style>
@@ -510,7 +502,7 @@
         <h2>पहली सेवा, &#8377;299 में</h2>
         <p class="lede">एक पूरी विज़िट &mdash; मंदिर की सफ़ाई, एक सूती पोशाक, ताज़े फूल &mdash; ताकि योजना लेने से पहले आप देख सकें कि यह कैसा लगता है। ट्रायल पर कोई ऑटो-रिन्युअल नहीं।</p>
         <p class="lede"><strong>बात करना चाहेंगे?</strong> व्हाट्सऐप पर संदेश भेजिए, एक मिनट में स्लॉट तय हो जाएगा।</p>
-        <a class="btn btn-dark" href="https://wa.me/910000000000?text=%E0%A4%A8%E0%A4%AE%E0%A4%B8%E0%A5%8D%E0%A4%A4%E0%A5%87%2C%20%E0%A4%AE%E0%A5%81%E0%A4%9D%E0%A5%87%20%E0%A4%AE%E0%A4%82%E0%A4%A6%E0%A4%BF%E0%A4%B0%20%E0%A4%B8%E0%A5%87%E0%A4%B5%E0%A4%BE%20%E0%A4%AC%E0%A5%81%E0%A4%95%20%E0%A4%95%E0%A4%B0%E0%A4%A8%E0%A5%80%20%E0%A4%B9%E0%A5%88" target="_blank" rel="noopener">व्हाट्सऐप करें</a>
+        <a class="btn btn-dark" id="waDirect" href="https://wa.me/910000000000?text=%E0%A4%A8%E0%A4%AE%E0%A4%B8%E0%A5%8D%E0%A4%A4%E0%A5%87%2C%20%E0%A4%AE%E0%A5%81%E0%A4%9D%E0%A5%87%20%E0%A4%AE%E0%A4%82%E0%A4%A6%E0%A4%BF%E0%A4%B0%20%E0%A4%B8%E0%A5%87%E0%A4%B5%E0%A4%BE%20%E0%A4%AC%E0%A5%81%E0%A4%95%20%E0%A4%95%E0%A4%B0%E0%A4%A8%E0%A5%80%20%E0%A4%B9%E0%A5%88" target="_blank" rel="noopener">व्हाट्सऐप करें</a>
         <p class="form-note">लाइव करने से पहले यह नंबर बदल दें।</p>
       </div>
       <div>
@@ -553,20 +545,8 @@
               <button class="slot pref" type="button" aria-pressed="false">पूरा शृंगार सेवा साथी करें</button>
             </div>
           </div>
-          <!-- स्पैम रोकने के लिए। अपने डोमेन पर इसे Cloudflare Turnstile से बदला जा सकता है। -->
-          <div class="field">
-            <label for="cap">एक छोटी जाँच &mdash; कृपया हल करें</label>
-            <div class="cap-row">
-              <span class="cap-q" id="capq" aria-live="polite">3 + 4 =</span>
-              <input id="cap" name="captcha" type="text" inputmode="numeric" autocomplete="off"
-                     aria-describedby="caphelp" aria-label="जोड़ का उत्तर" required>
-              <button type="button" class="cap-new" id="capnew">दूसरा सवाल</button>
-            </div>
-            <p class="form-note" id="caphelp">स्वचालित बुकिंग रोकने के लिए। असुविधा के लिए क्षमा करें।</p>
-          </div>
-          <div class="hp"><label>Company (खाली छोड़ें)<input type="text" name="company" tabindex="-1" autocomplete="off"></label></div>
-          <button class="btn btn-primary" type="submit">यह स्लॉट माँगें</button>
-          <p class="form-note">दो घंटे के भीतर व्हाट्सऐप पर पुष्टि। अभी कोई भुगतान नहीं।</p>
+          <button class="btn btn-primary" type="submit">व्हाट्सऐप पर भेजें</button>
+          <p class="form-note">यह आपके विवरण के साथ व्हाट्सऐप खोल देगा। इस वेबसाइट पर कुछ भी संग्रहित नहीं होता।</p>
           <div id="confirm" class="confirm" hidden></div>
         </form>
       </div>
@@ -620,51 +600,41 @@
 <script>
 var LOCALE = 'hi-IN';
 var MSG = {
-  spam:   'इस अनुरोध में कुछ गड़बड़ हुई। कृपया दोबारा कोशिश करें।',
-  fast:   'यह कुछ ज़्यादा ही तेज़ी से भेजा गया। कृपया विवरण जाँचकर फिर से भेजें।',
+  hello:  'नमस्ते देविका, मुझे मंदिर सेवा बुक करनी है।',
   name:   'कृपया अपना नाम बताइए ताकि हम जान सकें किससे बात करनी है।',
-  phone:  'कृपया 10 अंकों का मोबाइल नंबर भरें जिस पर हम पुष्टि कर सकें।',
+  phone:  'कृपया 10 अंकों का मोबाइल नंबर भरें जिस पर हम संपर्क कर सकें।',
   pin:    'कृपया 6 अंकों का सही पिन कोड भरें ताकि हम देख सकें कि आपके इलाक़े में सेवा है या नहीं।',
   date:   'कृपया विज़िट की तारीख़ चुनें।',
   past:   'यह तारीख़ निकल चुकी है। कृपया आज या उसके बाद का दिन चुनें।',
-  captcha:'उत्तर सही नहीं था। यह लीजिए नया सवाल।',
-  sent:   'अनुरोध भेज दिया गया',
-  ok: function(name, plan, date, win, pin, who){
-    return '<strong>धन्यवाद, ' + name + '।</strong><br>' + plan + ' के लिए ' + date + ', ' + win +
-           ', पिन ' + pin + ' पर आपका अनुरोध मिल गया है। पसंद: ' + who +
-           '। दो घंटे के भीतर व्हाट्सऐप पर पुष्टि करेंगे।';
-  }
+  sent:   'व्हाट्सऐप में खुल गया',
+  opening:'आपके विवरण के साथ व्हाट्सऐप खुल रहा है &mdash; बस भेजें दबाइए। अगर कुछ न हुआ हो तो',
+  openLink: 'चैट खोलने के लिए यहाँ दबाइए।',
+  msgTitle: 'मंदिर सेवा बुकिंग अनुरोध',
+  fName: 'नाम', fPhone: 'मोबाइल', fPin: 'पिन कोड', fPlan: 'योजना',
+  fDate: 'पसंदीदा तारीख़', fWindow: 'पसंदीदा समय', fDress: 'वस्त्र कौन पहनाएगा',
+  fIdol: 'मूर्ति की ऊँचाई'
 };
 </script>
 <script>
 (function(){
-  var openedAt = Date.now();
-  var MIN_MS = 2500;          // a human cannot complete this form faster
-  var a = 0, b = 0;
+  // ---- The one place to change the number. Used by the form and the header button. ----
+  var WA = '910000000000';           // TODO: replace with the real WhatsApp business number
 
-  var form  = document.getElementById('bookingForm');
-  var out   = document.getElementById('confirm');
-  var capQ  = document.getElementById('capq');
-  var capIn = document.getElementById('cap');
-  var capNew= document.getElementById('capnew');
+  var form   = document.getElementById('bookingForm');
+  var out    = document.getElementById('confirm');
+  var submit = form.querySelector('button[type=submit]');
 
-  function newChallenge(){
-    a = 2 + Math.floor(Math.random() * 8);
-    b = 1 + Math.floor(Math.random() * 8);
-    capQ.textContent = a + ' + ' + b + ' =';
-    capIn.value = '';
-    capIn.removeAttribute('aria-invalid');
-  }
-  newChallenge();
-  capNew.addEventListener('click', function(){ newChallenge(); capIn.focus(); });
+  // keep the standalone "WhatsApp us" button in sync with WA
+  var direct = document.getElementById('waDirect');
+  if (direct) direct.href = 'https://wa.me/' + WA + '?text=' + encodeURIComponent(MSG.hello);
 
   // slot / preference toggles
   document.querySelectorAll('.slots').forEach(function(group){
     group.addEventListener('click', function(e){
-      var b2 = e.target.closest('.slot');
-      if(!b2) return;
+      var b = e.target.closest('.slot');
+      if(!b) return;
       group.querySelectorAll('.slot').forEach(function(s){ s.setAttribute('aria-pressed','false'); });
-      b2.setAttribute('aria-pressed','true');
+      b.setAttribute('aria-pressed','true');
     });
   });
 
@@ -676,13 +646,16 @@ var MSG = {
     if(el){ el.setAttribute('aria-invalid','true'); el.focus(); }
     return false;
   }
+  function pressed(i){
+    var g = document.querySelectorAll('.slots')[i];
+    var b = g && g.querySelector('.slot[aria-pressed="true"]');
+    return b ? b.textContent.trim() : '';
+  }
 
   form.addEventListener('submit', function(e){
     e.preventDefault();
-
-    ['nm','ph','pin','dt','cap'].forEach(function(id){
-      var el = document.getElementById(id);
-      if(el) el.removeAttribute('aria-invalid');
+    ['nm','ph','pin','dt'].forEach(function(id){
+      var el = document.getElementById(id); if(el) el.removeAttribute('aria-invalid');
     });
 
     var name = (document.getElementById('nm').value || '').trim();
@@ -690,39 +663,45 @@ var MSG = {
     var pin  = (document.getElementById('pin').value || '').replace(/[^0-9]/g,'');
     var date = document.getElementById('dt').value;
     var plan = document.getElementById('pl').value;
-    var hp   = form.querySelector('input[name="company"]').value;
+    var idol = (document.getElementById('idl').value || '').trim();
 
-    if(hp){ return fail(MSG.spam); }                                   // honeypot
-    if(Date.now() - openedAt < MIN_MS){ return fail(MSG.fast); }        // time trap
     if(!name){ return fail(MSG.name, document.getElementById('nm')); }
     if(phone.length < 10){ return fail(MSG.phone, document.getElementById('ph')); }
     if(pin.length !== 6){ return fail(MSG.pin, document.getElementById('pin')); }
     if(!date){ return fail(MSG.date, document.getElementById('dt')); }
-    var chosen = new Date(date), today = new Date(); today.setHours(0,0,0,0);
+    var chosen = new Date(date + 'T00:00:00'), today = new Date(); today.setHours(0,0,0,0);
     if(chosen < today){ return fail(MSG.past, document.getElementById('dt')); }
-    if(parseInt(capIn.value, 10) !== a + b){ newChallenge(); return fail(MSG.captcha, capIn); }
 
     var dateTxt = date;
-    try { dateTxt = new Date(date + 'T00:00:00').toLocaleDateString(
-            LOCALE, {weekday:'long', day:'numeric', month:'long', year:'numeric'}); } catch(e){}
-    var win  = document.querySelector('.slots .slot[aria-pressed="true"]');
-    var who  = document.querySelectorAll('.slots')[1];
-    var whoTxt = who ? who.querySelector('.slot[aria-pressed="true"]').textContent : '';
+    try { dateTxt = chosen.toLocaleDateString(LOCALE,
+            {weekday:'long', day:'numeric', month:'long', year:'numeric'}); } catch(err){}
+
+    var lines = [
+      MSG.msgTitle, '',
+      MSG.fName   + ': ' + name,
+      MSG.fPhone  + ': ' + phone,
+      MSG.fPin    + ': ' + pin,
+      MSG.fPlan   + ': ' + plan,
+      MSG.fDate   + ': ' + dateTxt,
+      MSG.fWindow + ': ' + pressed(0),
+      MSG.fDress  + ': ' + pressed(1)
+    ];
+    if(idol) lines.push(MSG.fIdol + ': ' + idol);
+
+    var url = 'https://wa.me/' + WA + '?text=' + encodeURIComponent(lines.join(String.fromCharCode(10)));
 
     out.hidden = false;
     out.className = 'confirm';
     out.setAttribute('role','status');
-    out.innerHTML = MSG.ok(name.replace(/[<>&"]/g,''), plan, dateTxt, win ? win.textContent : '', pin, whoTxt);
-    form.querySelector('button[type=submit]').textContent = MSG.sent;
-    form.querySelector('button[type=submit]').disabled = true;
+    out.innerHTML = MSG.opening + ' <a href="' + url + '" target="_blank" rel="noopener" id="waFallback">'
+                  + MSG.openLink + '</a>';
+    submit.textContent = MSG.sent;
 
-    // TODO: POST to your endpoint here (Formspree, or your own API).
-    // fetch('https://formspree.io/f/XXXX', {method:'POST', headers:{'Content-Type':'application/json'},
-    //   body: JSON.stringify({name:name, phone:phone, pincode:pin, plan:plan, date:date,
-    //                         window: win && win.textContent, dressing: whoTxt})});
+    window.open(url, '_blank', 'noopener');
   });
 })();
 </script>
+
 
 
 </body>

@@ -1,5 +1,10 @@
-"""End-to-end tests for the Devika booking form (English + Hindi)."""
+"""End-to-end tests for the Devika booking form (English + Hindi).
+
+The form no longer posts anywhere: it validates, then opens a prefilled
+WhatsApp chat. These tests intercept window.open and assert on the URL.
+"""
 from playwright.sync_api import sync_playwright
+from urllib.parse import unquote
 import datetime, re, sys
 
 EN = 'file:///home/claude/brand/site/index.html'
@@ -13,12 +18,7 @@ def check(name, cond, detail=''):
     results.append((name, bool(cond), detail))
     print(('PASS  ' if cond else 'FAIL  ') + name + (('  -> ' + detail) if detail else ''))
 
-def solve(page):
-    q = page.locator('#capq').inner_text()          # "3 + 4 ="
-    a, b = [int(x) for x in re.findall(r'\d+', q)]
-    return str(a + b)
-
-def fill(page, name='Saurabh Vaish', phone='9810012345', pin='122002', date=FUTURE, idol='7 inches'):
+def fill(page, name='Saurabh Vaish', phone='98100 12345', pin='122002', date=FUTURE, idol='7 inches'):
     page.fill('#nm', name); page.fill('#ph', phone)
     page.fill('#pin', pin); page.fill('#dt', date); page.fill('#idl', idol)
 
@@ -26,130 +26,98 @@ def out(page):
     el = page.locator('#confirm')
     return (el.inner_text() if el.is_visible() else ''), (el.get_attribute('class') or '')
 
+def trap(page):
+    """Capture window.open instead of launching WhatsApp."""
+    page.evaluate("window.__opened = null; window.open = function(u){ window.__opened = u; return null; };")
+
+def opened(page):
+    u = page.evaluate("window.__opened")
+    return unquote(u) if u else ''
+
 def run(pw, url, label):
     print('\n=== ' + label + ' ===')
     br = pw.chromium.launch()
     ctx = br.new_context(viewport={'width': 1280, 'height': 900})
     ctx.route(re.compile(r'fonts\.(googleapis|gstatic)\.com'), lambda r: r.abort())
     pg = ctx.new_page()
-    pg.goto(url); pg.wait_for_timeout(2600)         # also clears the 2.5s time-trap
+    pg.goto(url); pg.wait_for_timeout(600)
     pg.locator('#book').scroll_into_view_if_needed()
+    trap(pg)
 
-    # 1. empty submit
+    # --- no captcha, no honeypot, no dead endpoint ---
+    check(label + ' | captcha removed', pg.locator('#capq').count() == 0)
+    check(label + ' | honeypot removed', pg.locator('input[name="company"]').count() == 0)
+    src = pg.content()
+    check(label + ' | no formspree/fetch placeholder left', 'formspree' not in src.lower())
+
+    # --- validation still holds ---
     pg.click('#bookingForm button[type=submit]')
     txt, cls = out(pg)
-    check(label + ' | empty form is rejected', 'err' in cls and len(txt) > 10, txt[:60])
+    check(label + ' | empty form rejected', 'err' in cls, txt[:60])
+    check(label + ' | nothing opened on failure', opened(pg) == '')
 
-    # 2. short phone
-    fill(pg, phone='98100')
-    pg.fill('#cap', solve(pg))
-    pg.click('#bookingForm button[type=submit]')
+    fill(pg, phone='98100'); pg.click('#bookingForm button[type=submit]')
     txt, cls = out(pg)
-    check(label + ' | 5-digit phone rejected', 'err' in cls, txt[:60])
-    check(label + ' | phone field marked invalid',
-          pg.get_attribute('#ph', 'aria-invalid') == 'true')
+    check(label + ' | short phone rejected', 'err' in cls, txt[:60])
+    check(label + ' | phone marked invalid', pg.get_attribute('#ph', 'aria-invalid') == 'true')
 
-    # 3. bad pin
-    fill(pg, pin='1220')
-    pg.fill('#cap', solve(pg))
-    pg.click('#bookingForm button[type=submit]')
-    txt, cls = out(pg)
-    check(label + ' | 4-digit pin rejected', 'err' in cls, txt[:60])
+    fill(pg, pin='1220'); pg.click('#bookingForm button[type=submit]')
+    check(label + ' | short pin rejected', 'err' in out(pg)[1])
 
-    # 4. past date
-    fill(pg, date=PAST)
-    pg.fill('#cap', solve(pg))
-    pg.click('#bookingForm button[type=submit]')
-    txt, cls = out(pg)
-    check(label + ' | past date rejected', 'err' in cls, txt[:60])
+    fill(pg, date=PAST); pg.click('#bookingForm button[type=submit]')
+    check(label + ' | past date rejected', 'err' in out(pg)[1])
+    check(label + ' | still nothing opened', opened(pg) == '')
 
-    # 5. wrong captcha
-    fill(pg)
-    before = pg.locator('#capq').inner_text()
-    pg.fill('#cap', '999')
-    pg.click('#bookingForm button[type=submit]')
-    txt, cls = out(pg)
-    after = pg.locator('#capq').inner_text()
-    check(label + ' | wrong captcha rejected', 'err' in cls, txt[:60])
-    check(label + ' | captcha rotates after a failure', before != after,
-          before + ' -> ' + after)
-    check(label + ' | captcha input cleared on rotate', pg.input_value('#cap') == '')
-
-    # 6. "New question" button
-    b1 = pg.locator('#capq').inner_text()
-    pg.click('#capnew'); pg.wait_for_timeout(120)
-    check(label + ' | new-question button works', pg.locator('#capq').inner_text() != b1)
-
-    # 7. slot + dressing preference selection
+    # --- the happy path opens WhatsApp with everything filled in ---
     pg.locator('.slots').first.locator('.slot').nth(3).click()
     pg.locator('.slots').nth(1).locator('.slot').nth(1).click()
-    pressed = pg.locator('.slots').first.locator('.slot[aria-pressed="true"]')
-    check(label + ' | only one time slot stays selected', pressed.count() == 1,
-          pressed.inner_text())
-
-    # 8. happy path
+    win = pg.locator('.slots').first.locator('.slot[aria-pressed="true"]').inner_text().strip()
+    who = pg.locator('.slots').nth(1).locator('.slot[aria-pressed="true"]').inner_text().strip()
     fill(pg)
     pg.select_option('#pl', index=2)
-    pg.fill('#cap', solve(pg))
+    plan = pg.locator('#pl option:checked').inner_text().strip()
     pg.click('#bookingForm button[type=submit]')
-    pg.wait_for_timeout(200)
+    pg.wait_for_timeout(150)
+
+    u = opened(pg)
     txt, cls = out(pg)
-    ok = ('err' not in cls) and ('Saurabh' in txt) and ('122002' in txt) \
-         and (str(TODAY.year) in txt) and (FUTURE not in txt)
-    check(label + ' | valid booking accepted', ok, txt[:110])
-    check(label + ' | submit disabled after success',
-          pg.is_disabled('#bookingForm button[type=submit]'))
-    check(label + ' | confirmation echoes the chosen window',
-          pressed.inner_text().strip() in txt, pressed.inner_text().strip())
-    check(label + ' | confirmation shows a readable date, not ISO',
-          FUTURE not in txt and str(TODAY.year) in txt, txt[:110])
+    check(label + ' | valid submit opens wa.me', u.startswith('https://wa.me/'), u[:48])
+    check(label + ' | message carries the name', 'Saurabh Vaish' in u)
+    check(label + ' | phone normalised to digits', '9810012345' in u, 'input had a space')
+    check(label + ' | message carries the pin', '122002' in u)
+    check(label + ' | message carries the plan', plan.split()[0] in u, plan)
+    check(label + ' | message carries the chosen window', win in u, win)
+    check(label + ' | message carries dressing preference', who in u, who)
+    check(label + ' | message carries idol height', '7 inches' in u)
+    check(label + ' | date is readable, not ISO', FUTURE not in u and str(TODAY.year) in u)
+    check(label + ' | confirmation is not an error', 'err' not in cls)
+    check(label + ' | fallback link present', pg.locator('#waFallback').count() == 1)
+    check(label + ' | fallback href matches opened url',
+          pg.get_attribute('#waFallback', 'href') and
+          unquote(pg.get_attribute('#waFallback', 'href')) == u)
 
-    # 9. honeypot
-    pg2 = ctx.new_page()
-    pg2.goto(url); pg2.wait_for_timeout(2600)
-    pg2.locator('#book').scroll_into_view_if_needed()
-    fill(pg2)
-    pg2.fill('#cap', solve(pg2))
-    pg2.eval_on_selector('input[name="company"]', 'el => el.value = "bot-filled"')
-    pg2.click('#bookingForm button[type=submit]')
-    txt, cls = out(pg2)
-    check(label + ' | honeypot blocks bots', 'err' in cls, txt[:60])
-    check(label + ' | honeypot is off-screen',
-          pg2.eval_on_selector('.hp', 'el => el.getBoundingClientRect().left < -1000'))
-    check(label + ' | honeypot not keyboard-reachable',
-          pg2.get_attribute('input[name="company"]', 'tabindex') == '-1')
+    # --- one number, one place ---
+    nums = set(re.findall(r'wa\.me/(\d+)', pg.content()))
+    check(label + ' | single WhatsApp number on the page', len(nums) == 1, str(nums))
+    check(label + ' | header button wired from the same constant',
+          pg.get_attribute('#waDirect', 'href').startswith('https://wa.me/'))
 
-    # 10. time trap
-    pg3 = ctx.new_page()
-    pg3.goto(url); pg3.wait_for_timeout(350)
-    pg3.locator('#book').scroll_into_view_if_needed()
-    fill(pg3)
-    pg3.fill('#cap', solve(pg3))
-    pg3.click('#bookingForm button[type=submit]')
-    txt, cls = out(pg3)
-    check(label + ' | sub-2.5s submit blocked', 'err' in cls, txt[:60])
-
-    # 11. accessibility bits
-    check(label + ' | captcha has an accessible label',
-          bool(pg.get_attribute('#cap', 'aria-label')))
-    check(label + ' | question announced politely',
-          pg.get_attribute('#capq', 'aria-live') == 'polite')
-
-    # 12. mobile layout, no horizontal scroll
-    pg4 = ctx.new_page(); pg4.set_viewport_size({'width':390,'height':780})
-    pg4.goto(url); pg4.wait_for_timeout(2600)
+    # --- mobile ---
+    pg4 = ctx.new_page(); pg4.set_viewport_size({'width': 390, 'height': 780})
+    pg4.goto(url); pg4.wait_for_timeout(600)
     ov = pg4.evaluate('document.documentElement.scrollWidth - document.documentElement.clientWidth')
     check(label + ' | no horizontal scroll at 390px', ov <= 1, 'overflow=' + str(ov))
     pg4.locator('#book').scroll_into_view_if_needed()
-    fill(pg4)
-    pg4.fill('#cap', solve(pg4))
-    pg4.click('#bookingForm button[type=submit]')
-    txt, cls = out(pg4)
-    check(label + ' | booking works on mobile', 'err' not in cls and 'Saurabh' in txt, txt[:70])
+    trap(pg4); fill(pg4)
+    pg4.click('#bookingForm button[type=submit]'); pg4.wait_for_timeout(150)
+    check(label + ' | works on mobile', opened(pg4).startswith('https://wa.me/'))
     pg4.screenshot(path='/tmp/form-mobile-' + label.lower() + '.png')
 
     pg.locator('#book').scroll_into_view_if_needed()
     pg.screenshot(path='/tmp/form-' + label.lower() + '.png')
+    print('\n  --- message that would be sent (' + label + ') ---')
+    for line in u.split('text=')[-1].split('\n'):
+        print('  | ' + line)
     br.close()
 
 with sync_playwright() as pw:
