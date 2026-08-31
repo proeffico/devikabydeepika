@@ -229,6 +229,19 @@
   .work-grid img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s ease;}
   .work-grid figure:hover img{transform:scale(1.045);}
   @media (prefers-reduced-motion: reduce){.work-grid img{transition:none;}}
+
+  /* ---------- captcha + anti-spam ---------- */
+  .hp{position:absolute!important;left:-10000px;top:auto;width:1px;height:1px;overflow:hidden;}
+  .cap-row{display:flex;gap:10px;align-items:stretch;}
+  .cap-row input{flex:0 0 130px;font-variant-numeric:tabular-nums;letter-spacing:.06em;}
+  .cap-q{font-family:Marcellus,Georgia,serif;font-size:1.05rem;letter-spacing:.06em;
+    background:#FFFDFA;border:1px solid var(--line-l);padding:11px 16px;display:inline-flex;align-items:center;
+    font-variant-numeric:tabular-nums;color:var(--ink);border-radius:2px;}
+  .cap-new{background:none;border:0;color:var(--brass-deep);font-family:inherit;font-size:.8rem;
+    text-decoration:underline;cursor:pointer;padding:0 4px;align-self:center;}
+  .cap-new:hover{color:var(--ink);}
+  .confirm.err{border-color:var(--kumkum);background:#FDF1EE;}
+  .field input[aria-invalid="true"],.field select[aria-invalid="true"]{border-color:var(--kumkum);}
 </style>
 <style>
   body{font-family:Mukta,"Noto Sans Devanagari","Segoe UI",Arial,sans-serif;line-height:1.8;}
@@ -540,6 +553,18 @@
               <button class="slot pref" type="button" aria-pressed="false">पूरा शृंगार सेवा साथी करें</button>
             </div>
           </div>
+          <!-- स्पैम रोकने के लिए। अपने डोमेन पर इसे Cloudflare Turnstile से बदला जा सकता है। -->
+          <div class="field">
+            <label for="cap">एक छोटी जाँच &mdash; कृपया हल करें</label>
+            <div class="cap-row">
+              <span class="cap-q" id="capq" aria-live="polite">3 + 4 =</span>
+              <input id="cap" name="captcha" type="text" inputmode="numeric" autocomplete="off"
+                     aria-describedby="caphelp" aria-label="जोड़ का उत्तर" required>
+              <button type="button" class="cap-new" id="capnew">दूसरा सवाल</button>
+            </div>
+            <p class="form-note" id="caphelp">स्वचालित बुकिंग रोकने के लिए। असुविधा के लिए क्षमा करें।</p>
+          </div>
+          <div class="hp"><label>Company (खाली छोड़ें)<input type="text" name="company" tabindex="-1" autocomplete="off"></label></div>
           <button class="btn btn-primary" type="submit">यह स्लॉट माँगें</button>
           <p class="form-note">दो घंटे के भीतर व्हाट्सऐप पर पुष्टि। अभी कोई भुगतान नहीं।</p>
           <div id="confirm" class="confirm" hidden></div>
@@ -593,37 +618,112 @@
 </footer>
 
 <script>
+var LOCALE = 'hi-IN';
+var MSG = {
+  spam:   'इस अनुरोध में कुछ गड़बड़ हुई। कृपया दोबारा कोशिश करें।',
+  fast:   'यह कुछ ज़्यादा ही तेज़ी से भेजा गया। कृपया विवरण जाँचकर फिर से भेजें।',
+  name:   'कृपया अपना नाम बताइए ताकि हम जान सकें किससे बात करनी है।',
+  phone:  'कृपया 10 अंकों का मोबाइल नंबर भरें जिस पर हम पुष्टि कर सकें।',
+  pin:    'कृपया 6 अंकों का सही पिन कोड भरें ताकि हम देख सकें कि आपके इलाक़े में सेवा है या नहीं।',
+  date:   'कृपया विज़िट की तारीख़ चुनें।',
+  past:   'यह तारीख़ निकल चुकी है। कृपया आज या उसके बाद का दिन चुनें।',
+  captcha:'उत्तर सही नहीं था। यह लीजिए नया सवाल।',
+  sent:   'अनुरोध भेज दिया गया',
+  ok: function(name, plan, date, win, pin, who){
+    return '<strong>धन्यवाद, ' + name + '।</strong><br>' + plan + ' के लिए ' + date + ', ' + win +
+           ', पिन ' + pin + ' पर आपका अनुरोध मिल गया है। पसंद: ' + who +
+           '। दो घंटे के भीतर व्हाट्सऐप पर पुष्टि करेंगे।';
+  }
+};
+</script>
+<script>
 (function(){
+  var openedAt = Date.now();
+  var MIN_MS = 2500;          // a human cannot complete this form faster
+  var a = 0, b = 0;
+
+  var form  = document.getElementById('bookingForm');
+  var out   = document.getElementById('confirm');
+  var capQ  = document.getElementById('capq');
+  var capIn = document.getElementById('cap');
+  var capNew= document.getElementById('capnew');
+
+  function newChallenge(){
+    a = 2 + Math.floor(Math.random() * 8);
+    b = 1 + Math.floor(Math.random() * 8);
+    capQ.textContent = a + ' + ' + b + ' =';
+    capIn.value = '';
+    capIn.removeAttribute('aria-invalid');
+  }
+  newChallenge();
+  capNew.addEventListener('click', function(){ newChallenge(); capIn.focus(); });
+
+  // slot / preference toggles
   document.querySelectorAll('.slots').forEach(function(group){
     group.addEventListener('click', function(e){
-      var b = e.target.closest('.slot');
-      if(!b) return;
+      var b2 = e.target.closest('.slot');
+      if(!b2) return;
       group.querySelectorAll('.slot').forEach(function(s){ s.setAttribute('aria-pressed','false'); });
-      b.setAttribute('aria-pressed','true');
+      b2.setAttribute('aria-pressed','true');
     });
   });
-  var form = document.getElementById('bookingForm');
-  var out = document.getElementById('confirm');
+
+  function fail(msg, el){
+    out.hidden = false;
+    out.className = 'confirm err';
+    out.setAttribute('role','alert');
+    out.textContent = msg;
+    if(el){ el.setAttribute('aria-invalid','true'); el.focus(); }
+    return false;
+  }
+
   form.addEventListener('submit', function(e){
     e.preventDefault();
+
+    ['nm','ph','pin','dt','cap'].forEach(function(id){
+      var el = document.getElementById(id);
+      if(el) el.removeAttribute('aria-invalid');
+    });
+
     var name = (document.getElementById('nm').value || '').trim();
-    var pin  = (document.getElementById('pin').value || '').trim();
+    var phone= (document.getElementById('ph').value || '').replace(/[^0-9]/g,'');
+    var pin  = (document.getElementById('pin').value || '').replace(/[^0-9]/g,'');
     var date = document.getElementById('dt').value;
     var plan = document.getElementById('pl').value;
-    if(!name || !pin || !date){
-      out.hidden = false;
-      out.textContent = 'कृपया अपना नाम, पिन कोड और पसंदीदा तारीख़ भरें ताकि हम उपलब्धता देख सकें।';
-      return;
-    }
-    var win = document.querySelector('.slots .slot[aria-pressed="true"]');
+    var hp   = form.querySelector('input[name="company"]').value;
+
+    if(hp){ return fail(MSG.spam); }                                   // honeypot
+    if(Date.now() - openedAt < MIN_MS){ return fail(MSG.fast); }        // time trap
+    if(!name){ return fail(MSG.name, document.getElementById('nm')); }
+    if(phone.length < 10){ return fail(MSG.phone, document.getElementById('ph')); }
+    if(pin.length !== 6){ return fail(MSG.pin, document.getElementById('pin')); }
+    if(!date){ return fail(MSG.date, document.getElementById('dt')); }
+    var chosen = new Date(date), today = new Date(); today.setHours(0,0,0,0);
+    if(chosen < today){ return fail(MSG.past, document.getElementById('dt')); }
+    if(parseInt(capIn.value, 10) !== a + b){ newChallenge(); return fail(MSG.captcha, capIn); }
+
+    var dateTxt = date;
+    try { dateTxt = new Date(date + 'T00:00:00').toLocaleDateString(
+            LOCALE, {weekday:'long', day:'numeric', month:'long', year:'numeric'}); } catch(e){}
+    var win  = document.querySelector('.slots .slot[aria-pressed="true"]');
+    var who  = document.querySelectorAll('.slots')[1];
+    var whoTxt = who ? who.querySelector('.slot[aria-pressed="true"]').textContent : '';
+
     out.hidden = false;
-    out.innerHTML = '<strong>धन्यवाद, ' + name.replace(/[<>&]/g,'') + '।</strong><br>' + plan +
-      ' के लिए ' + date + ', ' + (win ? win.textContent : '') + ', पिन ' + pin.replace(/[^0-9]/g,'') +
-      ' पर आपका अनुरोध हमें मिल गया है। दो घंटे के भीतर व्हाट्सऐप पर पुष्टि करेंगे।';
-    form.querySelector('button[type=submit]').textContent = 'अनुरोध भेज दिया गया';
+    out.className = 'confirm';
+    out.setAttribute('role','status');
+    out.innerHTML = MSG.ok(name.replace(/[<>&"]/g,''), plan, dateTxt, win ? win.textContent : '', pin, whoTxt);
+    form.querySelector('button[type=submit]').textContent = MSG.sent;
+    form.querySelector('button[type=submit]').disabled = true;
+
+    // TODO: POST to your endpoint here (Formspree, or your own API).
+    // fetch('https://formspree.io/f/XXXX', {method:'POST', headers:{'Content-Type':'application/json'},
+    //   body: JSON.stringify({name:name, phone:phone, pincode:pin, plan:plan, date:date,
+    //                         window: win && win.textContent, dressing: whoTxt})});
   });
 })();
 </script>
+
 
 </body>
 </html>
