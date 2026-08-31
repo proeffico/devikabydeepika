@@ -88,12 +88,15 @@ Validation covers a 10-digit mobile, a 6-digit pin code, and dates from today on
 
 ### Tests
 
-`test/test_form.py` drives both language versions in headless Chromium — 52 checks covering validation, the generated WhatsApp URL and every field inside it, the fallback link, single-source-of-truth for the number, mobile layout and the success path. It intercepts `window.open`, so no chat actually launches.
+`test/test_form.py` — 52 checks across both language versions: validation, the generated WhatsApp URL and every field inside it, the fallback link, single-source-of-truth for the number, and the success path. It intercepts `window.open`, so no chat actually launches.
+
+`test/test_mobile.py` — 100 checks: five viewports (375, 360, 390, 430, 768) × both languages × both themes, covering horizontal overflow, per-viewport contrast, 40px minimum tap targets, section-nav reachability, header height as a share of the screen, broken images, and an end-to-end booking on each device.
 
 ```bash
 pip install playwright && playwright install chromium
 python3 -m http.server 8000 &
 python3 test/test_form.py
+python3 test/test_mobile.py
 ```
 
 The file paths at the top of the test point at a local build; change `EN` and `HI` to your served URLs.
@@ -103,6 +106,14 @@ The file paths at the top of the test point at a local build; change `EN` and `H
 Both pages ship with meta description, canonical, Open Graph, Twitter card, reciprocal `hreflang` (`en`, `hi`, `x-default`), and JSON-LD covering `Organization`, `Service` with a priced `OfferCatalog`, and `FAQPage`. FAQ answers are written answer-first so they can be lifted cleanly by AI search.
 
 Keyword map and content priorities are in [`docs/launch-playbook.md`](docs/launch-playbook.md).
+
+## Mobile
+
+Most traffic will arrive from Instagram on a phone, so the mobile layout is tested rather than assumed.
+
+The header is two rows under 820px: brand, theme toggle, language and the booking CTA on the first; a horizontally scrollable row of section links on the second. **Do not replace this with `display:none` on the links** — that is what it used to be, and it left phone visitors with no way to reach Collections, Seva, Plans or Festivals at all. The header stays at 110px on a 390px-wide screen, about 13% of the viewport.
+
+Every interactive element is at least 44px in its tappable dimension: nav links, the theme toggle, time-slot buttons, form inputs, FAQ rows and footer links.
 
 ## Colour and themes
 
