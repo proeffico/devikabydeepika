@@ -1,0 +1,623 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Devika by Deepika makes handcrafted deity poshak and runs Mandir Seva - a monthly home temple service in Delhi NCR. We dress your mandir, refresh the shringar and take the old poshak back for respectful recycling. Ships worldwide.">
+<link rel="canonical" href="https://devikabydeepika.com/">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta name="theme-color" content="#150E19">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Devika by Deepika">
+<meta property="og:title" content="Devika by Deepika - handcrafted poshak &amp; monthly Mandir Seva">
+<meta property="og:description" content="Fresh poshak, a clean shrine and new shringar every month. We take the old poshak back and recycle it respectfully. Delhi NCR, and shipping worldwide.">
+<meta property="og:url" content="https://devikabydeepika.com/">
+<meta property="og:image" content="https://devikabydeepika.com/og-image.jpg">
+<meta property="og:locale" content="en_IN">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Devika by Deepika - handcrafted poshak &amp; monthly Mandir Seva">
+<meta name="twitter:description" content="Your mandir, dressed with care - every single month. Delhi NCR, shipping worldwide.">
+<meta name="twitter:image" content="https://devikabydeepika.com/og-image.jpg">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="alternate" hreflang="en" href="https://devikabydeepika.com/">
+<link rel="alternate" hreflang="hi" href="https://devikabydeepika.com/hi/">
+<link rel="alternate" hreflang="x-default" href="https://devikabydeepika.com/">
+<title>Devika by Deepika</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Marcellus&family=Karla:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap">
+<style>
+  :root{
+    --night:#150E19;        /* deep plum-black ground */
+    --night-2:#1E1421;      /* raised panel on night */
+    --paper:#F5F1EC;        /* warm ivory panel */
+    --paper-2:#EBE4DC;
+    --ink:#221726;
+    --ivory:#F2ECEF;
+    --muted-dark:#A593A6;   /* muted text on night */
+    --muted-light:#6E6158;  /* muted text on paper */
+    --brass:#C89B4A;
+    --brass-deep:#9C6B22;
+    --kumkum:#C8452A;
+    --line-d:#3A2B3C;
+    --line-l:#DBD2C7;
+    --maxw:1120px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto;} *{animation:none!important;transition:none!important;} }
+  body{
+    margin:0;background:var(--night);color:var(--ivory);
+    font-family:Karla,"Helvetica Neue",Arial,sans-serif;
+    font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,h4{font-family:Marcellus,"Iowan Old Style",Georgia,serif;font-weight:400;margin:0;text-wrap:balance;}
+  h1{font-size:clamp(2.6rem,7vw,4.6rem);line-height:1.02;letter-spacing:-.015em;}
+  h2{font-size:clamp(1.8rem,4vw,2.7rem);line-height:1.15;}
+  h3{font-size:1.25rem;line-height:1.3;}
+  h4{font-size:1.02rem;}
+  p{margin:0;}
+  a{color:inherit;}
+  img{max-width:100%;}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px;}
+  .eyebrow{font-size:.7rem;text-transform:uppercase;letter-spacing:.2em;font-weight:700;color:var(--brass);}
+  .section{padding:88px 0;}
+  .stack{display:flex;flex-direction:column;gap:18px;}
+  .lede{font-size:1.08rem;color:var(--muted-dark);max-width:56ch;}
+  .on-paper .lede{color:var(--muted-light);}
+
+  /* zari rule */
+  .zari{height:9px;width:100%;background-image:
+      linear-gradient(90deg, transparent 0 6px, var(--brass) 6px 7px, transparent 7px 14px);
+    background-size:14px 9px;opacity:.55;}
+
+  /* ---------- nav ---------- */
+  nav.top{position:sticky;top:0;z-index:50;background:rgba(21,14,25,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line-d);}
+  nav.top .inner{max-width:var(--maxw);margin:0 auto;padding:14px 24px;display:flex;align-items:center;gap:24px;}
+  .brandmark{display:flex;align-items:center;gap:10px;text-decoration:none;margin-right:auto;}
+  .brandmark .nm{font-family:Marcellus,Georgia,serif;font-size:1.15rem;letter-spacing:.22em;text-transform:uppercase;}
+  .brandmark .by{font-size:.62rem;letter-spacing:.28em;text-transform:uppercase;color:var(--brass);display:block;margin-top:2px;}
+  nav.top a.lnk{text-decoration:none;font-size:.86rem;color:var(--muted-dark);letter-spacing:.04em;}
+  nav.top a.lnk:hover,nav.top a.lnk:focus-visible{color:var(--ivory);}
+  @media(max-width:820px){ nav.top .lnk{display:none;} }
+
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:8px;
+    padding:13px 22px;border-radius:2px;text-decoration:none;font-weight:700;
+    font-size:.84rem;letter-spacing:.09em;text-transform:uppercase;border:1px solid transparent;cursor:pointer;
+    transition:background .18s ease,color .18s ease,border-color .18s ease;
+  }
+  .btn-primary{background:var(--brass);color:#1A1119;}
+  .btn-primary:hover{background:#DDB25F;}
+  .btn-ghost{border-color:var(--brass);color:var(--brass);background:transparent;}
+  .btn-ghost:hover{background:rgba(200,155,74,.12);}
+  .on-paper .btn-ghost{border-color:var(--brass-deep);color:var(--brass-deep);}
+  .btn-dark{background:var(--ink);color:var(--paper);}
+  a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible{outline:2px solid var(--brass);outline-offset:3px;}
+
+  /* ---------- hero ---------- */
+  header.hero{position:relative;overflow:hidden;padding:96px 0 72px;}
+  .hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:48px;align-items:center;}
+  @media(max-width:900px){.hero-grid{grid-template-columns:1fr;gap:36px;}}
+  .hero h1 span.gold{color:var(--brass);}
+  .hero .kicker{font-size:.72rem;letter-spacing:.24em;text-transform:uppercase;color:var(--brass);font-weight:700;}
+  .hero .cta-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:8px;}
+  .hero-art{
+    aspect-ratio:4/5;border:1px solid var(--line-d);position:relative;
+    background:
+      radial-gradient(120% 90% at 30% 12%, rgba(200,155,74,.30), transparent 60%),
+      radial-gradient(90% 70% at 80% 85%, rgba(200,69,42,.28), transparent 62%),
+      linear-gradient(160deg,#2C1B2E,#160F1A 70%);
+    display:flex;align-items:flex-end;padding:22px;
+  }
+  .hero-art{align-items:center;justify-content:center;padding:26px;}
+  .heroart-in{width:100%;max-width:330px;}
+  .heroart-in svg{width:100%;height:auto;display:block;}
+  .card .art{align-items:center;justify-content:center;padding:20px;}
+  .card .art svg{width:100%;height:auto;max-width:200px;display:block;}
+  .hero-art .ph{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(242,236,239,.5);}
+  .diya{position:absolute;top:26px;left:50%;transform:translateX(-50%);width:74px;height:auto;}
+
+  .trustbar{border-top:1px solid var(--line-d);border-bottom:1px solid var(--line-d);background:var(--night-2);}
+  .trustbar .items{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line-d);}
+  @media(max-width:880px){.trustbar .items{grid-template-columns:repeat(2,1fr);}}
+  .trustbar .it{background:var(--night-2);padding:20px 22px;display:flex;flex-direction:column;gap:4px;}
+  .trustbar .it .t{font-family:Marcellus,Georgia,serif;font-size:1rem;}
+  .trustbar .it .s{font-size:.8rem;color:var(--muted-dark);}
+
+  /* ---------- paper section ---------- */
+  .on-paper{background:var(--paper);color:var(--ink);}
+  .on-paper .eyebrow{color:var(--brass-deep);}
+
+  /* ---------- collection cards ---------- */
+  .cards{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;}
+  @media(max-width:980px){.cards{grid-template-columns:repeat(2,1fr);}}
+  @media(max-width:560px){.cards{grid-template-columns:1fr;}}
+  .card{border:1px solid var(--line-l);background:#FFFDFA;display:flex;flex-direction:column;}
+  .card .art{aspect-ratio:3/4;display:flex;align-items:flex-end;padding:14px;}
+  .card .art .ph{font-size:.64rem;letter-spacing:.13em;text-transform:uppercase;color:rgba(255,255,255,.72);}
+  .c1 .art{background:linear-gradient(155deg,#7C6A93,#3B2C46);}
+  .c2 .art{background:linear-gradient(155deg,#C0562F,#6A2233);}
+  .c3 .art{background:linear-gradient(155deg,#C89B4A,#7A4A17);}
+  .c4 .art{background:linear-gradient(155deg,#3E6B60,#1E3630);}
+  .card .body{padding:18px 20px 22px;display:flex;flex-direction:column;gap:8px;flex:1;}
+  .card .sanskrit{font-family:Marcellus,Georgia,serif;font-size:1.28rem;}
+  .card .meaning{font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--brass-deep);font-weight:700;}
+  .card p{font-size:.9rem;color:var(--muted-light);}
+  .card .price{margin-top:auto;padding-top:10px;font-size:.86rem;font-weight:700;letter-spacing:.04em;}
+
+  /* ---------- seva steps ---------- */
+  .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line-d);border:1px solid var(--line-d);}
+  @media(max-width:900px){.steps{grid-template-columns:repeat(2,1fr);}}
+  @media(max-width:520px){.steps{grid-template-columns:1fr;}}
+  .step{background:var(--night);padding:26px 24px;display:flex;flex-direction:column;gap:10px;}
+  .step .n{font-family:Marcellus,Georgia,serif;font-size:.95rem;color:var(--brass);letter-spacing:.16em;}
+  .step p{font-size:.9rem;color:var(--muted-dark);}
+
+  /* ---------- plans ---------- */
+  .plans{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;align-items:stretch;}
+  @media(max-width:900px){.plans{grid-template-columns:1fr;}}
+  .plan{border:1px solid var(--line-l);background:#FFFDFA;padding:26px 24px;display:flex;flex-direction:column;gap:14px;}
+  .plan.featured{border:1px solid var(--brass-deep);box-shadow:0 18px 44px -26px rgba(34,23,38,.55);position:relative;}
+  .plan.featured .tag{position:absolute;top:-11px;left:24px;background:var(--brass-deep);color:#FFF9EE;font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;font-weight:700;padding:4px 10px;}
+  .plan .nm{font-family:Marcellus,Georgia,serif;font-size:1.5rem;}
+  .plan .amt{font-family:Marcellus,Georgia,serif;font-size:2.3rem;line-height:1;font-variant-numeric:tabular-nums;}
+  .plan .per{font-size:.8rem;color:var(--muted-light);}
+  .plan ul{margin:0;padding-left:1.05em;display:flex;flex-direction:column;gap:8px;font-size:.9rem;color:var(--muted-light);}
+  .plan ul li::marker{color:var(--brass-deep);}
+  .plan .qtr{font-size:.8rem;color:var(--muted-light);border-top:1px solid var(--line-l);padding-top:12px;}
+  .plan .btn{margin-top:auto;}
+
+  /* ---------- festival packages ---------- */
+  .fests{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+  @media(max-width:900px){.fests{grid-template-columns:repeat(2,1fr);}}
+  @media(max-width:560px){.fests{grid-template-columns:1fr;}}
+  .fest{border:1px solid var(--line-d);background:var(--night-2);padding:22px;display:flex;flex-direction:column;gap:9px;}
+  .fest .season{font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:var(--brass);font-weight:700;}
+  .fest h3{font-size:1.18rem;}
+  .fest p{font-size:.88rem;color:var(--muted-dark);}
+  .fest .amt{margin-top:auto;padding-top:10px;font-family:Marcellus,Georgia,serif;font-size:1.3rem;font-variant-numeric:tabular-nums;}
+
+  /* ---------- booking ---------- */
+  .book-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:44px;}
+  @media(max-width:900px){.book-grid{grid-template-columns:1fr;gap:28px;}}
+  form.booking{display:flex;flex-direction:column;gap:16px;}
+  .field{display:flex;flex-direction:column;gap:6px;}
+  .field label{font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--brass-deep);}
+  .field input,.field select{
+    font-family:inherit;font-size:.95rem;padding:12px 13px;border:1px solid var(--line-l);
+    background:#FFFDFA;color:var(--ink);border-radius:2px;width:100%;
+  }
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+  @media(max-width:560px){.two{grid-template-columns:1fr;}}
+  .slots{display:flex;flex-wrap:wrap;gap:8px;}
+  .slot{
+    font-family:inherit;font-size:.85rem;padding:9px 14px;border:1px solid var(--line-l);
+    background:#FFFDFA;color:var(--ink);cursor:pointer;border-radius:2px;
+  }
+  .slot[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink);}
+  .form-note{font-size:.78rem;color:var(--muted-light);}
+  .confirm{border:1px solid var(--brass-deep);background:#FFF8EA;padding:16px 18px;font-size:.92rem;}
+
+  /* ---------- faq ---------- */
+  details.faq{border-bottom:1px solid var(--line-d);padding:16px 0;}
+  details.faq summary{cursor:pointer;font-family:Marcellus,Georgia,serif;font-size:1.08rem;list-style:none;display:flex;justify-content:space-between;gap:16px;align-items:baseline;}
+  details.faq summary::-webkit-details-marker{display:none;}
+  details.faq summary::after{content:"+";color:var(--brass);font-size:1.2rem;}
+  details.faq[open] summary::after{content:"\2212";}
+  details.faq p{margin-top:10px;color:var(--muted-dark);font-size:.94rem;max-width:70ch;}
+
+  /* ---------- footer ---------- */
+  footer.site{border-top:1px solid var(--line-d);padding:52px 0 40px;background:var(--night-2);}
+  footer.site .cols{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:32px;}
+  @media(max-width:760px){footer.site .cols{grid-template-columns:1fr;}}
+  footer.site a{color:var(--muted-dark);text-decoration:none;font-size:.88rem;display:block;padding:3px 0;}
+  footer.site a:hover{color:var(--ivory);}
+  footer.site .legal{margin-top:34px;padding-top:20px;border-top:1px solid var(--line-d);font-size:.78rem;color:var(--muted-dark);}
+  .areas{font-size:.86rem;color:var(--muted-dark);}
+  .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0;}
+
+  /* ---------- photography ---------- */
+  .hero-art{padding:0;border:1px solid var(--line-d);overflow:hidden;}
+  .heroart-in{width:100%;height:100%;}
+  .heroart-in img{width:100%;height:100%;object-fit:cover;display:block;}
+  .card .art{padding:0;overflow:hidden;position:relative;}
+  .card .art img{width:100%;height:100%;object-fit:cover;display:block;}
+</style>
+
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@graph":[
+    {
+      "@type":"Organization",
+      "@id":"https://devikabydeepika.com/#org",
+      "name":"Devika by Deepika",
+      "alternateName":"Devika Poshak",
+      "url":"https://devikabydeepika.com/",
+      "description":"Handcrafted deity garments (poshak) and a subscription Mandir Seva that dresses your home temple each month and takes the old poshak back for respectful recycling.",
+      "areaServed":["Gurugram","New Delhi","Noida","India","United States","United Kingdom","Canada","United Arab Emirates","Australia"],
+      "founder":{"@type":"Person","name":"Deepika"},
+      "sameAs":[]
+    },
+    {
+      "@type":"Service",
+      "name":"Mandir Seva - monthly home temple decoration",
+      "serviceType":"Home temple decoration and deity dressing service",
+      "provider":{"@id":"https://devikabydeepika.com/#org"},
+      "areaServed":{"@type":"Place","name":"Delhi NCR"},
+      "description":"A trained Seva Sathi visits your home each month, cleans the mandir, dresses the deity in a fresh handcrafted poshak, refreshes the shringar, and carries the previous poshak away for respectful recycling.",
+      "offers":{
+        "@type":"OfferCatalog","name":"Mandir Seva plans",
+        "itemListElement":[
+          {"@type":"Offer","name":"Nitya monthly plan","price":"699","priceCurrency":"INR"},
+          {"@type":"Offer","name":"Utsav monthly plan","price":"1199","priceCurrency":"INR"},
+          {"@type":"Offer","name":"Shringar monthly plan","price":"2499","priceCurrency":"INR"}
+        ]
+      }
+    },
+    {
+      "@type":"FAQPage",
+      "mainEntity":[
+        {"@type":"Question","name":"Who actually touches the idol during a Mandir Seva visit?",
+         "acceptedAnswer":{"@type":"Answer","text":"You choose. Many families prefer that our Seva Sathi prepares everything - cleans the mandir, presses the poshak, arranges the shringar - and hands the garment to a family member for the final dressing. Others ask us to do it fully. Both are standard, and you set the preference when you book."}},
+        {"@type":"Question","name":"What happens to the old poshak you take away?",
+         "acceptedAnswer":{"@type":"Answer","text":"Nothing profane. Returned garments are cleaned and either reworked into asan and chandani for shrines, cut into wicks for temple lamps, used as covers for scripture, or ceremonially burnt with the ash returned to you. Every returned poshak gets a photo record showing what became of it. Deity cloth is never sold on, shredded into rags, or made into anything worn on the body."}},
+        {"@type":"Question","name":"How often should a deity's poshak be changed?",
+         "acceptedAnswer":{"@type":"Answer","text":"There is no single rule. In most Vaishnav households the poshak is changed daily or on ekadashi and festival days; many urban families change it monthly and add a special poshak for each major festival. Our monthly plans are built around that second, realistic rhythm."}},
+        {"@type":"Question","name":"How do I know which poshak size fits my idol?",
+         "acceptedAnswer":{"@type":"Answer","text":"Measure the idol's height from base to crown in inches. Sizes 0 to 3 suit idols up to 6 inches, sizes 4 to 7 suit 6 to 12 inches, and larger idols are made to measure. If you are unsure, send a photo with a scale next to the idol on WhatsApp and we will size it for you before dispatch."}},
+        {"@type":"Question","name":"Do you serve families outside India?",
+         "acceptedAnswer":{"@type":"Answer","text":"Yes, in two ways. The seasonal poshak subscription ships worldwide with a prepaid return mailer for the old garment. Separately, many customers abroad book Mandir Seva visits for their parents' home in India and pay from overseas."}},
+        {"@type":"Question","name":"Can I gift Mandir Seva to my parents in India?",
+         "acceptedAnswer":{"@type":"Answer","text":"Yes. Gift subscriptions are our most popular plan among customers in the US, UK and UAE. You pay in your currency, we visit their home, and you receive photographs after each visit."}}
+      ]
+    }
+  ]
+}
+</script>
+
+</head>
+<body>
+<nav class="top">
+  <div class="inner">
+    <a class="brandmark" href="#top">
+      <span>
+        <span class="nm">Devika</span>
+        <span class="by">by Deepika</span>
+      </span>
+    </a>
+    <a class="lnk" href="#collections">Collections</a>
+    <a class="lnk" href="#seva">Mandir Seva</a>
+    <a class="lnk" href="#plans">Plans</a>
+    <a class="lnk" href="#festivals">Festivals</a>
+    <a class="lnk" href="/hi/" hreflang="hi" lang="hi" style="letter-spacing:.02em;">हिंदी</a>
+    <a class="btn btn-primary" href="#book">Book a visit</a>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="wrap hero-grid">
+    <div class="stack">
+      <p class="kicker">Handcrafted in Vrindavan &middot; Serving Delhi NCR &amp; shipping worldwide</p>
+      <h1>Your mandir, <span class="gold">dressed with care</span> — every single month.</h1>
+      <p class="lede">Devika makes the garments families dress their gods in, and sends someone to do it properly. Fresh poshak, clean shrine, new shringar. We carry the old poshak away and return it to the earth the way it deserves.</p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="#book">Book your first Seva &mdash; &#8377;299</a>
+        <a class="btn btn-ghost" href="#collections">See the collections</a>
+      </div>
+      <p class="areas">Now serving Gurugram, South Delhi, Noida &amp; Dwarka. Elsewhere in India &mdash; join the waitlist.</p>
+    </div>
+    <div class="hero-art">
+<div class="heroart-in"><img src="img/hero-shrine-dressed.jpg" alt="A home shrine fully dressed — Laddu Gopal in a blue and lilac poshak beneath a floral arch, with lit diyas" width="900" height="1125" loading="eager" decoding="async"></div>
+    </div>
+  </div>
+</header>
+
+<div class="trustbar">
+  <div class="wrap" style="padding:0 24px;">
+    <div class="items">
+      <div class="it"><span class="t">Handcrafted, not wholesale</span><span class="s">Named artisans in Vrindavan &amp; Mathura</span></div>
+      <div class="it"><span class="t">You keep the ritual</span><span class="s">We prepare, you dress &mdash; or we do both</span></div>
+      <div class="it"><span class="t">Old poshak taken back</span><span class="s">Recycled respectfully, with photo proof</span></div>
+      <div class="it"><span class="t">Festival-ready</span><span class="s">Delivered before the date, not after</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== COLLECTIONS ===== -->
+<section class="section on-paper" id="collections">
+  <div class="wrap stack">
+    <p class="eyebrow">The collections</p>
+    <h2>Four wardrobes for the divine</h2>
+    <p class="lede">Everything is made to idol measurements, in fabrics chosen for the season and the occasion. Sizes 0 to 12, and made-to-measure above that.</p>
+    <div class="cards" style="margin-top:14px;">
+      <article class="card c1">
+        <div class="art"><img src="img/poshak-everyday-pink.jpg" alt="Laddu Gopal dressed in a pink poshak with pearl and thread work, beside a lit lantern" width="600" height="800" loading="lazy" decoding="async"></div>
+        <div class="body">
+          <span class="meaning">Nitya &middot; daily</span>
+          <span class="sanskrit">Everyday poshak</span>
+          <p>Soft cotton and cotton-silk for the morning change. Machine-friendly, colour-fast, made to be worn and washed often.</p>
+          <span class="price">From &#8377;499</span>
+        </div>
+      </article>
+      <article class="card c2">
+        <div class="art"><img src="img/poshak-festival-green.jpg" alt="Laddu Gopal in a green embroidered poshak on a floral shrine arch, flanked by brass diyas" width="600" height="800" loading="lazy" decoding="async"></div>
+        <div class="body">
+          <span class="meaning">Utsav &middot; festival</span>
+          <span class="sanskrit">Festival poshak</span>
+          <p>Banarasi silk, zari borders and seasonal colours for Janmashtami, Navratri, Diwali and Annakut.</p>
+          <span class="price">From &#8377;1,299</span>
+        </div>
+      </article>
+      <article class="card c3">
+        <div class="art"><img src="img/poshak-shringar-blue.jpg" alt="Laddu Gopal in a pale blue poshak with a jewelled mukut and beaded malas" width="600" height="800" loading="lazy" decoding="async"></div>
+        <div class="body">
+          <span class="meaning">Shringar &middot; couture</span>
+          <span class="sanskrit">Hand-embroidered</span>
+          <p>Hand zardozi, real zari, mukut and jewellery made to your idol's measurements. Numbered pieces, four to six weeks.</p>
+          <span class="price">From &#8377;3,499</span>
+        </div>
+      </article>
+      <article class="card c4">
+        <div class="art"><img src="img/singhasan-jhula.jpg" alt="Carved singhasan with jhula, peacock medallion and elephant motifs" width="600" height="800" loading="lazy" decoding="async"></div>
+        <div class="body">
+          <span class="meaning">Mandir &middot; the shrine</span>
+          <span class="sanskrit">Beyond the cloth</span>
+          <p>Singhasan covers, chandani, asan, bedding for Thakurji, jhula drapes and mandir table runners.</p>
+          <span class="price">From &#8377;899</span>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SEVA ===== -->
+<section class="section" id="seva">
+  <div class="wrap stack">
+    <p class="eyebrow">Mandir Seva</p>
+    <h2>Someone comes. It gets done properly.</h2>
+    <p class="lede">A trained Seva Sathi arrives at a time you choose. Forty-five quiet minutes, and your shrine looks the way it does on a festival morning &mdash; every month, without you having to remember.</p>
+    <div class="steps" style="margin-top:18px;">
+      <div class="step"><span class="n">I &middot; Book</span><h4>Pick your slot</h4><p>Choose a date and a two-hour window. Same Seva Sathi each month wherever we can, so you are not letting a stranger in each time.</p></div>
+      <div class="step"><span class="n">II &middot; Prepare</span><h4>Clean and set</h4><p>The mandir is dusted and wiped, brass polished, old flowers cleared, fresh flowers and a clean asan laid.</p></div>
+      <div class="step"><span class="n">III &middot; Dress</span><h4>New poshak, new shringar</h4><p>Fresh poshak for the season, pressed and ready. You dress the deity yourself if you prefer &mdash; most families do, and we hand it to you.</p></div>
+      <div class="step"><span class="n">IV &middot; Return</span><h4>The old cloth goes home</h4><p>Last month's poshak is collected in a cotton pouch, recycled respectfully, and you get a photograph of what it became.</p></div>
+    </div>
+    <div class="zari" style="margin:34px 0 10px;"></div>
+    <div class="book-grid" style="margin-top:8px;">
+      <div class="stack">
+        <h3>The part everyone asks about first</h3>
+        <p class="lede">Nobody touches your idol unless you ask them to. The default is that we prepare everything and hand the poshak to you for the final dressing &mdash; the seva stays yours. Say the word and we do it fully. It is your shrine and your call, recorded on your file so you never have to explain twice.</p>
+      </div>
+      <div class="stack">
+        <h3>Built for apartments</h3>
+        <p class="lede">Our Seva Sathis are background-verified, carry society-approved ID, wear shoe covers, work barefoot at the shrine, and are trained in what may and may not be touched. Visit windows are two hours so you are not waiting all morning, and you get a photograph of the finished mandir even when you were not home.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PLANS ===== -->
+<section class="section on-paper" id="plans">
+  <div class="wrap stack">
+    <p class="eyebrow">Monthly &amp; quarterly plans</p>
+    <h2>Choose the rhythm of your shrine</h2>
+    <p class="lede">Every plan includes the visit, the poshak, fresh flowers and incense, and takeback of the previous garment. Cancel any month. Quarterly is billed once and saves about a tenth.</p>
+    <div class="plans" style="margin-top:16px;">
+      <div class="plan">
+        <span class="nm">Nitya</span>
+        <div><span class="amt">&#8377;699</span> <span class="per">/ month</span></div>
+        <ul>
+          <li>One visit a month</li>
+          <li>One cotton or cotton-silk poshak</li>
+          <li>Mandir cleaning and fresh flowers</li>
+          <li>Old poshak collected and recycled</li>
+        </ul>
+        <p class="qtr">Quarterly &#8377;1,899 &mdash; three visits, billed once</p>
+        <a class="btn btn-ghost" href="#book">Choose Nitya</a>
+      </div>
+      <div class="plan featured">
+        <span class="tag">Most chosen</span>
+        <span class="nm">Utsav</span>
+        <div><span class="amt">&#8377;1,199</span> <span class="per">/ month</span></div>
+        <ul>
+          <li>One visit a month plus a festival visit each quarter</li>
+          <li>Silk or silk-blend poshak, seasonal colours</li>
+          <li>Shringar refresh &mdash; mala, mukut, bansuri</li>
+          <li>Priority slots in festival weeks</li>
+          <li>Old poshak collected and recycled</li>
+        </ul>
+        <p class="qtr">Quarterly &#8377;3,299 &mdash; saves &#8377;298</p>
+        <a class="btn btn-primary" href="#book">Choose Utsav</a>
+      </div>
+      <div class="plan">
+        <span class="nm">Shringar</span>
+        <div><span class="amt">&#8377;2,499</span> <span class="per">/ month</span></div>
+        <ul>
+          <li>One visit a month, extended to 90 minutes</li>
+          <li>Hand-embroidered poshak, made to measure</li>
+          <li>Full shringar and jewellery rotation</li>
+          <li>Complete mandir styling twice a year</li>
+          <li>A named Seva Sathi and a direct line</li>
+        </ul>
+        <p class="qtr">Quarterly &#8377;6,799 &mdash; saves &#8377;698</p>
+        <a class="btn btn-ghost" href="#book">Choose Shringar</a>
+      </div>
+    </div>
+    <div class="book-grid" style="margin-top:34px;">
+      <div class="stack">
+        <p class="eyebrow">For families abroad</p>
+        <h3>Two ways to keep the shrine in season</h3>
+        <p class="lede"><strong>The poshak box</strong> &mdash; a seasonal garment posted to you, USD 39 or USD 59 a month, with a prepaid mailer to send the old one back to us. <strong>Seva for your parents</strong> &mdash; you pay from where you are, we visit their home in India, and you get the photographs. It is the plan most of our overseas customers choose.</p>
+      </div>
+      <div class="stack">
+        <p class="eyebrow">The circular promise</p>
+        <h3>Deity cloth never becomes a rag</h3>
+        <p class="lede">Returned poshak is cleaned and reworked into asan and chandani, cut into wicks for temple lamps, made into covers for scripture, or ceremonially burnt with the ash returned to you. Our disposal process is reviewed by the priests we work with, and every garment gets a photo record. Nothing is resold, shredded, or made into anything worn on the body.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FESTIVALS ===== -->
+<section class="section" id="festivals">
+  <div class="wrap stack">
+    <p class="eyebrow">Festival packages</p>
+    <h2>Booked in advance. Delivered before the date.</h2>
+    <p class="lede">The one thing families ask for most is not a better poshak &mdash; it is the poshak arriving on time. Reserve a festival package and we schedule the visit for the morning before, not the evening after.</p>
+    <div class="fests" style="margin-top:16px;">
+      <div class="fest"><span class="season">Monsoon</span><h3>Janmashtami Utsav</h3><p>Midnight-blue and gold poshak, mukut, bansuri, jhula drape and a full mandir setup for the night.</p><span class="amt">&#8377;4,999</span></div>
+      <div class="fest"><span class="season">Autumn</span><h3>Navratri &mdash; Nine Nights</h3><p>Nine poshak in the nine colours, delivered as a set with a daily changing guide. Two visits included.</p><span class="amt">&#8377;8,999</span></div>
+      <div class="fest"><span class="season">Autumn</span><h3>Diwali &amp; Annakut</h3><p>Festival poshak, complete shrine restyle, diya arrangement and Annakut cloth. Booked from Dhanteras.</p><span class="amt">&#8377;5,999</span></div>
+      <div class="fest"><span class="season">Winter</span><h3>Winter Woollens</h3><p>Quilted and velvet poshak, razai, and warm bedding for Thakurji, with the summer set collected.</p><span class="amt">&#8377;3,499</span></div>
+      <div class="fest"><span class="season">Spring</span><h3>Ram Navami &amp; Holi</h3><p>Saffron and rose poshak, gulal-safe fabric, and a shrine restyle for the spring months.</p><span class="amt">&#8377;3,999</span></div>
+      <div class="fest"><span class="season">Late monsoon</span><h3>Ganesh Chaturthi</h3><p>Ten-day setup and daily-change poshak set, arrival decoration, and respectful visarjan-day clearing.</p><span class="amt">&#8377;4,499</span></div>
+    </div>
+    <p class="areas" style="margin-top:16px;">Festival dates vary by region and panchang. We confirm your exact visit date when you reserve, and always schedule before the festival, never on it.</p>
+  </div>
+</section>
+
+<!-- ===== BOOKING ===== -->
+<section class="section on-paper" id="book">
+  <div class="wrap">
+    <div class="book-grid">
+      <div class="stack">
+        <p class="eyebrow">Book a visit</p>
+        <h2>Your first Seva, &#8377;299</h2>
+        <p class="lede">One full visit &mdash; mandir cleaning, a cotton poshak, fresh flowers &mdash; so you can see how it feels before committing to a plan. No auto-renewal on the trial.</p>
+        <p class="lede"><strong>Prefer to talk?</strong> Message us on WhatsApp and we will find a slot in a minute.</p>
+        <a class="btn btn-dark" href="https://wa.me/910000000000?text=Hi%20Devika%2C%20I%27d%20like%20to%20book%20a%20Mandir%20Seva%20visit" target="_blank" rel="noopener">WhatsApp us</a>
+        <p class="form-note">Replace this number before going live.</p>
+      </div>
+      <div>
+        <form class="booking" id="bookingForm" novalidate>
+          <div class="two">
+            <div class="field"><label for="nm">Your name</label><input id="nm" name="name" type="text" autocomplete="name" required></div>
+            <div class="field"><label for="ph">Mobile / WhatsApp</label><input id="ph" name="phone" type="tel" autocomplete="tel" required></div>
+          </div>
+          <div class="two">
+            <div class="field"><label for="pin">Pin code</label><input id="pin" name="pincode" type="text" inputmode="numeric" placeholder="122002" required></div>
+            <div class="field"><label for="pl">Plan</label>
+              <select id="pl" name="plan">
+                <option>First visit &mdash; &#8377;299</option>
+                <option>Nitya &mdash; &#8377;699 / month</option>
+                <option selected>Utsav &mdash; &#8377;1,199 / month</option>
+                <option>Shringar &mdash; &#8377;2,499 / month</option>
+                <option>Festival package</option>
+                <option>Poshak box (outside India)</option>
+              </select>
+            </div>
+          </div>
+          <div class="two">
+            <div class="field"><label for="dt">Preferred date</label><input id="dt" name="date" type="date" required></div>
+            <div class="field"><label for="idl">Idol height (inches)</label><input id="idl" name="idol" type="text" placeholder="e.g. 7 inches"></div>
+          </div>
+          <div class="field">
+            <label id="slotlbl">Preferred window</label>
+            <div class="slots" role="group" aria-labelledby="slotlbl">
+              <button class="slot" type="button" aria-pressed="false">8&ndash;10 am</button>
+              <button class="slot" type="button" aria-pressed="true">10 am&ndash;12 pm</button>
+              <button class="slot" type="button" aria-pressed="false">12&ndash;2 pm</button>
+              <button class="slot" type="button" aria-pressed="false">4&ndash;6 pm</button>
+              <button class="slot" type="button" aria-pressed="false">6&ndash;8 pm</button>
+            </div>
+          </div>
+          <div class="field">
+            <label id="whol">Who dresses the deity?</label>
+            <div class="slots" role="group" aria-labelledby="whol">
+              <button class="slot pref" type="button" aria-pressed="true">We prepare, family dresses</button>
+              <button class="slot pref" type="button" aria-pressed="false">Seva Sathi does it fully</button>
+            </div>
+          </div>
+          <button class="btn btn-primary" type="submit">Request this slot</button>
+          <p class="form-note">We confirm on WhatsApp within two hours. No payment now.</p>
+          <div id="confirm" class="confirm" hidden></div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FAQ ===== -->
+<section class="section" id="faq">
+  <div class="wrap stack">
+    <p class="eyebrow">Questions families ask</p>
+    <h2>Straight answers</h2>
+    <div style="margin-top:10px;">
+      <details class="faq" open><summary>Who actually touches the idol?</summary><p>You choose, and your choice is saved on your file. The default is that our Seva Sathi prepares everything &mdash; cleans the mandir, presses the poshak, arranges the shringar &mdash; and hands the garment to a family member for the final dressing. Many families prefer this. Others ask us to do it fully. Both are entirely standard.</p></details>
+      <details class="faq"><summary>What happens to the old poshak you take away?</summary><p>Returned garments are cleaned and reworked into asan and chandani for shrines, cut into wicks for temple lamps, used as covers for scripture, or ceremonially burnt with the ash returned to you. Every returned poshak gets a photo record showing what it became. Deity cloth is never resold, shredded into rags, or made into anything worn on the body.</p></details>
+      <details class="faq"><summary>How often should a deity's poshak be changed?</summary><p>There is no single rule and traditions differ. In many Vaishnav households the poshak changes daily or on ekadashi and festival days. Most urban families realistically manage a monthly change plus something special for each major festival, and that is the rhythm our plans are built around.</p></details>
+      <details class="faq"><summary>How do I get the size right?</summary><p>Measure your idol from base to crown in inches. Sizes 0&ndash;3 fit idols up to 6 inches, sizes 4&ndash;7 fit 6&ndash;12 inches, and anything larger is made to measure. Unsure? Send a photo with a scale beside the idol on WhatsApp and we will size it before dispatch.</p></details>
+      <details class="faq"><summary>Do you serve families outside India?</summary><p>Yes. The seasonal poshak box ships worldwide with a prepaid return mailer for the old garment. And many customers abroad book Mandir Seva for their parents' home in India, pay in their own currency, and receive photographs after each visit.</p></details>
+      <details class="faq"><summary>Can I pause or cancel?</summary><p>Pause any month from WhatsApp, and cancel any time before your next billing date. Festival packages can be rescheduled up to seven days before the reserved visit.</p></details>
+      <details class="faq"><summary>Which areas do you serve right now?</summary><p>Gurugram, South Delhi, Noida and Dwarka. We open a new locality once enough families in it have joined the waitlist &mdash; adding your pin code genuinely moves it up the queue.</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="site">
+  <div class="wrap">
+    <div class="cols">
+      <div class="stack">
+        <span class="brandmark"><span><span class="nm">Devika</span><span class="by">by Deepika</span></span></span>
+        <p class="lede" style="font-size:.92rem;">Garments for the divine. Handcrafted in Vrindavan, delivered across Delhi NCR and posted worldwide.</p>
+      </div>
+      <div>
+        <p class="eyebrow" style="margin-bottom:8px;">Shop</p>
+        <a href="#collections">Everyday poshak</a>
+        <a href="#collections">Festival poshak</a>
+        <a href="#collections">Hand-embroidered shringar</a>
+        <a href="#collections">Mandir textiles</a>
+      </div>
+      <div>
+        <p class="eyebrow" style="margin-bottom:8px;">Seva</p>
+        <a href="#seva">How a visit works</a>
+        <a href="#plans">Monthly &amp; quarterly plans</a>
+        <a href="#festivals">Festival packages</a>
+        <a href="#book">Book a visit</a>
+        <a href="#faq">Questions</a>
+      </div>
+    </div>
+    <p class="legal">&copy; Devika by Deepika. Prices shown are launch prices for Delhi NCR and include GST where applicable. Festival dates follow regional panchang and are confirmed at the time of booking.</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  document.querySelectorAll('.slots').forEach(function(group){
+    group.addEventListener('click', function(e){
+      var b = e.target.closest('.slot');
+      if(!b) return;
+      group.querySelectorAll('.slot').forEach(function(s){ s.setAttribute('aria-pressed','false'); });
+      b.setAttribute('aria-pressed','true');
+    });
+  });
+  var form = document.getElementById('bookingForm');
+  var out = document.getElementById('confirm');
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    var name = (document.getElementById('nm').value || '').trim();
+    var pin  = (document.getElementById('pin').value || '').trim();
+    var date = document.getElementById('dt').value;
+    var plan = document.getElementById('pl').value;
+    if(!name || !pin || !date){
+      out.hidden = false;
+      out.textContent = 'Please add your name, pin code and a preferred date so we can check availability.';
+      return;
+    }
+    var win = document.querySelector('.slots .slot[aria-pressed="true"]');
+    out.hidden = false;
+    out.innerHTML = '<strong>Thank you, ' + name.replace(/[<>&]/g,'') + '.</strong><br>We have your request for ' + plan +
+      ' on ' + date + ', ' + (win ? win.textContent : '') + ', pin ' + pin.replace(/[^0-9]/g,'') +
+      '. We will confirm on WhatsApp within two hours.';
+    form.querySelector('button[type=submit]').textContent = 'Request sent';
+  });
+})();
+</script>
+
+</body>
+</html>
