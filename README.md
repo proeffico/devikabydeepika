@@ -57,7 +57,9 @@ These are placeholders. The site will function without fixing them, but it shoul
 
 **The "who touches the idol" block** in the Mandir Seva section is load-bearing. That objection stops this business faster than price does, and the stated default — *we prepare, you dress* — is what removes it. Don't let it get edited into something vaguer.
 
-**Known copy mismatch:** the Nitya card promises "soft cotton, machine-friendly, worn and washed often" but shows a pearl-worked poshak. Needs either a plain-cotton photograph or rewritten copy.
+**Known copy mismatch:** the everyday card promises "soft cotton, machine-friendly, worn and washed often" but shows a pearl-worked poshak. Needs either a plain-cotton photograph or rewritten copy.
+
+**Still open:** per-band poshak prices; per-item prices and stock for the collections to work as a shop; whether the ₹299 trial should include a poshak.
 
 **Customer photographs.** The eight images in `img/work/` are installations inside private homes, and the page states they are shared with permission. Get that permission in writing before the site goes public. Two frames from the source set were left out on purpose — one was unusable from flash glare, the other contained framed portraits of an identifiable person.
 
@@ -74,13 +76,32 @@ These are placeholders. The site will function without fixing them, but it shoul
 | 5 to 7 ft | ₹1,499 | ₹4,099 |
 | Above 7 ft | ₹2,299 | ₹6,299 |
 
-Every tier gets **two visits a month** — cleaning, fresh flowers, dressing, old-poshak takeback, and **25% off every poshak** for as long as the subscription runs.
+Two rhythms at every size: **Monthly** (two visits a month) or **Seasonal** (one visit a quarter, four a year — how often most families actually change the poshak). Seasonal prices are ₹599 / ₹999 / ₹1,249 / ₹1,899 per quarter.
+
+Every tier gets — cleaning, fresh flowers, dressing, old-poshak takeback, and **25% off every poshak** for as long as the subscription runs.
 
 Outside the plan, deliberately:
 
 - **The poshak.** Ranges from ₹499 cotton to several thousand for hand zardozi, and a 30-inch deity needs a far larger garment than a 6-inch one. Bundling one in would either short-change the customer or inflate the price for everyone. The 25% subscriber discount is the retention lever, not a bundled garment.
 - **Festival setups.** Own visit, own attire, own rate.
 - **Full mandir styling.** Quoted after seeing the shrine.
+
+### Poshak sizing
+
+Poshak is priced against four idol size bands, because the band decides the cloth and the stitching time:
+
+| Band | Idol height |
+|---|---|
+| 1 | up to 6″ |
+| 2 | 6″ to 12″ |
+| 3 | 12″ to 18″ |
+| 4 | 18″ to 30″ |
+
+Above 30″ is quoted individually. **Per-band prices are still to be set with the master tailor** — the site states the bands and defers the numbers to WhatsApp. Fill them in before the collections work as a real shop.
+
+### No open commissions
+
+Customers choose from a defined set of fabrics and designs, cut to their size band. The site says so explicitly, in the Shringar card and in an FAQ. Do not soften this into "made to measure" or "custom" — an open commission means a one-off price and uneven quality, and it was ruled out deliberately.
 
 Price follows mandir size because the work does: a seven-foot mandir takes far longer to clean than a two-foot one. Flat pricing would make small shrines subsidise large ones.
 

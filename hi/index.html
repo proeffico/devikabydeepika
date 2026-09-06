@@ -87,6 +87,39 @@
   }catch(e){}
 })();
 </script>
+<script>
+/* Theme: dark by default, light if the visitor chose it before.
+   Runs before the body renders so there is no flash of the wrong theme. */
+(function(){
+  try{
+    if(localStorage.getItem('devika-theme') === 'light'){
+      document.documentElement.setAttribute('data-theme','light');
+    }
+  }catch(e){}
+})();
+</script>
+<script>
+/* Theme: dark by default, light if the visitor chose it before.
+   Runs before the body renders so there is no flash of the wrong theme. */
+(function(){
+  try{
+    if(localStorage.getItem('devika-theme') === 'light'){
+      document.documentElement.setAttribute('data-theme','light');
+    }
+  }catch(e){}
+})();
+</script>
+<script>
+/* Theme: dark by default, light if the visitor chose it before.
+   Runs before the body renders so there is no flash of the wrong theme. */
+(function(){
+  try{
+    if(localStorage.getItem('devika-theme') === 'light'){
+      document.documentElement.setAttribute('data-theme','light');
+    }
+  }catch(e){}
+})();
+</script>
 <title>देविका बाय दीपिका — ठाकुर जी की पोशाक और मंदिर सेवा</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+Devanagari:wght@400;500;600&family=Mukta:wght@400;500;600;700&family=Marcellus&display=swap">
 <style>
@@ -350,6 +383,7 @@
   footer.site a:hover{color:var(--ivory);}
   footer.site .legal{margin-top:34px;padding-top:20px;border-top:1px solid var(--line-d);font-size:.78rem;color:var(--muted-dark);}
   .areas{font-size:.86rem;color:var(--muted-dark);}
+  .on-paper .areas{color:var(--muted-light);}
   .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0;}
 
   /* ---------- photography ---------- */
@@ -420,6 +454,15 @@
 
   /* FAQ rows need a full-height tap area, not just the text line */
   details.faq summary{min-height:44px;}
+
+  /* ---------- idol size bands ---------- */
+  .sizes{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line-l);border:1px solid var(--line-l);margin-top:8px;}
+  @media(max-width:820px){.sizes{grid-template-columns:repeat(2,1fr);}}
+  @media(max-width:460px){.sizes{grid-template-columns:1fr;}}
+  .sizes .sz{background:var(--card-bg);padding:20px 18px;display:flex;flex-direction:column;gap:6px;}
+  .sizes .sz .band{font-family:Marcellus,Georgia,serif;font-size:1.22rem;}
+  .sizes .sz .who{font-size:.85rem;color:var(--muted-light);}
+  .sizes .sz .mark{font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--brass-deep);font-weight:700;}
 </style>
 <style>
   body{font-family:Mukta,"Noto Sans Devanagari","Segoe UI",Arial,sans-serif;line-height:1.8;}
@@ -464,7 +507,7 @@
 {"@type":"Question","name":"मूर्ति को असल में छूता कौन है?","acceptedAnswer":{"@type":"Answer","text":"यह आप तय करते हैं। सामान्य नियम यह है कि सेवा साथी पूरी तैयारी करते हैं — मंदिर की सफ़ाई, पोशाक की प्रेस, शृंगार की व्यवस्था — और वस्त्र परिवार के किसी सदस्य के हाथ में देते हैं। कुछ परिवार कहते हैं कि पूरा शृंगार हम ही करें। दोनों ही सामान्य हैं।"}},
 {"@type":"Question","name":"पुरानी पोशाक का क्या होता है?","acceptedAnswer":{"@type":"Answer","text":"लौटाई गई पोशाक धुलकर आसन और चँदनी में ढलती है, दीपकों की बत्ती में कटती है, ग्रंथों के आवरण में बदलती है, या विधिपूर्वक अग्नि को समर्पित की जाती है और भस्म आपको लौटा दी जाती है। ठाकुर जी का वस्त्र कभी दोबारा बेचा नहीं जाता और न ही शरीर पर पहनने की किसी वस्तु में बदलता है।"}},
 {"@type":"Question","name":"ठाकुर जी की पोशाक कितनी बार बदलनी चाहिए?","acceptedAnswer":{"@type":"Answer","text":"इसका कोई एक नियम नहीं है। कई वैष्णव घरों में पोशाक रोज़ या एकादशी और त्योहार के दिन बदली जाती है। शहरों में ज़्यादातर परिवार महीने में एक बार बदल पाते हैं और हर बड़े त्योहार पर कुछ विशेष रखते हैं।"}},
-{"@type":"Question","name":"लड्डू गोपाल की पोशाक का सही साइज़ कैसे नापें?","acceptedAnswer":{"@type":"Answer","text":"मूर्ति को आधार से मुकुट तक इंच में नापिए। साइज़ 0 से 3 छह इंच तक की मूर्तियों के लिए, 4 से 7 छह से बारह इंच के लिए, और उससे बड़ी मूर्तियाँ नाप पर बनती हैं।"}}]}]}
+{"@type":"Question","name":"लड्डू गोपाल की पोशाक का सही नाप कैसे तय करें?","acceptedAnswer":{"@type":"Answer","text":"विग्रह को आधार से मुकुट तक इंच में नापकर चार वर्गों में से एक चुनिए: 6 इंच तक, 6 से 12 इंच, 12 से 18 इंच, या 18 से 30 इंच। हर पोशाक की क़ीमत इन्हीं वर्गों से तय होती है। 30 इंच से बड़े विग्रह के लिए देखकर अनुमान दिया जाता है।"}}]}]}
 </script>
 </head>
 <body>
@@ -549,7 +592,7 @@
         <div class="body">
           <span class="meaning">शृंगार &middot; हस्तकढ़ाई</span>
           <span class="sanskrit">हाथ की कढ़ाई</span>
-          <p>हाथ की ज़रदोज़ी, असली ज़री, और आपकी मूर्ति के नाप का मुकुट व आभूषण। गिनी हुई कृतियाँ, चार से छह सप्ताह।</p>
+          <p>हाथ की ज़रदोज़ी, असली ज़री, मुकुट और आभूषण। हमारे कपड़ों और डिज़ाइनों में से चुनकर, आपके विग्रह के आकार-वर्ग के नाप पर &mdash; खुला ऑर्डर नहीं। गिनी हुई कृतियाँ, चार से छह सप्ताह।</p>
           <span class="price">&#8377;3,499 से</span>
         </div>
       </article>
@@ -558,10 +601,23 @@
         <div class="body">
           <span class="meaning">मंदिर &middot; वस्त्र से आगे</span>
           <span class="sanskrit">सिंहासन और चँदनी</span>
-          <p>सिंहासन के गिलाफ़, चँदनी, आसन, ठाकुर जी की शय्या, झूले के परदे और मंदिर के रनर।</p>
+          <p>सिंहासन के गिलाफ़, चँदनी, आसन, ठाकुर जी की शय्या, झूले के परदे, टेबल रनर &mdash; और त्योहारों की सज्जा, दीपावली सहित। मंदिर की हर वह चीज़ जो पोशाक नहीं है।</p>
           <span class="price">&#8377;899 से</span>
         </div>
       </article>
+    </div>
+
+    <div class="stack" style="margin-top:44px;">
+      <p class="eyebrow">नाप</p>
+      <h3>चार आकार-वर्ग, और पोशाक की क़ीमत उसी वर्ग से</h3>
+      <p class="lede">विग्रह को आधार से मुकुट तक नापिए। वर्ग से तय होता है कि कपड़ा कितना लगेगा और सिलाई में कितना समय &mdash; क़ीमत उसी के हिसाब से चलती है। मूर्ति के पास स्केल रखकर फ़ोटो व्हाट्सऐप कीजिए, वर्ग हम तय कर देंगे।</p>
+      <div class="sizes">
+        <div class="sz"><span class="mark">वर्ग 1</span><span class="band">6&Prime; तक</span><span class="who">छोटे लड्डू गोपाल, यात्रा की मूर्तियाँ</span></div>
+        <div class="sz"><span class="mark">वर्ग 2</span><span class="band">6&Prime; से 12&Prime;</span><span class="who">घरों में सबसे आम आकार</span></div>
+        <div class="sz"><span class="mark">वर्ग 3</span><span class="band">12&Prime; से 18&Prime;</span><span class="who">बड़े घरेलू मंदिर</span></div>
+        <div class="sz"><span class="mark">वर्ग 4</span><span class="band">18&Prime; से 30&Prime;</span><span class="who">बड़ी स्थापनाएँ, ऑर्डर पर</span></div>
+      </div>
+      <p class="areas">30&Prime; से बड़े विग्रह के लिए देखकर अनुमान दिया जाता है। संग्रह की हर वस्तु की क़ीमत इन्हीं वर्गों के हिसाब से है।</p>
     </div>
   </div>
 </section>
@@ -570,7 +626,7 @@
   <div class="wrap stack">
     <p class="eyebrow">मंदिर सेवा</p>
     <h2>कोई आता है। और काम ठीक से होता है।</h2>
-    <p class="lede">प्रशिक्षित सेवा साथी आपके बताए समय पर महीने में दो बार आते हैं। पैंतालीस शांत मिनट, और आपका मंदिर वैसा दिखने लगता है जैसा त्योहार की सुबह दिखता है — बिना आपको याद रखे।</p>
+    <p class="lede">प्रशिक्षित सेवा साथी आपके बताए समय पर आते हैं — महीने में दो बार, या हर तिमाही एक बार अगर आपकी लय वही है। पैंतालीस शांत मिनट, और आपका मंदिर वैसा दिखने लगता है जैसा त्योहार की सुबह दिखता है, बिना आपको याद रखे।</p>
     <div class="steps" style="margin-top:18px;">
       <div class="step"><span class="n">१ &middot; बुकिंग</span><h4>अपना समय चुनें</h4><p>तारीख़ और दो घंटे की विंडो चुनिए। जहाँ तक हो सके हर महीने वही सेवा साथी आते हैं, ताकि हर बार कोई अजनबी घर में न आए।</p></div>
       <div class="step"><span class="n">२ &middot; तैयारी</span><h4>सफ़ाई और व्यवस्था</h4><p>मंदिर की धूल और सफ़ाई, पीतल की पॉलिश, पुराने फूल हटाना, ताज़े फूल और साफ़ आसन।</p></div>
@@ -616,35 +672,36 @@
   <div class="wrap stack">
     <p class="eyebrow">मंदिर सेवा योजनाएँ</p>
     <h2>क़ीमत आपके मंदिर के आकार से तय होती है</h2>
-    <p class="lede">योजना सेवा की है, वस्त्र की नहीं। महीने में दो विज़िट &mdash; मंदिर की सफ़ाई, ताज़े फूल, और ठाकुर जी का शृंगार। बड़े मंदिर में समय ज़्यादा लगता है और बड़े विग्रह की सेवा में मेहनत ज़्यादा, इसलिए क़ीमत उसी हिसाब से है। पोशाक अलग से चुनी जाती है, और सदस्यों को हर पोशाक पर 25% की छूट मिलती है।</p>
+    <p class="lede">योजना सेवा की है, वस्त्र की नहीं। बड़े मंदिर में समय ज़्यादा लगता है और बड़े विग्रह की सेवा में मेहनत ज़्यादा, इसलिए क़ीमत उसी हिसाब से है। पोशाक अलग से चुनी जाती है, और सदस्यों को हर पोशाक पर 25% की छूट मिलती है।</p>
+    <p class="lede"><strong>दो लय।</strong> <em>मासिक</em> यानी महीने में दो विज़िट, उन परिवारों के लिए जो मंदिर बार-बार बदलते हैं। <em>त्रैमासिक</em> यानी हर तिमाही एक विज़िट &mdash; साल में चार &mdash; जितनी बार ज़्यादातर परिवार सचमुच पोशाक बदलते हैं। सेवा दोनों में वही।</p>
     <div class="plans" style="margin-top:16px;">
       <div class="plan">
         <span class="nm">3 फ़ुट तक</span>
         <div><span class="amt">&#8377;699</span> <span class="per">/ माह</span></div>
-        <p class="per">महीने में दो विज़िट</p>
-        <p class="qtr">त्रैमासिक &#8377;1,899 &mdash; &#8377;198 की बचत</p>
+        <p class="per">मासिक &mdash; दो विज़िट</p>
+        <p class="qtr"><strong>त्रैमासिक &#8377;599</strong> &mdash; एक विज़िट, साल में चार</p>
         <a class="btn btn-ghost" href="#book">यह आकार चुनें</a>
       </div>
       <div class="plan featured">
         <span class="tag">सबसे ज़्यादा घरों में</span>
         <span class="nm">3 से 5 फ़ुट</span>
         <div><span class="amt">&#8377;1,199</span> <span class="per">/ माह</span></div>
-        <p class="per">महीने में दो विज़िट</p>
-        <p class="qtr">त्रैमासिक &#8377;3,299 &mdash; &#8377;298 की बचत</p>
+        <p class="per">मासिक &mdash; दो विज़िट</p>
+        <p class="qtr"><strong>त्रैमासिक &#8377;999</strong> &mdash; एक विज़िट, साल में चार</p>
         <a class="btn btn-primary" href="#book">यह आकार चुनें</a>
       </div>
       <div class="plan">
         <span class="nm">5 से 7 फ़ुट</span>
         <div><span class="amt">&#8377;1,499</span> <span class="per">/ माह</span></div>
-        <p class="per">महीने में दो विज़िट</p>
-        <p class="qtr">त्रैमासिक &#8377;4,099 &mdash; &#8377;398 की बचत</p>
+        <p class="per">मासिक &mdash; दो विज़िट</p>
+        <p class="qtr"><strong>त्रैमासिक &#8377;1,249</strong> &mdash; एक विज़िट, साल में चार</p>
         <a class="btn btn-ghost" href="#book">यह आकार चुनें</a>
       </div>
       <div class="plan">
         <span class="nm">7 फ़ुट से ऊपर</span>
         <div><span class="amt">&#8377;2,299</span> <span class="per">/ माह</span></div>
-        <p class="per">महीने में दो लंबी विज़िट</p>
-        <p class="qtr">त्रैमासिक &#8377;6,299 &mdash; &#8377;598 की बचत</p>
+        <p class="per">मासिक &mdash; दो लंबी विज़िट</p>
+        <p class="qtr"><strong>त्रैमासिक &#8377;1,899</strong> &mdash; एक विज़िट, साल में चार</p>
         <a class="btn btn-ghost" href="#book">यह आकार चुनें</a>
       </div>
     </div>
@@ -653,7 +710,7 @@
       <div class="stack">
         <h3>हर योजना में शामिल</h3>
         <ul class="plain">
-          <li><strong>महीने में दो विज़िट।</strong> एक नहीं &mdash; ताकि मंदिर पूरे महीने वैसा ही सजा रहे, सिर्फ़ आने के बाद वाले हफ़्ते नहीं।</li>
+          <li><strong>आपकी लय पर विज़िट।</strong> महीने में दो, या हर तिमाही एक अगर आप साल में तीन-चार बार पोशाक बदलते हैं।</li>
           <li><strong>मंदिर की पूरी सफ़ाई।</strong> धूल और पोंछा, पीतल की पॉलिश, पुराने फूल और निर्माल्य हटाना, साफ़ आसन।</li>
           <li><strong>हर विज़िट पर ताज़े फूल और धूप।</strong></li>
           <li><strong>ठाकुर जी का शृंगार</strong> आपकी चुनी पोशाक में &mdash; या तैयारी हम करें और वस्त्र आप स्वयं पहनाएँ।</li>
@@ -668,7 +725,7 @@
           <li><strong>त्योहार की व्यवस्था।</strong> जन्माष्टमी, नवरात्रि, दीपावली और बाक़ी त्योहारों की अपनी विज़िट, अपनी पोशाक और अपनी दर होती है &mdash; ये मासिक योजना में शामिल नहीं हैं।</li>
           <li><strong>पूरे मंदिर की सज्जा।</strong> अगर आप चाहते हैं कि आपका मंदिर वैसा दिखे जैसा हमारे काम में दिखता है, तो वह अलग काम है &mdash; मंदिर देखकर उसका अनुमान दिया जाता है।</li>
         </ul>
-        <p class="lede" style="font-size:.95rem;">किसी भी महीने बंद कर सकते हैं। त्रैमासिक एक बार में बिल होती है और लगभग दसवाँ हिस्सा बचाती है।</p>
+        <p class="lede" style="font-size:.95rem;">किसी भी महीने बंद कर सकते हैं। त्रैमासिक योजना का बिल हर तिमाही एक बार।</p>
       </div>
     </div>
 
@@ -725,10 +782,14 @@
             <div class="field"><label for="pl">योजना</label>
               <select id="pl" name="plan">
                 <option>पहली विज़िट &mdash; &#8377;299</option>
-                <option>सेवा &mdash; 3 फ़ुट तक &mdash; &#8377;699 / माह</option>
-                <option selected>सेवा &mdash; 3 से 5 फ़ुट &mdash; &#8377;1,199 / माह</option>
-                <option>सेवा &mdash; 5 से 7 फ़ुट &mdash; &#8377;1,499 / माह</option>
-                <option>सेवा &mdash; 7 फ़ुट से ऊपर &mdash; &#8377;2,299 / माह</option>
+                <option>सेवा मासिक &mdash; 3 फ़ुट तक &mdash; &#8377;699</option>
+                <option>सेवा त्रैमासिक &mdash; 3 फ़ुट तक &mdash; &#8377;599</option>
+                <option selected>सेवा मासिक &mdash; 3 से 5 फ़ुट &mdash; &#8377;1,199</option>
+                <option>सेवा त्रैमासिक &mdash; 3 से 5 फ़ुट &mdash; &#8377;999</option>
+                <option>सेवा मासिक &mdash; 5 से 7 फ़ुट &mdash; &#8377;1,499</option>
+                <option>सेवा त्रैमासिक &mdash; 5 से 7 फ़ुट &mdash; &#8377;1,249</option>
+                <option>सेवा मासिक &mdash; 7 फ़ुट से ऊपर &mdash; &#8377;2,299</option>
+                <option>सेवा त्रैमासिक &mdash; 7 फ़ुट से ऊपर &mdash; &#8377;1,899</option>
                 <option>त्योहार पैकेज</option>
                 <option>सिर्फ़ पोशाक (बिना योजना)</option>
                 <option>पोशाक बॉक्स (भारत से बाहर)</option>
@@ -775,7 +836,8 @@
       <details class="faq"><summary>मूर्ति को असल में छूता कौन है?</summary><p>यह आप तय करते हैं, और आपका निर्णय आपकी फ़ाइल में दर्ज रहता है। सामान्य नियम यह है कि हमारे सेवा साथी पूरी तैयारी करते हैं — मंदिर की सफ़ाई, पोशाक की प्रेस, शृंगार की व्यवस्था — और वस्त्र परिवार के किसी सदस्य के हाथ में देते हैं। बहुत से परिवार यही पसंद करते हैं। कुछ कहते हैं कि पूरा शृंगार हम ही करें। दोनों ही सामान्य हैं।</p></details>
       <details class="faq"><summary>जो पुरानी पोशाक आप ले जाते हैं, उसका क्या होता है?</summary><p>लौटाई गई पोशाक धुलकर मंदिरों के आसन और चँदनी में ढलती है, दीपकों की बत्ती में कटती है, ग्रंथों के आवरण में बदलती है, या विधिपूर्वक अग्नि को समर्पित की जाती है और भस्म आपको लौटा दी जाती है। हर लौटी पोशाक का फ़ोटो रिकॉर्ड बनता है। ठाकुर जी का वस्त्र कभी दोबारा बेचा नहीं जाता, चीथड़ों में नहीं कटता, और शरीर पर पहनने की किसी वस्तु में नहीं बदलता।</p></details>
       <details class="faq"><summary>पोशाक कितनी बार बदलनी चाहिए?</summary><p>इसका कोई एक नियम नहीं है और परंपराएँ अलग-अलग हैं। कई वैष्णव घरों में पोशाक रोज़ या एकादशी और त्योहार के दिन बदली जाती है। शहरों में ज़्यादातर परिवार व्यावहारिक रूप से महीने में एक बार बदल पाते हैं और हर बड़े त्योहार पर कुछ विशेष रखते हैं — हमारी योजनाएँ इसी लय पर बनी हैं।</p></details>
-      <details class="faq"><summary>सही साइज़ कैसे पता करें?</summary><p>मूर्ति को आधार से मुकुट तक इंच में नापिए। साइज़ ०&ndash;३ छह इंच तक की मूर्तियों के लिए, ४&ndash;७ छह से बारह इंच के लिए, और उससे बड़ी मूर्तियाँ नाप पर बनती हैं। संशय हो तो मूर्ति के पास कोई स्केल रखकर फ़ोटो व्हाट्सऐप कीजिए — भेजने से पहले हम साइज़ तय कर देंगे।</p></details>
+      <details class="faq"><summary>सही नाप कैसे तय करें?</summary><p>विग्रह को आधार से मुकुट तक इंच में नापकर वर्ग चुनिए: 6&Prime; तक, 6&ndash;12&Prime;, 12&ndash;18&Prime;, या 18&ndash;30&Prime;। हर पोशाक की क़ीमत इन्हीं चार वर्गों से तय होती है, क्योंकि वर्ग से ही कपड़ा और सिलाई का समय तय होता है। 30&Prime; से बड़े विग्रह के लिए देखकर अनुमान देते हैं। संशय हो तो स्केल रखकर फ़ोटो व्हाट्सऐप कीजिए।</p></details>
+      <details class="faq"><summary>क्या अपनी पसंद के डिज़ाइन की पोशाक बनवाई जा सकती है?</summary><p>खुला ऑर्डर नहीं। आप हमारे कपड़ों और डिज़ाइनों में से चुनते हैं, और वह आपके विग्रह के आकार-वर्ग के नाप पर बनती है। इसी से गुणवत्ता एक जैसी रहती है और क़ीमत ईमानदार &mdash; एक अलग डिज़ाइन का मतलब एक अलग क़ीमत है, और हम आपको वही पाँच चीज़ें दिखाना पसंद करेंगे जो हम बहुत अच्छी बनाते हैं।</p></details>
       <details class="faq"><summary>क्या आप भारत के बाहर भी सेवा देते हैं?</summary><p>जी हाँ। मौसमी पोशाक बॉक्स दुनिया भर में भेजा जाता है, और उसके साथ पुरानी पोशाक लौटाने के लिए डाक-शुल्क चुकाया लिफ़ाफ़ा आता है। इसके अलावा विदेश में रहने वाले बहुत से ग्राहक भारत में अपने माता-पिता के घर के लिए मंदिर सेवा बुक करते हैं, अपनी मुद्रा में भुगतान करते हैं, और हर विज़िट के बाद फ़ोटो पाते हैं।</p></details>
       <details class="faq"><summary>क्या मैं सेवा रोक या बंद कर सकता हूँ?</summary><p>किसी भी महीने व्हाट्सऐप से रोक सकते हैं, और अगली बिलिंग तारीख़ से पहले कभी भी बंद कर सकते हैं। त्योहार पैकेज आरक्षित विज़िट से सात दिन पहले तक बदला जा सकता है।</p></details>
       <details class="faq"><summary>अभी किन इलाक़ों में सेवा उपलब्ध है?</summary><p>गुरुग्राम, दक्षिण दिल्ली, नोएडा और द्वारका। किसी नए इलाक़े में हम तब शुरू करते हैं जब वहाँ पर्याप्त परिवार प्रतीक्षा-सूची में जुड़ जाते हैं — अपना पिन कोड जोड़ना वाक़ई उस इलाक़े को आगे बढ़ाता है।</p></details>
@@ -795,7 +857,7 @@
         <a href="#collections">रोज़ की पोशाक</a>
         <a href="#collections">त्योहार की पोशाक</a>
         <a href="#collections">हाथ की कढ़ाई और शृंगार</a>
-        <a href="#collections">मंदिर के वस्त्र</a>
+        <a href="#collections">मंदिर के वस्त्र और सज्जा</a>
       </div>
       <div>
         <p class="eyebrow" style="margin-bottom:8px;">सेवा</p>
