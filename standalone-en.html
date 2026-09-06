@@ -81,6 +81,17 @@
   }catch(e){}
 })();
 </script>
+<script>
+/* Theme: dark by default, light if the visitor chose it before.
+   Runs before the body renders so there is no flash of the wrong theme. */
+(function(){
+  try{
+    if(localStorage.getItem('devika-theme') === 'light'){
+      document.documentElement.setAttribute('data-theme','light');
+    }
+  }catch(e){}
+})();
+</script>
 <title>Devika by Deepika</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Marcellus&family=Karla:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap">
 <style>
@@ -282,8 +293,10 @@
   .step p{font-size:.9rem;color:var(--muted-dark);}
 
   /* ---------- plans ---------- */
-  .plans{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;align-items:stretch;}
-  @media(max-width:900px){.plans{grid-template-columns:1fr;}}
+  .plans{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;align-items:stretch;}
+  @media(max-width:1080px){.plans{grid-template-columns:repeat(2,1fr);}}
+  @media(max-width:560px){.plans{grid-template-columns:1fr;}}
+  .plan .per{margin-top:-4px;}
   .plan{border:1px solid var(--line-l);background:var(--card-bg);padding:26px 24px;display:flex;flex-direction:column;gap:14px;}
   .plan.featured{border:1px solid var(--brass-deep);box-shadow:0 18px 44px -26px rgba(34,23,38,.55);position:relative;}
   .plan.featured .tag{position:absolute;top:-11px;left:24px;background:var(--brass-deep);color:#FFF9EE;font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;font-weight:700;padding:4px 10px;}
@@ -435,19 +448,24 @@
       "serviceType":"Home temple decoration and deity dressing service",
       "provider":{"@id":"https://devikabydeepika.com/#org"},
       "areaServed":{"@type":"Place","name":"Delhi NCR"},
-      "description":"A trained Seva Sathi visits your home each month, cleans the mandir, dresses the deity in a fresh handcrafted poshak, refreshes the shringar, and carries the previous poshak away for respectful recycling.",
+      "description":"A trained Seva Sathi visits your home twice a month, cleans the mandir, dresses the deity in the poshak you chose, refreshes the shringar, and carries the previous poshak away for respectful recycling. Plans are priced by the height of the mandir; the poshak is bought separately and subscribers get 25% off.",
       "offers":{
         "@type":"OfferCatalog","name":"Mandir Seva plans",
         "itemListElement":[
-          {"@type":"Offer","name":"Nitya monthly plan","price":"699","priceCurrency":"INR"},
-          {"@type":"Offer","name":"Utsav monthly plan","price":"1199","priceCurrency":"INR"},
-          {"@type":"Offer","name":"Shringar monthly plan","price":"2499","priceCurrency":"INR"}
+          {"@type":"Offer","name":"Mandir Seva - mandir up to 3 feet","price":"699","priceCurrency":"INR"},
+          {"@type":"Offer","name":"Mandir Seva - mandir 3 to 5 feet","price":"1199","priceCurrency":"INR"},
+          {"@type":"Offer","name":"Mandir Seva - mandir 5 to 7 feet","price":"1499","priceCurrency":"INR"},
+          {"@type":"Offer","name":"Mandir Seva - mandir above 7 feet","price":"2299","priceCurrency":"INR"}
         ]
       }
     },
     {
       "@type":"FAQPage",
       "mainEntity":[
+        {"@type":"Question","name":"Is the poshak included in the Mandir Seva plan?",
+         "acceptedAnswer":{"@type":"Answer","text":"No. The plan covers the seva - two visits a month, the mandir cleaning, fresh flowers and the dressing. The poshak is chosen separately because it ranges from about 499 rupees for cotton to several thousand for hand zardozi, and a 30-inch deity needs a far larger garment than a 6-inch one. Subscribers pay 25% less than the shelf price on every poshak."}},
+        {"@type":"Question","name":"Why is Mandir Seva priced by the size of the mandir?",
+         "acceptedAnswer":{"@type":"Answer","text":"Because the work follows the size. A seven-foot mandir takes far longer to clean than a two-foot one, and a larger deity is more careful work to dress. Plans run from 699 rupees a month for a mandir up to 3 feet, to 2299 rupees a month above 7 feet, with two visits every month at every size."}},
         {"@type":"Question","name":"Who actually touches the idol during a Mandir Seva visit?",
          "acceptedAnswer":{"@type":"Answer","text":"You choose. Many families prefer that our Seva Sathi prepares everything - cleans the mandir, presses the poshak, arranges the shringar - and hands the garment to a family member for the final dressing. Others ask us to do it fully. Both are standard, and you set the preference when you book."}},
         {"@type":"Question","name":"What happens to the old poshak you take away?",
@@ -498,7 +516,7 @@
     <div class="stack">
       <p class="kicker">Handcrafted in Vrindavan &middot; Serving Delhi NCR &amp; shipping worldwide</p>
       <h1>Your mandir, <span class="gold">dressed with care</span> — every single month.</h1>
-      <p class="lede">Devika makes the garments families dress their gods in, and sends someone to do it properly. Fresh poshak, clean shrine, new shringar. We carry the old poshak away and return it to the earth the way it deserves.</p>
+      <p class="lede">Devika makes the garments families dress their gods in, and sends someone to do it properly. Twice a month &mdash; the mandir cleaned, fresh flowers, your Thakur ji dressed. We carry the old poshak away and return it to the earth the way it deserves.</p>
       <div class="cta-row">
         <a class="btn btn-primary" href="#book">Book your first Seva &mdash; &#8377;299</a>
         <a class="btn btn-ghost" href="#collections">See the collections</a>
@@ -517,7 +535,7 @@
       <div class="it"><span class="t">Handcrafted, not wholesale</span><span class="s">Named artisans in Vrindavan &amp; Mathura</span></div>
       <div class="it"><span class="t">You keep the ritual</span><span class="s">We prepare, you dress &mdash; or we do both</span></div>
       <div class="it"><span class="t">Old poshak taken back</span><span class="s">Recycled respectfully, with photo proof</span></div>
-      <div class="it"><span class="t">Festival-ready</span><span class="s">Delivered before the date, not after</span></div>
+      <div class="it"><span class="t">Twice every month</span><span class="s">Not once &mdash; the shrine stays right all month</span></div>
     </div>
   </div>
 </div>
@@ -574,11 +592,11 @@
   <div class="wrap stack">
     <p class="eyebrow">Mandir Seva</p>
     <h2>Someone comes. It gets done properly.</h2>
-    <p class="lede">A trained Seva Sathi arrives at a time you choose. Forty-five quiet minutes, and your shrine looks the way it does on a festival morning &mdash; every month, without you having to remember.</p>
+    <p class="lede">A trained Seva Sathi arrives at a time you choose, twice a month. Forty-five quiet minutes, and your shrine looks the way it does on a festival morning &mdash; without you having to remember.</p>
     <div class="steps" style="margin-top:18px;">
       <div class="step"><span class="n">I &middot; Book</span><h4>Pick your slot</h4><p>Choose a date and a two-hour window. Same Seva Sathi each month wherever we can, so you are not letting a stranger in each time.</p></div>
       <div class="step"><span class="n">II &middot; Prepare</span><h4>Clean and set</h4><p>The mandir is dusted and wiped, brass polished, old flowers cleared, fresh flowers and a clean asan laid.</p></div>
-      <div class="step"><span class="n">III &middot; Dress</span><h4>New poshak, new shringar</h4><p>Fresh poshak for the season, pressed and ready. You dress the deity yourself if you prefer &mdash; most families do, and we hand it to you.</p></div>
+      <div class="step"><span class="n">III &middot; Dress</span><h4>The poshak you chose</h4><p>Pressed and ready, with the shringar arranged. You dress the deity yourself if you prefer &mdash; most families do, and we hand it to you.</p></div>
       <div class="step"><span class="n">IV &middot; Return</span><h4>The old cloth goes home</h4><p>Last month's poshak is collected in a cotton pouch, recycled respectfully, and you get a photograph of what it became.</p></div>
     </div>
     <div class="zari" style="margin:34px 0 10px;"></div>
@@ -619,50 +637,64 @@
 <!-- ===== PLANS ===== -->
 <section class="section on-paper" id="plans">
   <div class="wrap stack">
-    <p class="eyebrow">Monthly &amp; quarterly plans</p>
-    <h2>Choose the rhythm of your shrine</h2>
-    <p class="lede">Every plan includes the visit, the poshak, fresh flowers and incense, and takeback of the previous garment. Cancel any month. Quarterly is billed once and saves about a tenth.</p>
+    <p class="eyebrow">Mandir Seva plans</p>
+    <h2>Priced by the size of your mandir</h2>
+    <p class="lede">The plan buys the seva, not the cloth. Two visits every month &mdash; the mandir cleaned, fresh flowers, your Thakur ji dressed. A taller mandir takes longer and a larger deity needs more care, so that is what the price follows. The poshak is chosen separately, and subscribers pay 25% less on every one.</p>
     <div class="plans" style="margin-top:16px;">
       <div class="plan">
-        <span class="nm">Nitya</span>
+        <span class="nm">Up to 3 feet</span>
         <div><span class="amt">&#8377;699</span> <span class="per">/ month</span></div>
-        <ul>
-          <li>One visit a month</li>
-          <li>One cotton or cotton-silk poshak</li>
-          <li>Mandir cleaning and fresh flowers</li>
-          <li>Old poshak collected and recycled</li>
-        </ul>
-        <p class="qtr">Quarterly &#8377;1,899 &mdash; three visits, billed once</p>
-        <a class="btn btn-ghost" href="#book">Choose Nitya</a>
+        <p class="per">Two visits a month</p>
+        <p class="qtr">Quarterly &#8377;1,899 &mdash; saves &#8377;198</p>
+        <a class="btn btn-ghost" href="#book">Choose this size</a>
       </div>
       <div class="plan featured">
-        <span class="tag">Most chosen</span>
-        <span class="nm">Utsav</span>
+        <span class="tag">Most homes</span>
+        <span class="nm">3 to 5 feet</span>
         <div><span class="amt">&#8377;1,199</span> <span class="per">/ month</span></div>
-        <ul>
-          <li>One visit a month plus a festival visit each quarter</li>
-          <li>Silk or silk-blend poshak, seasonal colours</li>
-          <li>Shringar refresh &mdash; mala, mukut, bansuri</li>
-          <li>Priority slots in festival weeks</li>
-          <li>Old poshak collected and recycled</li>
-        </ul>
+        <p class="per">Two visits a month</p>
         <p class="qtr">Quarterly &#8377;3,299 &mdash; saves &#8377;298</p>
-        <a class="btn btn-primary" href="#book">Choose Utsav</a>
+        <a class="btn btn-primary" href="#book">Choose this size</a>
       </div>
       <div class="plan">
-        <span class="nm">Shringar</span>
-        <div><span class="amt">&#8377;2,499</span> <span class="per">/ month</span></div>
-        <ul>
-          <li>One visit a month, extended to 90 minutes</li>
-          <li>Hand-embroidered poshak, made to measure</li>
-          <li>Full shringar and jewellery rotation</li>
-          <li>Complete mandir styling twice a year</li>
-          <li>A named Seva Sathi and a direct line</li>
-        </ul>
-        <p class="qtr">Quarterly &#8377;6,799 &mdash; saves &#8377;698</p>
-        <a class="btn btn-ghost" href="#book">Choose Shringar</a>
+        <span class="nm">5 to 7 feet</span>
+        <div><span class="amt">&#8377;1,499</span> <span class="per">/ month</span></div>
+        <p class="per">Two visits a month</p>
+        <p class="qtr">Quarterly &#8377;4,099 &mdash; saves &#8377;398</p>
+        <a class="btn btn-ghost" href="#book">Choose this size</a>
+      </div>
+      <div class="plan">
+        <span class="nm">Above 7 feet</span>
+        <div><span class="amt">&#8377;2,299</span> <span class="per">/ month</span></div>
+        <p class="per">Two visits a month, extended</p>
+        <p class="qtr">Quarterly &#8377;6,299 &mdash; saves &#8377;598</p>
+        <a class="btn btn-ghost" href="#book">Choose this size</a>
       </div>
     </div>
+
+    <div class="book-grid" style="margin-top:36px;">
+      <div class="stack">
+        <h3>Every plan includes</h3>
+        <ul class="plain">
+          <li><strong>Two visits a month.</strong> Not one &mdash; the shrine stays right for the whole month, not just the week after we come.</li>
+          <li><strong>The mandir cleaned properly.</strong> Dusted and wiped, brass polished, old flowers and nirmalya cleared, a clean asan laid.</li>
+          <li><strong>Fresh flowers and dhoop</strong> on every visit.</li>
+          <li><strong>Your Thakur ji dressed</strong> in the poshak you chose &mdash; or prepared and handed to you, if you prefer to do it yourself.</li>
+          <li><strong>The old poshak collected</strong> and recycled respectfully, with a photograph of what it became.</li>
+          <li><strong>25% off every poshak</strong>, for as long as you are a subscriber.</li>
+        </ul>
+      </div>
+      <div class="stack">
+        <h3>Priced separately, on purpose</h3>
+        <ul class="plain">
+          <li><strong>The poshak.</strong> From &#8377;499 for cotton to several thousand for hand zardozi, and a 30-inch deity needs a far larger garment than a 6-inch one. Bundling one into the plan would either short-change you or inflate the price for everyone. You choose; you pay 25% less than the shelf price.</li>
+          <li><strong>Festival setups.</strong> Janmashtami, Navratri, Diwali and the rest each get their own visit, their own attire and their own rate &mdash; they are not folded into the monthly plan.</li>
+          <li><strong>A full mandir styling.</strong> If you want the shrine to look the way the ones in our work look, that is a separate piece of work, quoted once we have seen your mandir.</li>
+        </ul>
+        <p class="lede" style="font-size:.95rem;">Cancel any month. Quarterly is billed once and saves about a tenth.</p>
+      </div>
+    </div>
+
     <div class="book-grid" style="margin-top:34px;">
       <div class="stack">
         <p class="eyebrow">For families abroad</p>
@@ -683,7 +715,7 @@
   <div class="wrap stack">
     <p class="eyebrow">Festival packages</p>
     <h2>Booked in advance. Delivered before the date.</h2>
-    <p class="lede">The one thing families ask for most is not a better poshak &mdash; it is the poshak arriving on time. Reserve a festival package and we schedule the visit for the morning before, not the evening after.</p>
+    <p class="lede">Festival packages sit outside the monthly plan &mdash; their own visit, their own attire, their own rate. The one thing families ask for most is not a better poshak; it is the poshak arriving on time. Reserve a package and we schedule the visit for the morning before, not the evening after.</p>
     <div class="fests" style="margin-top:16px;">
       <div class="fest"><span class="season">Monsoon</span><h3>Janmashtami Utsav</h3><p>Midnight-blue and gold poshak, mukut, bansuri, jhula drape and a full mandir setup for the night.</p><span class="amt">&#8377;4,999</span></div>
       <div class="fest"><span class="season">Autumn</span><h3>Navratri &mdash; Nine Nights</h3><p>Nine poshak in the nine colours, delivered as a set with a daily changing guide. Two visits included.</p><span class="amt">&#8377;8,999</span></div>
@@ -703,7 +735,7 @@
       <div class="stack">
         <p class="eyebrow">Book a visit</p>
         <h2>Your first Seva, &#8377;299</h2>
-        <p class="lede">One full visit &mdash; mandir cleaning, a cotton poshak, fresh flowers &mdash; so you can see how it feels before committing to a plan. No auto-renewal on the trial.</p>
+        <p class="lede">One full visit &mdash; the mandir cleaned, fresh flowers, your Thakur ji dressed &mdash; so you can see how it feels before committing to a plan. Use a poshak you already have, or add one at subscriber price. No auto-renewal on the trial.</p>
         <p class="lede"><strong>Prefer to talk?</strong> Message us on WhatsApp and we will find a slot in a minute.</p>
         <a class="btn btn-dark" id="waDirect" href="https://wa.me/919355110366?text=Hi%20Devika%2C%20I%27d%20like%20to%20book%20a%20Mandir%20Seva%20visit" target="_blank" rel="noopener">WhatsApp us</a>
       </div>
@@ -718,17 +750,19 @@
             <div class="field"><label for="pl">Plan</label>
               <select id="pl" name="plan">
                 <option>First visit &mdash; &#8377;299</option>
-                <option>Nitya &mdash; &#8377;699 / month</option>
-                <option selected>Utsav &mdash; &#8377;1,199 / month</option>
-                <option>Shringar &mdash; &#8377;2,499 / month</option>
+                <option>Seva &mdash; up to 3 ft &mdash; &#8377;699 / month</option>
+                <option selected>Seva &mdash; 3 to 5 ft &mdash; &#8377;1,199 / month</option>
+                <option>Seva &mdash; 5 to 7 ft &mdash; &#8377;1,499 / month</option>
+                <option>Seva &mdash; above 7 ft &mdash; &#8377;2,299 / month</option>
                 <option>Festival package</option>
+                <option>Poshak only (no plan)</option>
                 <option>Poshak box (outside India)</option>
               </select>
             </div>
           </div>
           <div class="two">
             <div class="field"><label for="dt">Preferred date</label><input id="dt" name="date" type="date" required></div>
-            <div class="field"><label for="idl">Idol height (inches)</label><input id="idl" name="idol" type="text" placeholder="e.g. 7 inches"></div>
+            <div class="field"><label for="idl">Mandir height &amp; idol size</label><input id="idl" name="idol" type="text" placeholder="e.g. 4 ft mandir, 7 inch idol"></div>
           </div>
           <div class="field">
             <label id="slotlbl">Preferred window</label>
@@ -762,7 +796,9 @@
     <p class="eyebrow">Questions families ask</p>
     <h2>Straight answers</h2>
     <div style="margin-top:10px;">
-      <details class="faq" open><summary>Who actually touches the idol?</summary><p>You choose, and your choice is saved on your file. The default is that our Seva Sathi prepares everything &mdash; cleans the mandir, presses the poshak, arranges the shringar &mdash; and hands the garment to a family member for the final dressing. Many families prefer this. Others ask us to do it fully. Both are entirely standard.</p></details>
+      <details class="faq" open><summary>Is the poshak included in the plan?</summary><p>No, and that is deliberate. A poshak runs from &#8377;499 for cotton to several thousand for hand zardozi, and a 30-inch deity needs a far larger garment than a 6-inch one. Bundling one in would either short-change you or push the price up for everyone. The plan covers the seva &mdash; two visits a month, the cleaning, the flowers, the dressing. You choose the poshak, and as a subscriber you pay 25% less than the shelf price on every one.</p></details>
+      <details class="faq"><summary>Why is the price based on mandir size?</summary><p>Because that is what the work follows. A seven-foot mandir takes far longer to clean than a two-foot one, and a larger deity is more careful work to dress. Charging everyone the same would mean small shrines subsidising large ones.</p></details>
+      <details class="faq"><summary>Who actually touches the idol?</summary><p>You choose, and your choice is saved on your file. The default is that our Seva Sathi prepares everything &mdash; cleans the mandir, presses the poshak, arranges the shringar &mdash; and hands the garment to a family member for the final dressing. Many families prefer this. Others ask us to do it fully. Both are entirely standard.</p></details>
       <details class="faq"><summary>What happens to the old poshak you take away?</summary><p>Returned garments are cleaned and reworked into asan and chandani for shrines, cut into wicks for temple lamps, used as covers for scripture, or ceremonially burnt with the ash returned to you. Every returned poshak gets a photo record showing what it became. Deity cloth is never resold, shredded into rags, or made into anything worn on the body.</p></details>
       <details class="faq"><summary>How often should a deity's poshak be changed?</summary><p>There is no single rule and traditions differ. In many Vaishnav households the poshak changes daily or on ekadashi and festival days. Most urban families realistically manage a monthly change plus something special for each major festival, and that is the rhythm our plans are built around.</p></details>
       <details class="faq"><summary>How do I get the size right?</summary><p>Measure your idol from base to crown in inches. Sizes 0&ndash;3 fit idols up to 6 inches, sizes 4&ndash;7 fit 6&ndash;12 inches, and anything larger is made to measure. Unsure? Send a photo with a scale beside the idol on WhatsApp and we will size it before dispatch.</p></details>

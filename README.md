@@ -63,6 +63,29 @@ These are placeholders. The site will function without fixing them, but it shoul
 
 **Prices** in the page and in the JSON-LD `OfferCatalog` must stay in sync. Schema that contradicts visible page text gets penalised.
 
+## The pricing model
+
+**The plan buys the seva, not the poshak.** This is the single most important thing to understand before editing any pricing copy.
+
+| Mandir height | Monthly | Quarterly |
+|---|---|---|
+| Up to 3 ft | ₹699 | ₹1,899 |
+| 3 to 5 ft | ₹1,199 | ₹3,299 |
+| 5 to 7 ft | ₹1,499 | ₹4,099 |
+| Above 7 ft | ₹2,299 | ₹6,299 |
+
+Every tier gets **two visits a month** — cleaning, fresh flowers, dressing, old-poshak takeback, and **25% off every poshak** for as long as the subscription runs.
+
+Outside the plan, deliberately:
+
+- **The poshak.** Ranges from ₹499 cotton to several thousand for hand zardozi, and a 30-inch deity needs a far larger garment than a 6-inch one. Bundling one in would either short-change the customer or inflate the price for everyone. The 25% subscriber discount is the retention lever, not a bundled garment.
+- **Festival setups.** Own visit, own attire, own rate.
+- **Full mandir styling.** Quoted after seeing the shrine.
+
+Price follows mandir size because the work does: a seven-foot mandir takes far longer to clean than a two-foot one. Flat pricing would make small shrines subsidise large ones.
+
+If you change a price, change it in four places: the plan card, the booking form's `<option>`, the `OfferCatalog` in the JSON-LD, and the FAQ answer that quotes the range.
+
 ## The booking form
 
 **There is no backend and no form endpoint.** The form is a message composer: it validates what you typed, then opens WhatsApp with the whole enquiry written out, ready to send.
