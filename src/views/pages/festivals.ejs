@@ -1,0 +1,8 @@
+<%- include('../partials/head') %><%- include('../partials/nav') %>
+<section class="section"><div class="wrap stack">
+  <%- include('../partials/crumbs', { crumbs: [{name:t.nav.festivals}] }) %>
+  <p class="eyebrow"><%= t.fest.eyebrow %></p><h1><%= t.fest.h2 %></h1><p class="lede"><%= t.fest.lede %></p>
+  <div class="fest-grid"><% for (const f of fests) { %><a class="fest" href="<%= L %>/festival/<%= f.slug %>"><span class="season"><%= tr(f,'season') %></span><h3><%= tr(f,'name') %></h3><p><%= tr(f,'pack') %></p><span class="amt"><%= f.pack_price ? money(f.pack_price) : t.fest.reserve %></span></a><% } %></div>
+  <p class="areas"><%= t.fest.priceTba %></p>
+</div></section>
+<%- include('../partials/footer') %>

@@ -1,0 +1,26 @@
+<%- include('../partials/head') %><%- include('../partials/nav') %>
+<section class="section"><div class="wrap stack">
+  <%- include('../partials/crumbs', { crumbs: [{name:t.nav.seva}] }) %>
+  <p class="eyebrow"><%= t.seva.eyebrow %></p><h1><%= t.seva.h2 %></h1><p class="lede"><%= t.seva.lede %></p>
+  <div class="ritual"><% for (const r of t.seva.rites) { %><div class="rite"><%- include('../partials/diya') %><span class="sk"><%= r[0] %></span><h4><%= r[1] %></h4><p><%= r[2] %></p></div><% } %></div>
+  <div class="two-col" style="margin-top:44px;"><div class="stack"><h3><%= t.seva.touchH %></h3><p class="lede"><%= t.seva.touchP %></p></div><div class="stack"><h3><%= t.seva.aptH %></h3><p class="lede"><%= t.seva.aptP %></p></div></div>
+</div></section>
+<section class="section on-paper" id="plans"><div class="wrap stack">
+  <p class="eyebrow"><%= t.seva.eyebrow %></p><h2><%= t.seva.plansH %></h2><p class="lede"><%= t.seva.plansP %></p><p class="lede"><%= t.seva.rhythm %></p>
+  <form id="visitForm" class="plans" data-url="<%= L %>/subscribe/visit">
+    <% plans.forEach((p,i)=>{ const f=p.footprint.split('x').map(Number); %>
+    <div class="plan<%= i===1?' featured':'' %>"><% if (i===1) { %><span class="tag"><%= t.seva.most %></span><% } %>
+      <span class="fp" aria-hidden="true" style="grid-template-columns:repeat(<%= f[0] %>,9px);"><% for (let k=0;k<f[0]*f[1];k++){ %><i></i><% } %></span>
+      <span class="nm"><%= tr(p,'label') %></span>
+      <div><span class="amt"><%= money(p.monthly_price) %></span> <span class="per"><%= t.seva.perMonth %></span></div>
+      <p class="per"><%= t.seva.monthly2 %></p><p class="qtr"><strong><%= t.pack.quarterly %> <%= money(p.quarterly_price) %></strong> — <%= t.seva.quarterly2 %></p>
+      <div class="row"><button type="button" class="btn btn-sm <%= i===1?'btn-primary':'btn-ghost' %> visit-sub" data-fp="<%= p.footprint %>" data-rhythm="monthly"><%= t.pack.monthly %></button><button type="button" class="btn btn-sm btn-ghost visit-sub" data-fp="<%= p.footprint %>" data-rhythm="quarterly"><%= t.pack.quarterly %></button></div>
+    </div><% }) %>
+  </form>
+  <div id="visitBox" class="panel" hidden><h3 id="visitTitle"></h3><label><%= t.book.pin %> <input id="visitPin" inputmode="numeric" maxlength="6" placeholder="201304" style="padding:10px;border:1px solid var(--line-l);border-radius:6px;font-family:inherit;"></label><div class="row"><button class="btn btn-primary" id="visitGo" type="button"><%= customer ? t.cta.subscribe : t.pack.login %></button></div><div id="visitMsg" class="notice" hidden></div></div>
+  <div class="two-col" style="margin-top:36px;">
+    <div class="stack"><h3><%= t.seva.coversH %></h3><ul class="plain"><% for (const c of t.seva.covers) { %><li><%= c %></li><% } %></ul><p class="lede" style="font-size:.92rem;"><%= t.seva.noFlowers %></p></div>
+    <div class="stack"><h3><%= t.cta.bookVisit %></h3><p class="lede"><%= t.book.lede %></p><div><a class="btn btn-primary" href="<%= L %>/book"><%= t.cta.bookVisit %></a></div></div>
+  </div>
+</div></section>
+<%- include('../partials/footer', { needRazorpay: true }) %>

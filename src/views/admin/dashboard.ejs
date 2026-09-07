@@ -1,0 +1,8 @@
+<%- include('_top') %><h1>Dashboard</h1>
+<div class="kpi"><div><b><%= subs.n %></b>active subscriptions</div><div><b><%= bookings.length %></b>visits awaiting confirmation</div><div><b><%= sevadars.n %></b>sevadar applications</div><div><b><%= estimates.n %></b>products with estimate prices</div></div>
+<div class="grid2" style="margin-top:20px;">
+  <div><h3>Recent orders</h3><table class="tbl"><tr><th>No</th><th>Status</th><th>Total</th><th>Placed</th></tr><% for (const o of orders) { %><tr><td><a href="/admin/orders/<%= o.id %>"><%= o.order_no %></a></td><td><%= o.status %></td><td><%= money(o.total) %></td><td><%= new Date(o.created_at).toLocaleString('en-IN') %></td></tr><% } %></table></div>
+  <div><h3>Visits to confirm</h3><table class="tbl"><tr><th>Date</th><th>Slot</th><th>Name</th><th>Pin</th></tr><% for (const b of bookings) { %><tr><td><%= b.visit_date %></td><td><%= b.slot %></td><td><%= b.name %></td><td><%= b.pincode %></td></tr><% } %></table>
+    <h3 style="margin-top:16px;">Waitlist by pin code</h3><table class="tbl"><% for (const w of waitlist) { %><tr><td><%= w.pincode %></td><td><%= w.n %></td></tr><% } %></table>
+    <h3 style="margin-top:16px;">Low stock</h3><table class="tbl"><% for (const l of lowStock) { %><tr><td><%= l.name_en %></td><td><%= l.code %></td><td><%= l.stock %></td></tr><% } %></table></div>
+</div><%- include('_bottom') %>

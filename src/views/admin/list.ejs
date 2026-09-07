@@ -1,0 +1,1 @@
+<%- include('_top') %><h1><%= title %></h1><table class="tbl"><tr><% for (const c of cols) { %><th><%= c %></th><% } %></tr><% for (const r of rows) { %><tr><% for (const c of cols) { %><td><%= r[c] instanceof Date ? r[c].toLocaleString('en-IN') : (r[c]===null||r[c]===undefined?'':r[c]) %></td><% } %></tr><% } %></table><%- include('_bottom') %>

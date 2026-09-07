@@ -1,0 +1,18 @@
+<%- include('../partials/head') %><%- include('../partials/nav') %>
+<section class="section on-paper"><div class="wrap"><div class="book-grid">
+  <div class="stack"><%- include('../partials/crumbs', { crumbs: [{name:t.cta.bookVisit}] }) %><p class="eyebrow"><%= t.book.eyebrow %></p><h1><%= t.book.h2 %></h1><p class="lede"><%= t.book.lede %></p>
+    <p class="lede"><strong><%= locale==='hi'?'बात करना चाहेंगे?':'Prefer to talk?' %></strong></p><a class="btn btn-wa" href="https://wa.me/<%= cfg.whatsapp %>?text=<%= encodeURIComponent(locale==='hi'?'नमस्ते देविका, मुझे मंदिर सेवा की एक विज़िट बुक करनी है।':'Hi Devikka, I would like to book a Mandir Seva visit.') %>" target="_blank" rel="noopener"><%= t.cta.whatsapp %></a></div>
+  <div><% if (typeof done!=='undefined' && done) { %><div class="notice ok"><%= t.book.thanks %></div><% } else if (typeof waitlisted!=='undefined' && waitlisted) { %><div class="notice"><%= t.seva.sectorOnly.replace('{pin}', waitlisted) %> <%= locale==='hi'?'हमने आपको जोड़ लिया है।':'We have added you.' %></div><% } else { const o = typeof old!=='undefined'?old:{}; %>
+    <% if (typeof error!=='undefined' && error) { %><div class="notice err" style="margin-bottom:14px;"><%= error %></div><% } %>
+    <form class="booking" method="post" action="<%= L %>/book"><input type="hidden" name="_csrf" value="<%= csrf %>"><input type="hidden" name="_t" value="<%= formT %>"><div style="position:absolute;left:-9999px;" aria-hidden="true"><label>Website<input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
+      <div class="two"><div class="field"><label for="nm"><%= t.book.name %></label><input id="nm" name="name" required value="<%= o.name||'' %>"></div><div class="field"><label for="ph"><%= t.book.phone %></label><input id="ph" name="phone" type="tel" required value="<%= o.phone||'' %>"></div></div>
+      <div class="two"><div class="field"><label for="pin"><%= t.book.pin %></label><input id="pin" name="pincode" inputmode="numeric" maxlength="6" required placeholder="201304" value="<%= o.pincode||'' %>"></div>
+        <div class="field"><label for="kind"><%= t.book.kind %></label><select id="kind" name="kind"><% for (const [k,v] of Object.entries(t.book.kinds)) { %><option value="<%= k %>" <%= o.kind===k?'selected':'' %>><%= v %></option><% } %></select></div></div>
+      <div class="two"><div class="field"><label for="fp"><%= t.book.foot %></label><select id="fp" name="footprint"><% plans.forEach((p,i)=>{ %><option value="<%= p.footprint %>" <%= (o.footprint||'5x5')===p.footprint?'selected':'' %>><%= tr(p,'label') %></option><% }) %><option value=""><%= t.book.na %></option></select></div>
+        <div class="field"><label for="dt"><%= t.book.date %></label><input id="dt" name="visit_date" type="date" required value="<%= o.visit_date||'' %>"></div></div>
+      <div class="field"><label><%= t.book.window %></label><div class="opt"><% Object.entries(t.book.slots).forEach(([k,v],i)=>{ %><label><input type="radio" name="slot" value="<%= k %>" <%= (o.slot||'10-12')===k?'checked':'' %>> <%= v %></label><% }) %></div></div>
+      <div class="field"><label><%= t.book.who %></label><div class="opt"><label><input type="radio" name="dressing_pref" value="family" checked> <%= t.book.who1 %></label><label><input type="radio" name="dressing_pref" value="sevadar"> <%= t.book.who2 %></label></div></div>
+      <div class="field"><label for="idl"><%= t.book.idols %></label><input id="idl" name="idols_note" placeholder="<%= t.book.idolsPh %>" maxlength="255" value="<%= o.idols_note||'' %>"></div>
+      <button class="btn btn-primary" type="submit"><%= t.cta.bookVisit %></button></form><% } %></div>
+</div></div></section>
+<%- include('../partials/footer') %>

@@ -1,0 +1,18 @@
+<%- include('../partials/head') %><%- include('../partials/nav') %>
+<section class="section"><div class="wrap">
+  <%- include('../partials/crumbs', { crumbs: [{name:t.nav.story}] }) %>
+  <div class="story" style="margin-top:24px;">
+    <div class="portrait"><div class="ph"><%= t.story.portrait %></div></div>
+    <div class="stack"><p class="eyebrow"><%= t.story.eyebrow %></p><h1><%= t.story.h2 %></h1>
+      <% for (const p of t.story.ps) { %><p><%= p %></p><% } %>
+      <p class="pull"><%= t.story.pull %></p>
+      <h3><%= t.story.whyH %></h3><p><%= t.story.whyP %></p><h3><%= t.story.nowH %></h3><p><%= t.story.nowP %></p></div>
+  </div>
+</div></section>
+<section class="section on-paper"><div class="wrap stack"><p class="eyebrow"><%= t.voices.eyebrow %></p><h2><%= t.voices.h2 %></h2><p class="lede"><%= t.voices.lede %></p>
+  <div class="quotes"><% for (const v of voices) { %><figure class="quote"><blockquote><p><%= tr(v,'quote') %></p></blockquote><figcaption class="who"><%= tr(v,'who') %></figcaption></figure><% } %></div>
+  <p class="eyebrow" style="margin-top:20px;"><%= t.work.eyebrow %></p><h2><%= t.work.h2 %></h2><p class="lede"><%= t.work.lede %></p>
+  <div class="work-grid"><% for (const f of ['carved-marble-mandir','marble-shrine-deities','dressed-deities-row','marigold-garland-temple','radha-krishna-dressed','diya-lit-mandir','fitted-step-runners','om-panel-shrine']) { %><figure><img src="/img/work/<%= f %>.jpg" alt="" width="540" height="405" loading="lazy"></figure><% } %></div>
+  <p class="areas"><%= t.work.note %></p>
+</div></section>
+<%- include('../partials/footer') %>

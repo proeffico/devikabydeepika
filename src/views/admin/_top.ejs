@@ -1,0 +1,4 @@
+<%- include('../partials/head') %>
+<nav class="admn"><strong style="color:var(--brass);">Devikka admin</strong>
+<% for (const [h,l] of [['/admin','Dashboard'],['/admin/orders','Orders'],['/admin/products','Products'],['/admin/subscriptions','Subscriptions'],['/admin/cycles','Cycles'],['/admin/bookings','Bookings'],['/admin/sevadars','Sevadars'],['/admin/customers','Customers'],['/admin/waitlist','Waitlist'],['/admin/festivals','Festivals'],['/admin/pricing','Pricing'],['/admin/audit','Audit']]) { %><a href="<%= h %>" class="<%= path===h?'on':'' %>"><%= l %></a><% } %>
+<% if (admin) { %><form method="post" action="/admin/logout" style="margin-left:auto;"><input type="hidden" name="_csrf" value="<%= csrf %>"><button class="btn btn-ghost btn-sm" type="submit">Logout <%= admin.email %></button></form><% } %></nav><main>

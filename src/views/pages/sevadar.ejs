@@ -1,0 +1,14 @@
+<%- include('../partials/head') %><%- include('../partials/nav') %>
+<section class="section on-paper"><div class="wrap"><div class="two-col">
+  <div class="stack"><%- include('../partials/crumbs', { crumbs: [{name:t.sevadar.cta}] }) %><p class="eyebrow"><%= t.sevadar.eyebrow %></p><h1><%= t.sevadar.h %></h1><p class="lede"><%= t.sevadar.p %></p></div>
+  <div class="panel"><% if (typeof done!=='undefined' && done) { %><div class="notice ok"><%= t.sevadar.thanks %></div><% } else { %>
+    <% if (typeof error!=='undefined' && error) { %><div class="notice err"><%= error %></div><% } %>
+    <form method="post" action="<%= L %>/sevadar" class="booking"><input type="hidden" name="_csrf" value="<%= csrf %>"><input type="hidden" name="_t" value="<%= formT %>"><div style="position:absolute;left:-9999px;" aria-hidden="true"><label>Website<input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
+      <div class="field"><label for="sn"><%= t.sevadar.name %></label><input id="sn" name="name" required maxlength="120"></div>
+      <div class="field"><label for="sp"><%= t.sevadar.phone %></label><input id="sp" name="phone" type="tel" required inputmode="numeric"></div>
+      <div class="field"><label for="sa"><%= t.sevadar.area %></label><input id="sa" name="area" required maxlength="120" placeholder="Noida Sector 107"></div>
+      <div class="field"><label><%= t.sevadar.exp %></label><div class="opt"><label><input type="radio" name="has_experience" value="yes"> <%= locale==='hi'?'हाँ':'Yes' %></label><label><input type="radio" name="has_experience" value="no" checked> <%= locale==='hi'?'नहीं':'No' %></label></div></div>
+      <div class="field"><label for="sno"><%= t.sevadar.note %></label><input id="sno" name="note" maxlength="1000"></div>
+      <button class="btn btn-primary" type="submit"><%= t.sevadar.cta %></button></form><% } %></div>
+</div></div></section>
+<%- include('../partials/footer') %>

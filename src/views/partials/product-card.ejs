@@ -1,0 +1,13 @@
+<article class="card">
+  <a href="<%= L %>/product/<%= p.slug %>">
+    <div class="art"><img src="<%= p.imageUrl %>" alt="<%= tr(p,'name') %>" width="600" height="800" loading="lazy" decoding="async"></div>
+    <div class="body">
+      <span class="meaning"><%= p.deities && p.deities.length ? p.deities.slice(0,2).map(d=>tr(d,'name')).join(' · ') : '' %></span>
+      <span class="nm"><%= tr(p,'name') %></span>
+      <p><%= (tr(p,'fabric') || tr(p,'description') || '').slice(0,90) %></p>
+      <span class="price"><%= p.variants.length ? t.shop.priceFrom + ' ' + money(p.priceFrom) + ' · ' + t.shop.bySize : money(p.priceFrom) + ' ' + t.shop.perPiece %>
+        <% if (p.one_of_one) { %> <span class="badge"><%= t.shop.oneOfOne %></span><% } else if (p.totalStock>0 && p.totalStock<=3) { %> <span class="badge"><%= t.shop.oneLeft.replace('{n}',p.totalStock) %></span><% } else if (p.totalStock<=0) { %> <span class="badge est"><%= t.shop.soldOut %></span><% } %>
+      </span>
+    </div>
+  </a>
+</article>

@@ -1,0 +1,17 @@
+<%- include('../partials/head') %><%- include('../partials/nav') %>
+<section class="section on-paper"><div class="wrap stack">
+  <%- include('../partials/crumbs', { crumbs: [{name:t.cart.h1}] }) %><h1><%= t.cart.h1 %></h1>
+  <% if (!rows.length) { %><div class="notice"><%= t.cart.empty %></div><div><a class="btn btn-primary" href="<%= L %>/shop"><%= t.cta.continue %></a></div><% } else { %>
+  <div class="two-col" style="grid-template-columns:1.4fr .6fr;">
+    <table class="tbl"><thead><tr><th></th><th><%= t.cart.item %></th><th><%= t.cart.qty %></th><th><%= t.cart.price %></th><th></th></tr></thead><tbody>
+      <% for (const r of rows) { %><tr><td><img src="<%= r.imageUrl %>" alt=""></td>
+        <td><a href="<%= L %>/product/<%= r.slug %>" style="font-family:var(--disp);font-size:1.15rem;text-decoration:none;"><%= tr(r,'name') %></a><br><span class="areas"><% if (r.band_code) { %><%= r.band_code %> · <%= locale==='hi'?r.band_hi:r.band_en %><% } %><% if (r.deity_en) { %> · <%= t.cart.forDeity %> <%= locale==='hi'?r.deity_hi:r.deity_en %><% } %></span></td>
+        <td><form method="post" action="<%= L %>/cart/update" class="row"><input type="hidden" name="_csrf" value="<%= csrf %>"><input type="hidden" name="item_id" value="<%= r.item_id %>"><input type="number" name="qty" value="<%= r.qty %>" min="0" max="10" aria-label="<%= t.cart.qty %>"><button class="btn btn-ghost btn-sm" type="submit"><%= t.cart.update %></button></form></td>
+        <td><%= money(r.line) %></td>
+        <td><form method="post" action="<%= L %>/cart/update"><input type="hidden" name="_csrf" value="<%= csrf %>"><input type="hidden" name="item_id" value="<%= r.item_id %>"><input type="hidden" name="qty" value="0"><button class="btn btn-ghost btn-sm" type="submit"><%= t.cart.remove %></button></form></td></tr><% } %>
+    </tbody></table>
+    <div class="panel"><div class="tot"><span><%= t.cart.subtotal %></span><span><%= money(subtotal) %></span></div><div class="tot"><span><%= t.cart.shipping %></span><span><%= shipping ? money(shipping) : t.cart.free %></span></div><div class="tot big"><span><%= t.cart.total %></span><span><%= money(total) %></span></div>
+      <p class="areas"><%= t.cart.freeOver.replace('{n}', freeOver) %></p><a class="btn btn-primary" href="<%= L %>/checkout"><%= t.cta.checkout %></a><a class="btn btn-ghost" href="<%= L %>/shop"><%= t.cta.continue %></a></div>
+  </div><% } %>
+</div></section>
+<%- include('../partials/footer') %>

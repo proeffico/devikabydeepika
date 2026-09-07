@@ -1,0 +1,17 @@
+</main>
+<footer class="site"><div class="wrap">
+  <div class="cols">
+    <div class="stack"><img class="footlogo" src="/img/logo-full.png" alt="Devikka by Deepika" width="693" height="900" loading="lazy"><p class="lede" style="font-size:.9rem;"><%= t.footer.p %></p></div>
+    <div><p class="eyebrow" style="margin-bottom:8px;"><%= t.footer.shop %></p>
+      <a href="<%= L %>/shop"><%= t.shop.all %></a><a href="<%= L %>/shop/everyday-poshak"><%= locale==='hi'?'रोज़ की पोशाक':'Everyday Poshak' %></a><a href="<%= L %>/shop/festival-poshak"><%= locale==='hi'?'त्योहार की पोशाक':'Festival Poshak' %></a><a href="<%= L %>/shop/shringar"><%= locale==='hi'?'शृंगार':'Shringar' %></a><a href="<%= L %>/shop/mandir-decor"><%= locale==='hi'?'मंदिर सजावट':'Mandir Decor' %></a><a href="<%= L %>/shop/idols"><%= locale==='hi'?'मूर्तियाँ':'Idols' %></a></div>
+    <div><p class="eyebrow" style="margin-bottom:8px;"><%= t.footer.seva %></p>
+      <a href="<%= L %>/dress-pack"><%= t.nav.pack %></a><a href="<%= L %>/mandir-seva"><%= t.nav.seva %></a><a href="<%= L %>/festivals"><%= t.nav.festivals %></a><a href="<%= L %>/book"><%= t.cta.bookVisit %></a><a href="<%= L %>/sevadar"><%= t.sevadar.cta %></a><a href="<%= L %>/faq"><%= t.faq.h2 %></a><a href="<%= L %>/story"><%= t.nav.story %></a>
+      <a href="<%= L %>/privacy"><%= t.footer.privacy %></a><a href="<%= L %>/terms"><%= t.footer.terms %></a><a href="<%= L %>/refunds"><%= t.footer.refunds %></a><a href="<%= L %>/contact"><%= t.footer.contact %></a></div>
+  </div>
+  <p class="legal"><%= t.footer.legal %></p>
+</div></footer>
+<script>window.DVK={csrf:"<%= csrf %>",L:"<%= L %>",rzp:"<%= cfg.razorpayKey %>",brand:"<%= cfg.brand %>",locale:"<%= locale %>"};</script>
+<script src="/js/site.js" defer></script>
+<% if (typeof needRazorpay !== 'undefined' && needRazorpay) { %><script src="https://checkout.razorpay.com/v1/checkout.js" defer></script><% } %>
+</body>
+</html>

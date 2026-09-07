@@ -1,0 +1,1 @@
+<nav class="crumbs" aria-label="Breadcrumb"><a href="<%= L %>/"><%= t.misc.breadcrumbHome %></a><% for (const c of crumbs) { %><span>›</span><% if (c.url) { %><a href="<%= L %><%= c.url %>"><%= c.name %></a><% } else { %><span><%= c.name %></span><% } %><% } %></nav>

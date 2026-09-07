@@ -1,0 +1,28 @@
+<%- include('../partials/head') %><%- include('../partials/nav') %>
+<section class="section on-paper"><div class="wrap">
+  <%- include('../partials/crumbs', { crumbs: [{name:t.nav.shop,url:'/shop'},{name:tr(p.category,'name'),url:'/shop/'+p.category.slug},{name:tr(p,'name')}] }) %>
+  <div class="pdp" style="margin-top:24px;">
+    <div class="gallery"><img src="<%= p.imageUrl %>" alt="<%= tr(p,'name') %>" width="900" height="1125"></div>
+    <form class="stack" method="post" action="<%= L %>/cart/add">
+      <input type="hidden" name="_csrf" value="<%= csrf %>"><input type="hidden" name="product_id" value="<%= p.id %>">
+      <p class="eyebrow"><%= tr(p.category,'name') %><% if (p.subcategory) { %> · <%= tr(p.subcategory,'name') %><% } %></p>
+      <h1><%= tr(p,'name') %></h1>
+      <% if (tr(p,'fabric')) { %><p class="areas"><%= tr(p,'fabric') %></p><% } %>
+      <p class="desc"><%= tr(p,'description') %></p>
+      <% if (p.variants.length) { %>
+        <div><p class="eyebrow" style="margin-bottom:8px;"><%= t.shop.chooseSize %></p>
+          <div class="opt"><% p.variants.forEach((v,i)=>{ %><label class="<%= v.stock<=0?'dis':'' %>"><input type="radio" name="variant_id" value="<%= v.id %>" <%= i===1?'checked':'' %> <%= v.stock<=0?'disabled':'' %>> <%= v.band.code %> · <%= tr(v.band,'label') %> <span class="pr"><%= money(v.price) %></span></label><% }) %></div>
+          <p class="areas" style="margin-top:8px;"><%= t.sizes.p %> <a href="<%= L %>/faq"><%= locale==='hi'?'नाप कैसे लें':'How to measure' %></a></p></div>
+      <% } else { %><p class="price"><%= money(p.base_price) %> <span class="areas"><%= t.shop.perPiece %></span></p><% } %>
+      <% if (p.price_is_estimate) { %><p class="areas"><span class="badge est"><%= t.shop.estimate %></span></p><% } %>
+      <% if (p.deities.length) { %><div><p class="eyebrow" style="margin-bottom:8px;"><%= t.shop.chooseDeity %></p>
+        <div class="opt"><% p.deities.forEach((d,i)=>{ %><label><input type="radio" name="deity_id" value="<%= d.id %>" <%= i===0?'checked':'' %>> <%= tr(d,'name') %></label><% }) %></div></div><% } %>
+      <div class="row"><label><%= t.cart.qty %> <input type="number" name="qty" value="1" min="1" max="10" style="width:64px;padding:9px;border:1px solid var(--line-l);border-radius:6px;font-family:inherit;"></label>
+        <% if (p.totalStock>0) { %><button class="btn btn-primary" type="submit"><%= t.cta.addToCart %></button><% } else { %><span class="badge est"><%= t.shop.soldOut %></span> <a class="btn btn-wa" href="https://wa.me/<%= cfg.whatsapp %>?text=<%= encodeURIComponent('Hi Devikka, when is ' + p.name_en + ' back in stock?') %>" target="_blank" rel="noopener"><%= t.cta.whatsapp %></a><% } %></div>
+      <p class="areas"><%= p.one_of_one ? t.shop.oneOfOne : (p.totalStock>0 && p.totalStock<=3 ? t.shop.oneLeft.replace('{n}',p.totalStock) : (p.totalStock>0?t.shop.inStock:'')) %></p>
+      <% if (p.festivals.length) { %><p class="areas"><%= t.nav.festivals %>: <% p.festivals.forEach((f,i)=>{ %><a href="<%= L %>/festival/<%= f.slug %>"><%= tr(f,'name') %></a><%= i<p.festivals.length-1?', ':'' %><% }) %></p><% } %>
+    </form>
+  </div>
+  <% if (rel.length) { %><div class="stack" style="margin-top:56px;"><p class="eyebrow"><%= locale==='hi'?'इसके साथ':'Goes with this' %></p><div class="grid-prod"><% for (const q of rel) { %><%- include('../partials/product-card', { p: q }) %><% } %></div></div><% } %>
+</div></section>
+<%- include('../partials/footer') %>

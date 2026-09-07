@@ -1,0 +1,34 @@
+<%- include('../partials/head') %><%- include('../partials/nav') %>
+<section class="section on-paper"><div class="wrap stack">
+  <div class="row" style="justify-content:space-between;"><h1><%= t.account.welcome %><%= c.name?', '+c.name:'' %></h1><form method="post" action="<%= L %>/account/logout"><input type="hidden" name="_csrf" value="<%= csrf %>"><button class="btn btn-ghost btn-sm" type="submit"><%= t.nav.logout %></button></form></div>
+  <div class="acct">
+    <div class="panel"><h3><%= t.account.mandir %></h3>
+      <form method="post" action="<%= L %>/account/profile" class="booking"><input type="hidden" name="_csrf" value="<%= csrf %>">
+        <div class="field"><label for="an"><%= t.account.nameLabel %></label><input id="an" name="name" required value="<%= c.name||'' %>"></div>
+        <div class="field"><label for="af"><%= t.account.footprint %></label><select id="af" name="footprint"><option value="">—</option><% for (const f of ['3x3','5x5','5x8','6x10']) { %><option value="<%= f %>" <%= h&&h.footprint===f?'selected':'' %>><%= f.replace('x','×') %> ft</option><% } %></select></div>
+        <div class="field"><label><%= t.account.dressing %></label><div class="opt"><label><input type="radio" name="dressing_pref" value="family" <%= !h||h.dressing_pref==='family'?'checked':'' %>> <%= t.book.who1 %></label><label><input type="radio" name="dressing_pref" value="sevadar" <%= h&&h.dressing_pref==='sevadar'?'checked':'' %>> <%= t.book.who2 %></label></div></div>
+        <button class="btn btn-primary btn-sm" type="submit"><%= t.cta.save %></button></form>
+    </div>
+    <div class="panel" id="idols"><h3><%= t.account.idols %></h3>
+      <% if (!idols.length) { %><p class="areas"><%= t.account.none %></p><% } %>
+      <% for (const i of idols) { %><div class="tot"><span><%= locale==='hi'?i.name_hi:i.name_en %> <span class="areas"><%= i.height_in?Number(i.height_in).toString().replace(/\.0+$/,'')+'″':'' %> <%= i.code?'· '+i.code:'' %> <%= i.size_number?'· size '+i.size_number:'' %></span></span><form method="post" action="<%= L %>/account/idols/<%= i.id %>/delete"><input type="hidden" name="_csrf" value="<%= csrf %>"><button class="btn btn-ghost btn-sm" type="submit">×</button></form></div><% } %>
+      <form method="post" action="<%= L %>/account/idols" class="booking"><input type="hidden" name="_csrf" value="<%= csrf %>">
+        <div class="two"><div class="field"><label><%= t.shop.deity %></label><select name="deity_id"><% for (const d of deities) { %><option value="<%= d.id %>"><%= tr(d,'name') %></option><% } %></select></div><div class="field"><label><%= t.account.height %></label><input name="height_in" type="number" step="0.5" min="1" max="120"></div></div>
+        <div class="two"><div class="field"><label><%= t.account.sizeNo %></label><input name="size_number" maxlength="10"></div><div class="field"><label><%= locale==='hi'?'नोट':'Notes' %></label><input name="notes" maxlength="255"></div></div>
+        <button class="btn btn-ghost btn-sm" type="submit"><%= t.account.addIdol %></button></form>
+    </div>
+    <div class="panel" id="subs"><h3><%= t.account.subs %></h3>
+      <% if (!ss.length) { %><p class="areas"><%= t.account.none %></p><div><a class="btn btn-primary btn-sm" href="<%= L %>/dress-pack"><%= t.cta.buildPack %></a></div><% } %>
+      <% for (const s of ss) { %><div class="tot" style="flex-direction:column;align-items:flex-start;gap:6px;"><strong><%= s.kind==='visit' ? t.plans.p1 + (s.plan?' · '+tr(s.plan,'label'):'') : t.plans.p2 %> · <%= s.rhythm==='monthly'?t.pack.monthly:t.pack.quarterly %> · <%= money(s.amount) %></strong>
+        <span class="areas"><%= t.account.status %>: <%= s.status %><%= s.next_cycle_date?' · '+t.account.next+' '+s.next_cycle_date:'' %></span>
+        <% if (s.items.length) { %><span class="areas"><%= s.items.map(i=>(locale==='hi'?i.name_hi:i.name_en)+' '+i.code).join(', ') %></span><% } %>
+        <div class="row"><% if (s.cycle && s.cycle.state==='pending_choice') { %><a class="btn btn-primary btn-sm" href="<%= L %>/choose/<%= s.cycle.choice_token %>"><%= t.account.chooseFabric %></a><% } %>
+          <% if (s.status==='active') { %><form method="post" action="<%= L %>/account/subscriptions/<%= s.id %>/pause"><input type="hidden" name="_csrf" value="<%= csrf %>"><button class="btn btn-ghost btn-sm"><%= t.account.pause %></button></form><% } %>
+          <% if (s.status==='paused') { %><form method="post" action="<%= L %>/account/subscriptions/<%= s.id %>/resume"><input type="hidden" name="_csrf" value="<%= csrf %>"><button class="btn btn-ghost btn-sm"><%= t.account.resume %></button></form><% } %>
+          <% if (['active','paused','pending'].includes(s.status)) { %><form method="post" action="<%= L %>/account/subscriptions/<%= s.id %>/cancel"><input type="hidden" name="_csrf" value="<%= csrf %>"><button class="btn btn-ghost btn-sm"><%= t.account.cancel %></button></form><% } %></div></div><% } %>
+    </div>
+    <div class="panel"><h3><%= t.account.orders %></h3><% if (!os.length) { %><p class="areas"><%= t.account.none %></p><% } %>
+      <% for (const o of os) { %><div class="tot"><span><%= o.order_no %> <span class="areas"><%= new Date(o.created_at).toLocaleDateString('en-IN') %></span></span><span><%= o.status %> · <%= money(o.total) %></span></div><% } %></div>
+  </div>
+</div></section>
+<%- include('../partials/footer') %>

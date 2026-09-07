@@ -1,0 +1,8 @@
+<%- include('../partials/head') %><%- include('../partials/nav') %>
+<section class="section on-paper"><div class="wrap stack"><h1><%= t.checkout.placed %></h1>
+  <% if (o) { %><div class="notice ok"><%= t.checkout.thanks.replace('{no}', o.order_no) %></div>
+  <div class="panel" style="max-width:640px;"><h3><%= t.checkout.orderNo %>: <%= o.order_no %></h3><% for (const it of o.items) { %><div class="tot"><span><%= it.name_snapshot %><%= it.band_snapshot?' · '+it.band_snapshot:'' %> × <%= it.qty %></span><span><%= money(it.line_total) %></span></div><% } %><div class="tot big"><span><%= t.cart.total %></span><span><%= money(o.total) %></span></div></div>
+  <% } else { %><div class="notice"><%= t.checkout.failed %></div><% } %>
+  <div><a class="btn btn-primary" href="<%= L %>/account"><%= t.nav.account %></a> <a class="btn btn-ghost" href="<%= L %>/shop"><%= t.cta.continue %></a></div>
+</div></section>
+<%- include('../partials/footer') %>

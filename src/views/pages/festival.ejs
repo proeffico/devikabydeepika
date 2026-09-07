@@ -1,0 +1,18 @@
+<%- include('../partials/head') %><%- include('../partials/nav') %>
+<header class="hero"><div class="wrap"><div class="hero-grid">
+  <div class="stack">
+    <%- include('../partials/crumbs', { crumbs: [{name:t.nav.festivals,url:'/festivals'},{name:tr(f,'name')}] }) %>
+    <p class="kicker"><%= tr(f,'season') %><% if (f.next_date) { %> · <%= t.fest.nextDate %> <%= new Date(f.next_date).toLocaleDateString(locale==='hi'?'hi-IN':'en-IN',{day:'numeric',month:'long',year:'numeric'}) %><% } %></p>
+    <h1><%= tr(f,'name') %></h1>
+    <p class="eyebrow"><%= t.fest.inPack %></p><p class="lede"><%= tr(f,'pack') %></p>
+    <p class="pull"><%= f.pack_price ? money(f.pack_price) : t.fest.priceTba %></p>
+    <div class="cta-row"><a class="btn btn-wa" href="https://wa.me/<%= cfg.whatsapp %>?text=<%= encodeURIComponent((locale==='hi'?'नमस्ते देविका, मुझे ':'Hi Devikka, I would like to reserve the ') + f.name_en + (locale==='hi'?' पैक बुक करना है।':' pack.')) %>" target="_blank" rel="noopener"><%= t.fest.reserve %></a><a class="btn btn-ghost" href="#items"><%= t.fest.shop %></a></div>
+  </div>
+  <div class="arch"><img src="/img/<%= f.image %>" alt="<%= tr(f,'name') %>" width="900" height="1125" loading="eager"></div>
+</div></div></header>
+<section class="section on-paper" id="items"><div class="wrap stack">
+  <p class="eyebrow"><%= t.fest.shop %></p><h2><%= tr(f,'name') %></h2>
+  <% if (!products.length) { %><div class="notice"><%= t.shop.noResults %></div><% } %>
+  <div class="grid-prod"><% for (const p of products) { %><%- include('../partials/product-card', { p }) %><% } %></div>
+</div></section>
+<%- include('../partials/footer') %>

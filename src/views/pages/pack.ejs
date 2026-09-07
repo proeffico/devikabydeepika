@@ -1,0 +1,32 @@
+<%- include('../partials/head') %><%- include('../partials/nav') %>
+<section class="section"><div class="wrap stack">
+  <%- include('../partials/crumbs', { crumbs: [{name:t.nav.pack}] }) %>
+  <p class="eyebrow"><%= t.pack.eyebrow %></p><h1><%= t.pack.h2 %></h1><p class="lede"><%= t.pack.lede %></p>
+  <div class="cfgwrap">
+    <form class="cfg" id="packForm" novalidate data-price-url="<%= L %>/dress-pack/price">
+      <% deities.forEach((d,i)=>{ %>
+      <div class="cfgrow">
+        <label class="cfgpick"><input type="checkbox" name="deity" value="<%= d.id %>" data-pieces="<%= d.pieces_per_set %>" <%= i===0?'checked':'' %>> <%= tr(d,'name') %></label>
+        <div><span class="lbl"><%= t.pack.garment %></span><span class="deity-g"><%= tr(d,'garment') %><%= d.pieces_per_set>1 ? ' ×'+d.pieces_per_set : '' %></span></div>
+        <div><span class="lbl"><%= t.pack.band %></span><select name="band" aria-label="<%= t.pack.band %> — <%= tr(d,'name') %>">
+          <% bands.forEach(b=>{ %><option value="<%= b.code %>" <%= b.code==='S2'?'selected':'' %>><%= b.code %> — <%= tr(b,'label') %><%= bp[b.code] ? ' · '+money(bp[b.code].price) : '' %></option><% }) %>
+          <option value=""><%= t.pack.notSure %></option></select></div>
+      </div>
+      <% }) %>
+      <div class="cfgfoot">
+        <span class="cfgcount" id="packCount"></span>
+        <div class="rhythm slots" role="group" aria-label="<%= t.pack.howOften %>"><button class="slot" type="button" data-rhythm="monthly" aria-pressed="true"><%= t.pack.monthly %></button><button class="slot" type="button" data-rhythm="quarterly" aria-pressed="false"><%= t.pack.quarterly %></button></div>
+        <button class="btn btn-primary" type="submit" id="packSubmit"><%= customer ? t.pack.subscribe : t.pack.login %></button>
+      </div>
+      <div id="packPrice" class="confirm" style="margin:0 20px 18px;" hidden></div>
+      <div id="packConfirm" class="confirm" hidden></div>
+    </form>
+    <div>
+      <div class="thali" id="thali" aria-hidden="true"><% for (let i=0;i<7;i++){ %><span class="d diya off" style="--a:<%= Math.round(i*360/7) %>deg"><span class="fl"></span><span class="bowl"></span></span><% } %><div class="centre"><span class="n" id="thaliN">1</span><span class="t"><%= t.pack.thali %></span></div></div>
+      <p class="thali-cap"><%= t.pack.thaliCap %></p>
+      <div class="panel" style="margin-top:18px;"><h3><%= t.pack.comboOff %></h3><table class="tbl"><% ladder.forEach(l=>{ %><tr><td><%= l.deity_count %><%= l.deity_count===4?'+':'' %> <%= locale==='hi'?'विग्रह':'deities' %></td><td><%= Number(l.discount_pct) %>%</td></tr><% }) %></table><p class="areas"><%= t.pack.estimateNote %></p></div>
+    </div>
+  </div>
+  <div class="two-col" style="margin-top:36px;"><div class="stack"><h3><%= t.pack.onceH %></h3><p class="lede"><%= t.pack.onceP %></p></div><div class="stack"><h3><%= t.pack.fabH %></h3><p class="lede"><%= t.pack.fabP %></p></div></div>
+</div></section>
+<%- include('../partials/footer', { needRazorpay: true }) %>

@@ -1,0 +1,22 @@
+<%- include('../partials/head') %><%- include('../partials/nav') %>
+<header class="hero"><div class="wrap"><div class="hero-grid">
+  <div class="stack">
+    <%- include('../partials/crumbs', { crumbs: [{name:t.nav.shop,url:'/shop'},{name:tr(d,'name')}] }) %>
+    <p class="kicker"><%= tr(d,'garment') %> · <%= d.posture==='seated'?(locale==='hi'?'बैठे':'seated'):d.posture==='standing'?(locale==='hi'?'खड़े':'standing'):(locale==='hi'?'सेट':'a set') %></p>
+    <h1><%= tr(d,'name') %></h1>
+    <p class="lede"><%= tr(d,'intro') %></p>
+    <div class="cta-row"><a class="btn btn-primary" href="<%= L %>/dress-pack?deity=<%= d.slug %>"><%= t.cta.buildPack %></a><a class="btn btn-ghost" href="#items"><%= t.cta.shopAll %></a></div>
+  </div>
+  <div class="arch"><img src="/img/<%= d.image %>" alt="<%= tr(d,'name') %>" width="900" height="1125" loading="eager"></div>
+</div></div></header>
+<section class="section on-paper" id="items"><div class="wrap stack">
+  <p class="eyebrow"><%= tr(d,'name') %></p><h2><%= locale==='hi' ? 'इनके लिए सब कुछ' : 'Everything for ' + tr(d,'name') %></h2>
+  <p class="areas"><%= t.shop.results.replace('{n}', products.length) %></p>
+  <% if (!products.length) { %><div class="notice"><%= t.shop.noResults %></div><% } %>
+  <div class="grid-prod"><% for (const p of products) { %><%- include('../partials/product-card', { p }) %><% } %></div>
+  <div class="stack" style="margin-top:30px;"><p class="eyebrow"><%= t.sizes.eyebrow %></p><h3><%= t.sizes.h3 %></h3><p class="lede"><%= t.sizes.p %></p>
+    <div class="sizes"><% for (const b of bands) { %><div class="sz"><span class="mark"><%= b.code %></span><span class="band"><%= tr(b,'label') %></span><span class="who"><%= tr(b,'who') %></span></div><% } %></div></div>
+  <h3 style="margin-top:20px;"><%= t.shop.byDeity %></h3>
+  <div class="chips"><% for (const x of deities) { %><a class="chip <%= x.id===d.id?'on':'' %>" href="<%= L %>/deity/<%= x.slug %>"><%= tr(x,'name') %></a><% } %></div>
+</div></section>
+<%- include('../partials/footer') %>

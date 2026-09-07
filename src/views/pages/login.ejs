@@ -1,0 +1,16 @@
+<%- include('../partials/head') %><%- include('../partials/nav') %>
+<section class="section on-paper"><div class="wrap"><div class="panel" style="max-width:480px;margin:0 auto;"><h1><%= t.account.login %></h1>
+  <% if (typeof error!=='undefined' && error) { %><div class="notice err"><%= error %></div><% } %>
+  <% if (step==='phone') { %>
+  <form method="post" action="<%= L %>/account/otp" class="booking"><input type="hidden" name="_csrf" value="<%= csrf %>"><input type="hidden" name="_t" value="<%= formT %>"><div style="position:absolute;left:-9999px;" aria-hidden="true"><label>Website<input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
+    <div class="field"><label for="ph"><%= t.account.phone %></label><input id="ph" name="phone" type="tel" inputmode="numeric" autocomplete="tel" required autofocus placeholder="98100 12345"></div>
+    <button class="btn btn-primary" type="submit"><%= t.account.sendOtp %></button></form>
+  <% } else { %>
+  <p class="lede"><%= t.account.otpSent.replace('{phone}', '+' + phone.slice(0,2) + ' ' + phone.slice(2)) %></p>
+  <% if (typeof echo!=='undefined' && echo) { %><div class="notice">Dev mode — code: <strong><%= echo %></strong></div><% } %>
+  <form method="post" action="<%= L %>/account/verify" class="booking"><input type="hidden" name="_csrf" value="<%= csrf %>">
+    <div class="field"><label for="code"><%= t.account.otp %></label><input id="code" name="code" inputmode="numeric" pattern="\d{6}" maxlength="6" required autofocus autocomplete="one-time-code"></div>
+    <button class="btn btn-primary" type="submit"><%= t.account.verify %></button></form>
+  <% } %>
+</div></div></section>
+<%- include('../partials/footer') %>

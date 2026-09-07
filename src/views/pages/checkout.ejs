@@ -1,0 +1,19 @@
+<%- include('../partials/head') %><%- include('../partials/nav') %>
+<section class="section on-paper"><div class="wrap stack"><h1><%= t.checkout.h1 %></h1>
+  <div class="two-col" style="grid-template-columns:1.2fr .8fr;">
+    <form id="checkoutForm" class="booking" data-url="<%= L %>/checkout/create" data-verify="<%= L %>/checkout/verify"><input type="hidden" name="_csrf" value="<%= csrf %>">
+      <p class="eyebrow"><%= t.checkout.address %></p>
+      <div class="two"><div class="field"><label for="cn"><%= t.checkout.name %></label><input id="cn" name="name" required value="<%= addr?addr.name:(customer&&customer.name)||'' %>"></div><div class="field"><label for="cp"><%= t.checkout.phone %></label><input id="cp" name="phone" type="tel" required value="<%= addr?addr.phone:(customer?customer.phone.slice(-10):'') %>"></div></div>
+      <div class="field"><label for="l1"><%= t.checkout.line1 %></label><input id="l1" name="line1" required value="<%= addr?addr.line1:'' %>"></div>
+      <div class="field"><label for="l2"><%= t.checkout.line2 %></label><input id="l2" name="line2" value="<%= addr?(addr.line2||''):'' %>"></div>
+      <div class="two"><div class="field"><label for="ct"><%= t.checkout.city %></label><input id="ct" name="city" required value="<%= addr?addr.city:'' %>"></div><div class="field"><label for="st"><%= t.checkout.state %></label><input id="st" name="state" required value="<%= addr?addr.state:'' %>"></div></div>
+      <div class="two"><div class="field"><label for="pc"><%= t.checkout.pincode %></label><input id="pc" name="pincode" inputmode="numeric" maxlength="6" required value="<%= addr?addr.pincode:'' %>"></div><div class="field"><label for="nt"><%= t.checkout.notes %></label><input id="nt" name="notes"></div></div>
+      <button class="btn btn-primary" type="submit"><%= t.cta.pay %> · <%= money(total) %></button>
+      <p class="form-note"><%= t.checkout.secure %></p><div id="coMsg" class="notice err" hidden></div>
+    </form>
+    <div class="panel"><h3><%= t.checkout.summary %></h3><% for (const r of rows) { %><div class="tot"><span><%= tr(r,'name') %><%= r.band_code?' · '+r.band_code:'' %> × <%= r.qty %></span><span><%= money(r.line) %></span></div><% } %>
+      <div class="tot"><span><%= t.cart.shipping %></span><span><%= shipping?money(shipping):t.cart.free %></span></div><div class="tot big"><span><%= t.cart.total %></span><span><%= money(total) %></span></div>
+      <% if (!customer) { %><p class="areas"><%= t.checkout.loginFirst %> <a href="<%= L %>/account/login"><%= t.account.login %></a></p><% } %></div>
+  </div>
+</div></section>
+<%- include('../partials/footer', { needRazorpay: true }) %>

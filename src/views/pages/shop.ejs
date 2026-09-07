@@ -1,0 +1,31 @@
+<%- include('../partials/head') %><%- include('../partials/nav') %>
+<section class="on-paper" style="padding-bottom:88px;">
+  <div class="wrap">
+    <div class="page-head stack">
+      <%- include('../partials/crumbs', { crumbs: [{name:t.nav.shop,url:'/shop'}].concat(typeof category!=='undefined'&&category?[{name:tr(category,'name'),url:'/shop/'+category.slug}]:[]).concat(typeof sub!=='undefined'&&sub?[{name:tr(sub,'name')}]:[]) }) %>
+      <p class="eyebrow"><%= t.shop.eyebrow %></p>
+      <h1><%= title %></h1>
+      <% if (description) { %><p class="lede"><%= description %></p><% } %>
+      <form method="get" class="row" role="search"><input type="search" name="q" value="<%= typeof filters.q==='string'?filters.q:'' %>" placeholder="<%= locale==='hi'?'खोजिए…':'Search…' %>" style="flex:1;min-width:200px;padding:11px 13px;border:1px solid var(--line-l);border-radius:8px;font-family:inherit;" aria-label="Search"><button class="btn btn-ghost btn-sm" type="submit"><%= locale==='hi'?'खोजें':'Search' %></button></form>
+    </div>
+    <div class="shop-layout">
+      <aside class="facets">
+        <div><h4><%= t.shop.category %></h4><a href="<%= L %>/shop" class="<%= !filters.category?'on':'' %>"><%= t.shop.all %></a><% for (const c of cats) { %><a href="<%= L %>/shop/<%= c.slug %>" class="<%= filters.category===c.slug?'on':'' %>"><%= tr(c,'name') %></a><% } %></div>
+        <% if (typeof subs!=='undefined' && subs && subs.length) { %><div><h4><%= t.shop.sub %></h4><% for (const s of subs) { %><a href="<%= L %>/shop/<%= category.slug %>/<%= s.slug %>" class="<%= filters.sub===s.slug?'on':'' %>"><%= tr(s,'name') %></a><% } %></div><% } %>
+        <div><h4><%= t.shop.deity %></h4><% for (const d of deities) { %><a href="<%= L %>/deity/<%= d.slug %>"><%= tr(d,'name') %></a><% } %></div>
+        <div><h4><%= t.nav.festivals %></h4><% for (const f of fests) { %><a href="<%= L %>/festival/<%= f.slug %>"><%= tr(f,'name') %></a><% } %></div>
+      </aside>
+      <div>
+        <p class="areas" style="margin-bottom:14px;"><%= t.shop.results.replace('{n}', products.length) %></p>
+        <% if (!products.length) { %><div class="notice"><%= t.shop.noResults %></div><% } %>
+        <div class="grid-prod"><% for (const p of products) { %><%- include('../partials/product-card', { p }) %><% } %></div>
+        <% if (typeof category!=='undefined' && category && category.pricing_mode==='size_band') { %>
+        <div class="stack" style="margin-top:44px;"><p class="eyebrow"><%= t.sizes.eyebrow %></p><h3><%= t.sizes.h3 %></h3><p class="lede"><%= t.sizes.p %></p>
+          <div class="sizes"><% for (const b of bands) { %><div class="sz"><span class="mark"><%= b.code %></span><span class="band"><%= tr(b,'label') %></span><span class="who"><%= tr(b,'who') %></span></div><% } %></div>
+          <p class="areas"><%= t.sizes.note %></p></div>
+        <% } %>
+      </div>
+    </div>
+  </div>
+</section>
+<%- include('../partials/footer') %>

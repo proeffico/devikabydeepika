@@ -1,0 +1,4 @@
+<%- include('../partials/head') %><%- include('../partials/nav') %>
+<section class="section on-paper"><div class="wrap stack"><%- include('../partials/crumbs', { crumbs: [{name:t.faq.h2}] }) %><p class="eyebrow"><%= t.faq.eyebrow %></p><h1><%= t.faq.h2 %></h1>
+  <div><% faqs.forEach((f,i)=>{ %><details class="faq"<%= i===0?' open':'' %>><summary><%= tr(f,'q') %></summary><p><%= tr(f,'a') %></p></details><% }) %></div></div></section>
+<%- include('../partials/footer') %>

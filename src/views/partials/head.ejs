@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="<%= locale %>">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title><%= seo.title || cfg.brand %></title>
+<% if (seo.description) { %><meta name="description" content="<%= seo.description %>"><% } %>
+<% if (seo.noindex) { %><meta name="robots" content="noindex,nofollow"><% } else { %><meta name="robots" content="index,follow,max-image-preview:large"><% } %>
+<% if (seo.canonical) { %>
+<link rel="canonical" href="<%= seo.canonical %>">
+<link rel="alternate" hreflang="en" href="<%= seo.alternates.en %>">
+<link rel="alternate" hreflang="hi" href="<%= seo.alternates.hi %>">
+<link rel="alternate" hreflang="x-default" href="<%= seo.alternates.en %>">
+<meta property="og:type" content="<%= seo.type || 'website' %>">
+<meta property="og:site_name" content="<%= cfg.brand %>">
+<meta property="og:title" content="<%= seo.rawTitle %>">
+<meta property="og:description" content="<%= seo.description %>">
+<meta property="og:url" content="<%= seo.canonical %>">
+<meta property="og:image" content="<%= seo.image %>">
+<meta property="og:locale" content="<%= seo.locale %>">
+<meta name="twitter:card" content="summary_large_image">
+<% } %>
+<meta name="theme-color" content="#120B14">
+<link rel="icon" href="/img/logo-mark.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<% if (locale === 'hi') { %>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Hindi:ital@0;1&family=Mukta:wght@400;500;600;700&display=swap">
+<% } else { %>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Karla:ital,wght@0,400;0,500;0,700;1,400&display=swap">
+<% } %>
+<link rel="stylesheet" href="/css/site.css">
+<script>(function(){try{if(localStorage.getItem('devika-theme')==='light'){document.documentElement.setAttribute('data-theme','light');}}catch(e){}})();</script>
+<% if (seo.jsonld) { %><script type="application/ld+json"><%- seo.jsonld %></script><% } %>
+</head>
+<body<%= typeof isAdminArea !== 'undefined' && isAdminArea ? ' class="adm"' : '' %>>
+<a class="skip" href="#main"><%= locale === 'hi' ? 'मुख्य सामग्री पर जाएँ' : 'Skip to content' %></a>

@@ -1,0 +1,115 @@
+<%- include('../partials/head') %>
+<%- include('../partials/nav', { showParda: true }) %>
+
+<header class="hero" id="top">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div class="stack">
+        <p class="kicker"><%= t.hero.kicker %></p>
+        <h1><%= t.hero.h1a %> <span class="gold"><%= t.hero.h1b %></span></h1>
+        <p class="lede"><%= t.hero.lede %></p>
+        <p class="pull"><%= locale==='hi' ? 'अपने भगवान जी को आराम में रखिए। हर दिन।' : 'Make your Bhagwan ji feel comfortable. Every day.' %></p>
+        <div class="cta-row"><a class="btn btn-primary" href="<%= L %>/dress-pack"><%= t.cta.buildPack %></a><a class="btn btn-ghost" href="<%= L %>/mandir-seva"><%= t.cta.howVisit %></a></div>
+        <p class="areas"><%= t.hero.areas %></p>
+      </div>
+      <div class="arch"><img src="/img/hero-shrine-dressed.jpg" alt="<%= locale==='hi' ? 'पूरी तरह सजा हुआ घर का मंदिर' : 'A home shrine fully dressed' %>" width="900" height="1125" loading="eager" decoding="async"></div>
+    </div>
+    <div class="hero-rail"><%- include('../partials/rail', { n: 9 }) %></div>
+  </div>
+</header>
+
+<div class="trust"><div class="wrap" style="padding:0 24px;"><div class="items">
+  <% for (const [a,b] of t.trust) { %><div class="it"><span class="t"><%= a %></span><span class="s"><%= b %></span></div><% } %>
+</div></div></div>
+
+<section class="section">
+  <div class="wrap">
+    <div class="unique">
+      <div class="stack">
+        <p class="eyebrow"><%= t.unique.eyebrow %></p>
+        <h2><%= t.unique.h2 %></h2>
+        <p class="lede"><%= t.unique.p %></p>
+      </div>
+      <ul>
+        <li><%- include('../partials/diya') %><%= t.unique.a %></li>
+        <li><%- include('../partials/diya') %><%= t.unique.b %></li>
+        <li><%- include('../partials/diya') %><%= t.unique.c %></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="section on-paper" id="plans">
+  <div class="wrap stack">
+    <p class="eyebrow"><%= t.plans.eyebrow %></p>
+    <h2><%= t.plans.h2 %></h2>
+    <p class="lede"><%= t.plans.lede %></p>
+    <div class="diptych">
+      <article class="pane"><span class="num"><%= t.plans.p1n %></span><h3><%= t.plans.p1 %></h3><p><%= t.plans.p1p %></p><p class="basis"><%= t.plans.p1b %></p><a class="btn btn-ghost" href="<%= L %>/mandir-seva"><%= t.plans.p1c %></a></article>
+      <article class="pane"><span class="num"><%= t.plans.p2n %></span><h3><%= t.plans.p2 %></h3><p><%= t.plans.p2p %></p><p class="basis"><%= t.plans.p2b %></p><a class="btn btn-primary" href="<%= L %>/dress-pack"><%= t.plans.p2c %></a></article>
+    </div>
+    <p class="areas"><%= t.plans.both %></p>
+  </div>
+</section>
+
+<section class="section on-paper" id="shop" style="background:var(--paper-2);">
+  <div class="wrap stack">
+    <p class="eyebrow"><%= t.shop.eyebrow %></p>
+    <h2><%= t.shop.h2 %></h2>
+    <div class="grid-cats">
+      <% for (const c of cats) { %><a class="cat" href="<%= L %>/shop/<%= c.slug %>"><div class="art"><img src="/img/<%= c.image %>" alt="<%= tr(c,'name') %>" width="600" height="800" loading="lazy"></div><span class="k"><%= tr(c,'kicker') %></span><span class="nm"><%= tr(c,'name') %></span></a><% } %>
+    </div>
+    <h3 style="margin-top:20px;"><%= t.shop.byDeity %></h3>
+    <div class="chips"><% for (const d of deities) { %><a class="chip" href="<%= L %>/deity/<%= d.slug %>"><%= tr(d,'name') %> <span style="color:var(--muted-l);font-size:.76rem;"><%= tr(d,'garment') %></span></a><% } %></div>
+    <h3 style="margin-top:12px;"><%= t.shop.byFestival %></h3>
+    <div class="chips"><% for (const f of fests) { %><a class="chip" href="<%= L %>/festival/<%= f.slug %>"><%= tr(f,'name') %></a><% } %></div>
+  </div>
+</section>
+
+<% if (feats.length) { %>
+<section class="section">
+  <div class="wrap stack">
+    <p class="eyebrow"><%= locale==='hi' ? 'चुनिंदा' : 'Featured' %></p>
+    <h2><%= locale==='hi' ? 'इस मौसम के लिए' : 'For this season' %></h2>
+    <div class="grid-prod on-paper" style="background:transparent;"><% for (const p of feats) { %><%- include('../partials/product-card', { p }) %><% } %></div>
+    <div><a class="btn btn-ghost" href="<%= L %>/shop"><%= t.cta.shopAll %></a></div>
+  </div>
+</section>
+<% } %>
+
+<section class="section on-paper" id="seva">
+  <div class="wrap stack">
+    <p class="eyebrow"><%= t.seva.eyebrow %></p>
+    <h2><%= t.seva.h2 %></h2>
+    <p class="lede"><%= t.seva.lede %></p>
+    <div class="plans">
+      <% plans.forEach((p, i) => { const f = p.footprint.split('x').map(Number); %>
+      <div class="plan<%= i===1 ? ' featured' : '' %>"><% if (i===1) { %><span class="tag"><%= t.seva.most %></span><% } %>
+        <span class="fp" aria-hidden="true" style="grid-template-columns:repeat(<%= f[0] %>,9px);"><% for (let k=0;k<f[0]*f[1];k++){ %><i></i><% } %></span>
+        <span class="nm"><%= tr(p,'label') %></span>
+        <div><span class="amt"><%= money(p.monthly_price) %></span> <span class="per"><%= t.seva.perMonth %></span></div>
+        <p class="per"><%= t.seva.monthly2 %></p><p class="qtr"><strong><%= t.pack.quarterly %> <%= money(p.quarterly_price) %></strong> — <%= t.seva.quarterly2 %></p>
+        <a class="btn <%= i===1?'btn-primary':'btn-ghost' %>" href="<%= L %>/mandir-seva#plans"><%= t.seva.choose %></a></div>
+      <% }) %>
+    </div>
+    <div><a class="btn btn-ghost" href="<%= L %>/mandir-seva"><%= t.cta.howVisit %></a> <a class="btn btn-primary" href="<%= L %>/book"><%= t.cta.bookVisit %></a></div>
+  </div>
+</section>
+
+<section class="section on-paper" id="voices" style="background:var(--paper-2);">
+  <div class="wrap stack">
+    <p class="eyebrow"><%= t.voices.eyebrow %></p>
+    <h2><%= t.voices.h2 %></h2>
+    <p class="lede"><%= t.voices.lede %></p>
+    <div class="quotes"><% for (const v of voices.slice(0,6)) { %><figure class="quote"><svg class="lot" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 3c-1.6 2.3-2.4 4.7-2.4 7.2 0 2.7.9 4.9 2.4 6.6 1.5-1.7 2.4-3.9 2.4-6.6C14.4 7.7 13.6 5.3 12 3Zm-6.8 4.4c-.3 2.7.3 5.2 1.8 7.3 1.2 1.7 2.8 2.8 4.6 3.3-.9-1.9-1.3-3.9-1.2-6 .1-2.1-.8-3.4-5.2-4.6Zm13.6 0c-4.4 1.2-5.3 2.5-5.2 4.6.1 2.1-.3 4.1-1.2 6 1.8-.5 3.4-1.6 4.6-3.3 1.5-2.1 2.1-4.6 1.8-7.3ZM2 13.2c.7 2.4 2.2 4.3 4.4 5.6 1.9 1.1 4 1.5 6.2 1.2-2.2-1.1-3.9-2.9-5-5.2-.7-1.5-2.5-2-5.6-1.6Zm20 0c-3.1-.4-4.9.1-5.6 1.6-1.1 2.3-2.8 4.1-5 5.2 2.2.3 4.3-.1 6.2-1.2 2.2-1.3 3.7-3.2 4.4-5.6Z"/></svg><blockquote><p><%= tr(v,'quote') %></p></blockquote><figcaption class="who"><%= tr(v,'who') %></figcaption></figure><% } %></div>
+  </div>
+</section>
+
+<section class="section on-paper" id="faq">
+  <div class="wrap stack">
+    <p class="eyebrow"><%= t.faq.eyebrow %></p><h2><%= t.faq.h2 %></h2>
+    <div><% faqs.forEach((f,i)=>{ %><details class="faq"<%= i===0?' open':'' %>><summary><%= tr(f,'q') %></summary><p><%= tr(f,'a') %></p></details><% }) %></div>
+    <div><a class="btn btn-ghost" href="<%= L %>/faq"><%= locale==='hi'?'सभी सवाल':'All questions' %></a></div>
+  </div>
+</section>
+<%- include('../partials/footer') %>

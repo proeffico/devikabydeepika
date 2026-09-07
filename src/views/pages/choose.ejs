@@ -1,0 +1,9 @@
+<%- include('../partials/head') %><%- include('../partials/nav') %>
+<section class="section on-paper"><div class="wrap stack"><p class="eyebrow"><%= t.nav.pack %> · <%= locale==='hi'?'बार':'Cycle' %> <%= c.cycle_no %></p><h1><%= t.choice.h1 %></h1>
+  <% if (done) { %><div class="notice ok"><%= t.choice.done %></div><% } else { %><p class="lede"><%= t.choice.lede %></p>
+  <form method="post" action="<%= L %>/choose/<%= c.choice_token %>" class="stack"><input type="hidden" name="_csrf" value="<%= csrf %>">
+    <% for (const it of items) { %><div class="panel"><h3><%= locale==='hi'?it.name_hi:it.name_en %> · <%= it.code %></h3>
+      <div class="opt"><% for (const p of it.options) { const last = it.lastIds.includes(p.id); %><label class="<%= last?'dis':'' %>"><input type="radio" name="item_<%= it.id %>" value="<%= p.id %>" <%= last?'disabled':'' %>> <img src="<%= p.imageUrl %>" alt="" style="width:40px;height:50px;object-fit:cover;border-radius:4px;"> <%= tr(p,'name') %><%= last?' — '+t.choice.last:'' %></label><% } %></div></div><% } %>
+    <button class="btn btn-primary" type="submit"><%= t.cta.send %></button></form><% } %>
+</div></section>
+<%- include('../partials/footer') %>
